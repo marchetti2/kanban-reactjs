@@ -1,29 +1,21 @@
 # Kanban project
 
 <p align="center">
- <a href="#about">Sobre</a> | <a href="#screens">Telas</a> | <a href="#technologies">Tecnologias</a> | <a href="#features">Recursos</a> | <a href="#started">Instalação</a> | <a href="#license">Licença</a>
+ <a href="#about">Sobre</a> | <a href="#technologies">Tecnologias</a> | <a href="#features">Recursos</a> | <a href="#started">Instalação</a> | <a href="#license">Licença</a>
 </p>
+
+<p align="center"><img width="100%" src="https://i.ibb.co/sFvDFy4/Nov-19-2021-00-11-34.gif"></p>
+
+<p align="center"><img src="https://i.ibb.co/NNLHn4y/Nov-19-2021-00-12-20.gif"></p>
+
+<p align="center"><img width="100%" src="https://i.ibb.co/4dJH78N/Nov-19-2021-00-11-15.gif"></p>
+
+<p align="center"><img width="100%" src="https://i.ibb.co/xMBPw4K/Nov-19-2021-00-09-34.gif"></p>
+
 
 <h2 id="about">Sobre</h2>
 
 Aplicação web de gerenciamento de tarefas utilizando o modelo Kanban. Autenticação, armazenamento e banco de dados usando Firebase. .
-
-<h2 id="screens">Screens</h2>
-
-<ul>
-  <li>Cadastro
-    <p align="center"><img width="100%" src="https://i.ibb.co/sFvDFy4/Nov-19-2021-00-11-34.gif"></p>
-  </li>
-  <li>Autenticação
-    <p align="center"><img src="https://i.ibb.co/NNLHn4y/Nov-19-2021-00-12-20.gif"></p>
-  </li>
-    <li>Upload de avatar
-    <p align="center"><img width="100%" src="https://i.ibb.co/4dJH78N/Nov-19-2021-00-11-15.gif"></p>
-  </li>
-    <li>Quadro kanban
-    <p align="center"><img width="100%" src="https://i.ibb.co/xMBPw4K/Nov-19-2021-00-09-34.gif"></p>
-  </li>
-</ul>
  
  <h2 id="technologies">Tecnologias</h2>
 
