@@ -13,12 +13,12 @@
 
 Aplicação web de gerenciamento de tarefas utilizando o método organizacional com o quadro Kanban. Principais funcionalidades: 
 
-Autenticação: Firebase Auth.
-Banco de dados: Firebase Firestorage.
-Upload de imagem: Firebase Storage.
-Drag and drop: react-beautiful-dnd.
-Editor de Rich Text: Quill.
-Design: Chakra-ui
+- Autenticação: Firebase Auth.
+- Banco de dados: Firebase Firestorage.
+- Upload de imagem: Firebase Storage.
+- Drag and drop: react-beautiful-dnd.
+- Editor de Rich Text: Quill.
+- Design: Chakra-ui
 
 Projeto em desenvolvimento, faltando implementar resposividade, darktheme e melhorias de performace.
 
