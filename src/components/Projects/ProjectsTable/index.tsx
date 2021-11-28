@@ -5,7 +5,7 @@ import {
   Input,
   InputRightElement,
   Button,
-  useDisclosure,
+  useDisclosure, Box, Table
 } from "@chakra-ui/react";
 import { ReactNode } from "react";
 import { Search2Icon } from "@chakra-ui/icons";
@@ -30,12 +30,12 @@ function ProjectsTable({ children }: ProjectsTableProps) {
         (project) =>
           project.title.toLowerCase().indexOf(inputValue.toLowerCase()) > -1
       );
-  
+
       if (filterByTitle !== undefined) {
         setSearchListData(filterByTitle);
         return;
       }
-  
+
       if (projects.length === searchListData.length) {
         return;
       }
@@ -43,23 +43,34 @@ function ProjectsTable({ children }: ProjectsTableProps) {
 
     setSearchListData(projects);
     return;
-    
   }
 
   return (
     <Flex as="main" h="calc(100vh - 80px)">
-      <Flex p="30px 40px" flexDir="column" w="1120px" m="0 auto">
+      <Flex p="30px 0" flexDir="column" w="1120px" m="0 auto">
         <Flex w="100%" h="100%" flexDir="column">
           {projects.length > 0 ? (
-            <HStack h="40px" w="100%" mb="35px" justifyContent="space-between">
-              <InputGroup h="100%" w="250px">
+            <Flex
+              h={{ base: "auto", sm: "40px" }}
+              flexDir="row"
+              //w="100%"
+              w={{base:"100%", sm:"440px", md:"100%"}}
+              m="0 auto 35px auto"
+              alignItems={{ base: "center", sm: "normal" }}
+              justifyContent="space-between"
+            >
+              <InputGroup
+                h={{ base: "40px", sm: "100%" }}
+                w={{ base: "340px", sm: "250px" }}
+                m={{ base: "0 auto", sm: "0" }}
+              >
                 <Input
                   h="100%"
                   pl="20px"
                   color="gray.700"
                   bgColor="gray.50"
                   focusBorderColor="main.500"
-                  onChange={(e)=>handleInputChange(e.target.value)}
+                  onChange={(e) => handleInputChange(e.target.value)}
                 />
                 <InputRightElement h="100%" pointerEvents="none">
                   <Search2Icon w={4} h={4} color="gray.300" />
@@ -70,17 +81,27 @@ function ProjectsTable({ children }: ProjectsTableProps) {
                 type="button"
                 variant="session"
                 w="140px"
-                h="100%"
+                h={{ base: "40px", sm: "100%" }}
+                display={{ base: "none", sm: "flex" }}
+                transition="0"
                 onClick={onOpen}
               >
                 Criar projeto
               </Button>
-            </HStack>
+            </Flex>
           ) : null}
           <CreateProjectModal onClose={onClose} isOpen={isOpen} />
-
-          <TableHeader />
-          {children}
+          <Box 
+          w={{base:"340px", sm:"440px", md:"100%"}}
+          m="0 auto"
+          >
+          <Box display={{base:"none", md:"inline"}}>
+            <Table size="sm">
+              <TableHeader />
+            </Table>
+          </Box>
+            {children}
+          </Box>
         </Flex>
       </Flex>
     </Flex>

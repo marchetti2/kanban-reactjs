@@ -37,7 +37,7 @@ function CustomButton({ icon, name, onClick }: ButtonProps): JSX.Element {
       >
         <Icon as={icon} w={6} h={6} color="light.100" />
         <Text
-          variant="14px-500-light100"
+          variant="sidebar-button-text"
           sx={{
             visibility: "hidden",
             opacity: 0,

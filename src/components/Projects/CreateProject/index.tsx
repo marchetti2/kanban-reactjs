@@ -13,7 +13,7 @@ function CreateProject() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <Flex
-      maxW="420px"
+      maxW={{ base: "300px", md: "350px" }}
       m="auto"
       flexDir="column"
       alignItems="center"
@@ -26,14 +26,30 @@ function CreateProject() {
         alt="pageSketch"
         src="newProject.svg"
       />
-      <Heading variant="21px-500-light800" mb="18px">
+      <Heading fontSize={{ base: "18px", md: "21px" }} mb="18px">
         Voce não tem nenhum projeto
       </Heading>
-      <Text variant="14px-400-light800" mb="24px">
+      <Text
+        fontSize={{ base: "12px", sm: "13px", md: "14px" }}
+        lineHeight="20px"
+        textAlign="center"
+        color="gray.700"
+        mb="24px"
+      >
         Crie um novo projeto sozinho, ou com a sua equipe para planear,
         monitorizar e lançar problemas.
       </Text>
-      <Button type="button" variant="session" w="160px" onClick={onOpen}>
+      <Button
+        type="button"
+        variant="session"
+        w="160px"
+        onClick={onOpen}
+        h={{
+          base: "42.5px",
+          sm: "45px",
+          md: "50px",
+        }}
+      >
         Criar projeto
       </Button>
       <CreateProjectModal onClose={onClose} isOpen={isOpen} />

@@ -15,21 +15,33 @@ import {
   useDisclosure,
   Box,
   Spinner,
+  Button,
+  Flex,
 } from "@chakra-ui/react";
 import { HiOutlineDotsHorizontal } from "react-icons/hi";
 import { useRouter } from "next/router";
 import { useState, useCallback } from "react";
+import { AddIcon } from "@chakra-ui/icons";
 
 import { useProjects } from "../../../../contexts/ProjectsContext";
 
 import { ConfirmDeleteModal } from "../ConfirmDeleteModal";
 import { ProjectSettingsModal } from "../ProjectSettingsModal";
+import { CreateProjectModal } from "../../CreateProject/CreateProjectModal";
+
+import { TableHeaderResponsive } from "../TableHeader/TableHeaderResponsive";
+
+interface OnOpenModalProps {
+  id?: string;
+  modalName: string;
+}
 
 function TableBody() {
   const [id, setId] = useState("");
   const [isLoading, setLoading] = useState(false);
   const [isOpenConfirmDelete, setIsOpenConfirmDelete] = useState(false);
   const [isOpenProjectSettings, setIsOpenProjectSettings] = useState(false);
+  const [isOpenCreateProject, setIsOpenCreateProject] = useState(false);
 
   const [isLoadingProject, setLoadingProject] = useState<Array<boolean>>([]);
 
@@ -38,8 +50,10 @@ function TableBody() {
 
   const { deleteProject, searchListData } = useProjects();
 
-  const onOpenModal = useCallback((id: string, modalName: string) => {
-    setId(id);
+  const onOpenModal = useCallback(({ id, modalName }: OnOpenModalProps) => {
+    if (id) {
+      setId(id);
+    }
 
     if (modalName === "confirmDelete") {
       return setIsOpenConfirmDelete(true);
@@ -48,11 +62,16 @@ function TableBody() {
     if (modalName === "projectSettings") {
       return setIsOpenProjectSettings(true);
     }
+
+    if (modalName === "createProjects") {
+      return setIsOpenCreateProject(true);
+    }
   }, []);
 
   function onCloseModal() {
     setIsOpenConfirmDelete(false);
     setIsOpenProjectSettings(false);
+    setIsOpenCreateProject(false);
 
     return;
   }
@@ -77,7 +96,14 @@ function TableBody() {
   }
 
   return (
-    <Box overflowY="auto" maxH="400px">
+    <Box 
+    overflowY="auto"
+    overflowX={{
+      base:"auto", 
+      md:"hidden"
+    }}
+    maxH="400px"
+    >
       <ConfirmDeleteModal
         isOpen={isOpenConfirmDelete}
         onClose={onCloseModal}
@@ -90,7 +116,9 @@ function TableBody() {
         onClose={onCloseModal}
         id={id}
       />
+      <CreateProjectModal onClose={onCloseModal} isOpen={isOpenCreateProject} />
       <Table size="sm">
+        <TableHeaderResponsive />
         <Tbody>
           {searchListData.map((project, index) => (
             <Tr
@@ -115,7 +143,10 @@ function TableBody() {
                 borderBottomColor="gray.300"
               >
                 <HStack spacing={3}>
-                  <Box maxW="428px">
+                  <Box 
+                  //maxW={{ base: "50px", md: "428px" }}
+                  maxW= "428px"
+                  >
                     <Text
                       transition=".3s"
                       sx={{
@@ -124,6 +155,7 @@ function TableBody() {
                         },
                       }}
                       fontWeight="500"
+                      fontSize={{ base: "12px", md: "14px" }}
                       textTransform="capitalize"
                       isTruncated
                     >
@@ -141,7 +173,9 @@ function TableBody() {
                 maxW="195px"
                 borderBottomColor="gray.300"
               >
-                <Text isTruncated>{project?.type}</Text>
+                <Text fontSize={{ base: "12px", md: "14px" }} isTruncated>
+                  {project?.type}
+                </Text>
               </Td>
               <Td
                 onClick={() => handleNavigate(project?.id, index)}
@@ -149,13 +183,19 @@ function TableBody() {
                 maxW="195px"
                 borderBottomColor="gray.300"
               >
-                <HStack>
-                  <Avatar
-                    size="xs"
-                    name={project?.leader?.name}
-                    src={project?.leader?.avatar}
-                  />
-                  <Text isTruncated>{project?.leader?.name}</Text>
+                <HStack >
+                  <Box 
+                  //display={{base:'none', sm:"inline"}}
+                  >
+                    <Avatar
+                      size="xs"
+                      name={project?.leader?.name}
+                      src={project?.leader?.avatar}
+                    />
+                  </Box>
+                  <Text fontSize={{ base: "12px", md: "14px" }} isTruncated>
+                    {project?.leader?.name}
+                  </Text>
                 </HStack>
               </Td>
               <Td
@@ -164,7 +204,9 @@ function TableBody() {
                 maxW="120px"
                 borderBottomColor="gray.300"
               >
-                <Text isTruncated>{project?.createdAt}</Text>
+                <Text fontSize={{ base: "12px", md: "14px" }} isTruncated>
+                  {project?.createdAt}
+                </Text>
               </Td>
               <Td
                 w="70px"
@@ -200,7 +242,10 @@ function TableBody() {
                       variant="link"
                       w="100%"
                       onClick={() =>
-                        onOpenModal(project?.id, "projectSettings")
+                        onOpenModal({
+                          id: project?.id,
+                          modalName: "projectSettings",
+                        })
                       }
                     >
                       <Text pl="5px">Definições do projeto</Text>
@@ -208,7 +253,12 @@ function TableBody() {
                     <MenuItem
                       variant="link"
                       w="100%"
-                      onClick={() => onOpenModal(project?.id, "confirmDelete")}
+                      onClick={() =>
+                        onOpenModal({
+                          id: project?.id,
+                          modalName: "confirmDelete",
+                        })
+                      }
                     >
                       <Text pl="5px">Excluir</Text>
                     </MenuItem>
@@ -219,6 +269,27 @@ function TableBody() {
           ))}
         </Tbody>
       </Table>
+
+      <Flex
+        w="50px"
+        h="50px"
+        borderRadius="25px"
+        display={{ base: "flex", sm: "none" }}
+        onClick={() => onOpenModal({ modalName: "createProjects" })}
+        bgColor="main.300"
+        boxShadow="lg"//"xl"
+        position="absolute"
+        bottom="10px"
+        right="20px"
+        alignItems="center"
+        justifyContent="center"
+        _active={{
+          bgColor: "main.400",
+          boxShadow:"base"//"xl"
+        }}
+      >
+        <AddIcon color="white" />
+      </Flex>
     </Box>
   );
 }

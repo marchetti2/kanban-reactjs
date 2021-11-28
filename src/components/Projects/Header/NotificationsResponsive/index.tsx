@@ -14,21 +14,24 @@ import {
   Image,
   useColorMode,
   Box,
+  Icon,
   Heading,
 } from "@chakra-ui/react";
 import { BellIcon, CloseIcon } from "@chakra-ui/icons";
 import { useEffect } from "react";
+import { useId } from "@reach/auto-id";
 
 import { useNotifications } from "../../../../contexts/NotificationsContext";
 import { auth } from "../../../../services/firebase";
 
-function Notifications() {
+function NotificationsResponsive() {
   const {
     notifications,
     getNotifications,
     deleteNotification,
     updatedNotificationsListener,
   } = useNotifications();
+  const id = useId();
 
   useEffect(() => {
     getNotifications(auth.currentUser?.uid!);
@@ -39,26 +42,13 @@ function Notifications() {
     await updatedNotificationsListener(auth.currentUser?.uid!);
   }
   return (
-    <Popover id="popover-trigger-2" arrowShadowColor="#A38FD6">
+    <Popover id={id} arrowShadowColor="#A38FD6">
       <PopoverTrigger>
         <Box position="relative" alignItems="center" justifyContent="center">
-          <IconButton
-            className="notification-icon"
-            isRound
-            aria-label="config"
-            color="gray.600"
-            bgColor="white"
-            transition=".3s"
-            _hover={{
-              color: "main.400",
-              bgColor: "gray.100",
-            }}
-            _active={{
-              bgColor: "rgba(105,73,188, 0.5)",
-            }}
-          >
-            <BellIcon w={6} h={6} />
-          </IconButton>
+          <Box display={{ base: "flex", sm: "none" }}>
+            <Icon as={BellIcon} w={6} h={6} color="light.100" />
+          </Box>
+
           {notifications.length > 0 ? (
             <Flex
               h="12px"
@@ -120,8 +110,8 @@ function Notifications() {
                     boxShadow="base"
                     transition=".3s"
                     /*                     _hover={{
-                      bg: "gray.50",
-                    }} */
+                        bg: "gray.50",
+                      }} */
                     mb="5px"
                   >
                     <Text>{notification.content}</Text>
@@ -159,4 +149,4 @@ function Notifications() {
   );
 }
 
-export { Notifications };
+export { NotificationsResponsive };

@@ -53,21 +53,25 @@ function ProjectsHeader(): JSX.Element {
       <Flex
         as="header"
         w="100vw"
-        h="80px"
+        h={{ base: "60px", sm: "70px", md: "80px" }}
         borderBottomWidth=" 1px"
         borderBottomColor="gray.300"
       >
         <Flex
-          w="1120px"
+          maxW="1120px"
+          w={{base:"380px", sm:"440px", md:"100%"}}//"100%"
           m="auto"
-          px="40px"
+          px={{ base: "20px", sm:"0", md: "40px" }}
           alignItems="center"
           justifyContent="space-between"
         >
-          <Heading fontSize="24px" color="gray.800">
+          <Heading
+            fontSize={{ base: "18px", md: "22px", "2xl": "24px" }}
+            color="gray.800"
+          >
             Meus projetos
           </Heading>
-          <HStack spacing="15px">
+          <HStack spacing={{ base: "8px", sm: "10px", md: "15px" }}>
             <Notifications />
 
             <IconButton

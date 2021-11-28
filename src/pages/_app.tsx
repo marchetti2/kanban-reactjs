@@ -3,9 +3,9 @@ import { ChakraProvider } from "@chakra-ui/react";
 
 import { AuthProvider } from "../contexts/AuthContext";
 import { ProjectsProvider } from "../contexts/ProjectsContext";
+import { NotificationsProvider } from "../contexts/NotificationsContext";
 
 import { theme } from "../styles/theme";
-import { NotificationsProvider } from "../contexts/NotificationsContext";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -13,7 +13,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       <NotificationsProvider>
         <AuthProvider>
           <ProjectsProvider>
-            <Component {...pageProps} />
+              <Component {...pageProps} />
           </ProjectsProvider>
         </AuthProvider>
       </NotificationsProvider>

@@ -124,7 +124,7 @@ function ProfileModal({ isOpen, onClose }: UseModalProps) {
         <ModalOverlay />
         <ModalContent>
           <ModalHeader px="36px" pt="20px">
-            <Heading variant="21px-500-light800">Meu perfil</Heading>
+            <Heading variant="modal-title">Meu perfil</Heading>
           </ModalHeader>
           <ModalCloseButton m="8px 8px 0 0" onClick={onCloseModal} />
 
@@ -300,8 +300,12 @@ function ProfileModal({ isOpen, onClose }: UseModalProps) {
                   {...register("password", formValidations.password)}
                 />
                 {!!errors && (
-                  <Tooltip label={errors.password?.message} placement="right" fontSize="13px"
-                  fontFamily="Inter">
+                  <Tooltip
+                    label={errors.password?.message}
+                    placement="right"
+                    fontSize="13px"
+                    fontFamily="Inter"
+                  >
                     <FormErrorMessage ml={-7} mt={0} zIndex="tooltip">
                       <InfoOutlineIcon color="red.500" w={4} h={4} />
                     </FormErrorMessage>
@@ -377,10 +381,10 @@ function ProfileModal({ isOpen, onClose }: UseModalProps) {
                   fontWeight="400"
                   transition=".2s"
                   _hover={{
-                    bg:"rgba(226,232,240,.8)"
+                    bg: "rgba(226,232,240,.8)",
                   }}
                   _active={{
-                    bgColor:"gray.200"
+                    bgColor: "gray.200",
                   }}
                 >
                   Cancelar
@@ -393,10 +397,10 @@ function ProfileModal({ isOpen, onClose }: UseModalProps) {
                   color="white"
                   transition=".2s"
                   _hover={{
-                    bg:"main.400"
+                    bg: "main.400",
                   }}
                   _active={{
-                    bgColor:"main.500"
+                    bgColor: "main.500",
                   }}
                 >
                   {isLoading ? <Spinner color="white" /> : "Salvar"}

@@ -249,7 +249,7 @@ function CreateIssueModal({ isOpen, onClose, project }: CreateIssueModalProps) {
         <ModalOverlay />
         <ModalContent p="10px">
           <ModalHeader pl="36px">
-            <Heading variant="21px-500-light800">Criar problema</Heading>
+            <Heading variant="modal-title">Criar problema</Heading>
           </ModalHeader>
           <ModalCloseButton m="15px 10px 0 0" />
           <ModalBody>
@@ -353,8 +353,12 @@ function CreateIssueModal({ isOpen, onClose, project }: CreateIssueModalProps) {
                     </Menu>
 
                     {!!errors.type && (
-                      <Tooltip label={errors.type?.message} placement="right" fontSize="13px"
-                      fontFamily="Inter">
+                      <Tooltip
+                        label={errors.type?.message}
+                        placement="right"
+                        fontSize="13px"
+                        fontFamily="Inter"
+                      >
                         <FormErrorMessage
                           transform="translateX(-20px)"
                           ml={-7}
@@ -566,7 +570,8 @@ function CreateIssueModal({ isOpen, onClose, project }: CreateIssueModalProps) {
                     {!!errors.priority && (
                       <Tooltip
                         label={errors.priority?.message}
-                        placement="right" fontSize="13px"
+                        placement="right"
+                        fontSize="13px"
                         fontFamily="Inter"
                       >
                         <FormErrorMessage
@@ -591,20 +596,20 @@ function CreateIssueModal({ isOpen, onClose, project }: CreateIssueModalProps) {
                 </Text>
 
                 <Flex justifyContent="flex-end" mb="20px">
-                  <Button 
-                  w="120px" 
-                  onClick={onModalClose}
-                  mr="10px"
-                  bg="gray.100"
-                  color="gray.700"
-                  fontWeight="400"
-                  transition=".2s"
-                  _hover={{
-                    bg:"rgba(226,232,240,.8)"
-                  }}
-                  _active={{
-                    bgColor:"gray.200"
-                  }}
+                  <Button
+                    w="120px"
+                    onClick={onModalClose}
+                    mr="10px"
+                    bg="gray.100"
+                    color="gray.700"
+                    fontWeight="400"
+                    transition=".2s"
+                    _hover={{
+                      bg: "rgba(226,232,240,.8)",
+                    }}
+                    _active={{
+                      bgColor: "gray.200",
+                    }}
                   >
                     Cancelar
                   </Button>
@@ -616,13 +621,13 @@ function CreateIssueModal({ isOpen, onClose, project }: CreateIssueModalProps) {
                     color="white"
                     transition=".2s"
                     _hover={{
-                      bg:"main.400"
+                      bg: "main.400",
                     }}
                     _active={{
-                      bgColor:"main.500"
+                      bgColor: "main.500",
                     }}
                   >
-                    {isLoading ? <Spinner color="white"/> : "Criar"}
+                    {isLoading ? <Spinner color="white" /> : "Criar"}
                   </Button>
                 </Flex>
               </Container>

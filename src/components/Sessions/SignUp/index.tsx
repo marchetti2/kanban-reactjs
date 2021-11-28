@@ -8,6 +8,7 @@ import {
   FormErrorMessage,
   Tooltip,
   Spinner,
+  useColorMode,
 } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
 import { AiOutlineUser } from "react-icons/ai";
@@ -17,6 +18,8 @@ import { useForm } from "react-hook-form";
 import { useAuth } from "../../../contexts/AuthContext";
 
 function SignUp() {
+  const { colorMode } = useColorMode();
+
   const [user, setUser] = useState({
     name: "",
     email: "",
@@ -98,7 +101,15 @@ function SignUp() {
     >
       <Box>
         <FormControl
-          h="50px"
+          h={{
+            base: "42.5px",
+            sm: "45px",
+            md: "47.5px",
+            lg: "42.5px",
+            xl: "45px",
+            "2xl": "47.5px",
+            "4xl": "50px",
+          }}
           mb="10px"
           display="flex"
           flexDirection="row"
@@ -106,24 +117,38 @@ function SignUp() {
           isInvalid={!!errors.email}
         >
           <InputLeftElement h="100%" w="50px" pointerEvents="none">
-            <EmailIcon color="gray.300" />
+            <EmailIcon color={colorMode === "dark" ? "dark.800" : "gray.300"} />
           </InputLeftElement>
           <Input
             type="email"
             h="100%"
             pl="50px"
             placeholder="Digite seu e-mail"
+            borderColor={colorMode === "dark" ? "dark.300" : "gray.200"}
             _placeholder={{
-              fontSize: "14px",
+              fontSize: [
+                "12px",
+                "13px",
+                "14px",
+                "12px",
+                "13px",
+                "14px",
+                "14px",
+              ],
               fontWeight: "400",
+              color: colorMode === "dark" ? "dark.800" : "gray.400",
             }}
+            bg={colorMode === "dark" ? "dark.300" : "gray.50"}
             focusBorderColor={!!errors.email ? "red.500" : "main.500"}
             {...register("email", formValidations.email)}
-            formNoValidate
           />
           {!!errors && (
-            <Tooltip label={errors.email?.message} placement="right" fontSize="13px"
-            fontFamily="Inter">
+            <Tooltip
+              label={errors.email?.message}
+              placement="right"
+              fontSize="13px"
+              fontFamily="Inter"
+            >
               <FormErrorMessage ml={-7} mt={0} zIndex="tooltip">
                 <InfoOutlineIcon color="red.500" w={4} h={4} />
               </FormErrorMessage>
@@ -132,7 +157,15 @@ function SignUp() {
         </FormControl>
 
         <FormControl
-          h="50px"
+          h={{
+            base: "42.5px",
+            sm: "45px",
+            md: "47.5px",
+            lg: "42.5px",
+            xl: "45px",
+            "2xl": "47.5px",
+            "4xl": "50px",
+          }}
           mb="10px"
           display="flex"
           flexDirection="row"
@@ -140,23 +173,43 @@ function SignUp() {
           isInvalid={!!errors.name}
         >
           <InputLeftElement h="100%" w="50px" pointerEvents="none">
-            <Icon as={AiOutlineUser} w={5} h={5} color="gray.300" />
+            <Icon
+              as={AiOutlineUser}
+              w={5}
+              h={5}
+              color={colorMode === "dark" ? "dark.800" : "gray.300"}
+            />
           </InputLeftElement>
 
           <Input
             h="100%"
             pl="50px"
             placeholder="Digite seu nome"
+            borderColor={colorMode === "dark" ? "dark.300" : "gray.200"}
             _placeholder={{
-              fontSize: "14px",
+              fontSize: [
+                "12px",
+                "13px",
+                "14px",
+                "12px",
+                "13px",
+                "14px",
+                "14px",
+              ],
               fontWeight: "400",
+              color: colorMode === "dark" ? "dark.800" : "gray.400",
             }}
+            bg={colorMode === "dark" ? "dark.300" : "gray.50"}
             focusBorderColor={!!errors.name ? "red.500" : "main.500"}
             {...register("name", formValidations.name)}
           />
           {!!errors && (
-            <Tooltip label={errors.name?.message} placement="right" fontSize="13px"
-            fontFamily="Inter">
+            <Tooltip
+              label={errors.name?.message}
+              placement="right"
+              fontSize="13px"
+              fontFamily="Inter"
+            >
               <FormErrorMessage ml={-7} mt={0} zIndex="tooltip">
                 <InfoOutlineIcon color="red.500" w={4} h={4} />
               </FormErrorMessage>
@@ -165,7 +218,15 @@ function SignUp() {
         </FormControl>
 
         <FormControl
-          h="50px"
+          h={{
+            base: "42.5px",
+            sm: "45px",
+            md: "47.5px",
+            lg: "42.5px",
+            xl: "45px",
+            "2xl": "47.5px",
+            "4xl": "50px",
+          }}
           mb="10px"
           display="flex"
           flexDirection="row"
@@ -173,24 +234,39 @@ function SignUp() {
           isInvalid={!!errors.password}
         >
           <InputLeftElement h="100%" w="50px" pointerEvents="none">
-            <LockIcon color="gray.300" />
+            <LockIcon color={colorMode === "dark" ? "dark.800" : "gray.300"} />
           </InputLeftElement>
           <Input
             type="password"
             h="100%"
             pl="50px"
             placeholder="Digite sua senha"
+            borderColor={colorMode === "dark" ? "dark.300" : "gray.200"}
             _placeholder={{
-              fontSize: "14px",
+              fontSize: [
+                "12px",
+                "13px",
+                "14px",
+                "12px",
+                "13px",
+                "14px",
+                "14px",
+              ],
               fontWeight: "400",
+              color: colorMode === "dark" ? "dark.800" : "gray.400",
             }}
             value={user.password}
+            bg={colorMode === "dark" ? "dark.300" : "gray.50"}
             focusBorderColor={!!errors.password ? "red.500" : "main.500"}
             {...register("password", formValidations.password)}
           />
           {!!errors && (
-            <Tooltip label={errors.password?.message} placement="right" fontSize="13px"
-            fontFamily="Inter">
+            <Tooltip
+              label={errors.password?.message}
+              placement="right"
+              fontSize="13px"
+              fontFamily="Inter"
+            >
               <FormErrorMessage ml={-7} mt={0} zIndex="tooltip">
                 <InfoOutlineIcon color="red.500" w={4} h={4} />
               </FormErrorMessage>
@@ -199,7 +275,15 @@ function SignUp() {
         </FormControl>
 
         <FormControl
-          h="50px"
+          h={{
+            base: "42.5px",
+            sm: "45px",
+            md: "47.5px",
+            lg: "42.5px",
+            xl: "45px",
+            "2xl": "47.5px",
+            "4xl": "50px",
+          }}
           mb="20px"
           display="flex"
           flexDirection="row"
@@ -207,23 +291,38 @@ function SignUp() {
           isInvalid={!!errors.confirmPassword}
         >
           <InputLeftElement h="100%" w="50px" pointerEvents="none">
-            <LockIcon color="gray.300" />
+            <LockIcon color={colorMode === "dark" ? "dark.800" : "gray.300"} />
           </InputLeftElement>
           <Input
             type="password"
             h="100%"
             pl="50px"
             placeholder="Confirme sua senha"
+            borderColor={colorMode === "dark" ? "dark.300" : "gray.200"}
             _placeholder={{
-              fontSize: "14px",
+              fontSize: [
+                "12px",
+                "13px",
+                "14px",
+                "12px",
+                "13px",
+                "14px",
+                "14px",
+              ],
               fontWeight: "400",
+              color: colorMode === "dark" ? "dark.800" : "gray.400",
             }}
+            bg={colorMode === "dark" ? "dark.300" : "gray.50"}
             focusBorderColor={!!errors.confirmPassword ? "red.500" : "main.500"}
             {...register("confirmPassword", formValidations.confirmPassword)}
           />
           {!!errors && (
-            <Tooltip label={errors.confirmPassword?.message} placement="right" fontSize="13px"
-            fontFamily="Inter">
+            <Tooltip
+              label={errors.confirmPassword?.message}
+              placement="right"
+              fontSize="13px"
+              fontFamily="Inter"
+            >
               <FormErrorMessage ml={-7} mt={0} zIndex="tooltip">
                 <InfoOutlineIcon color="red.500" w={4} h={4} />
               </FormErrorMessage>
@@ -236,6 +335,7 @@ function SignUp() {
         type="submit"
         variant="session"
         pointerEvents={isLoading ? "none" : "auto"}
+        fontSize={["14px", "15px", "16px", "14px", "14px", "15px", "16px"]}
       >
         {isLoading ? <Spinner color="white" /> : "Criar conta"}
       </Button>

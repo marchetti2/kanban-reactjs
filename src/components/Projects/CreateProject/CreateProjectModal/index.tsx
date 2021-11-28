@@ -23,7 +23,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { InfoOutlineIcon } from "@chakra-ui/icons";
 
-import { auth } from '../../../../services/firebase'
+import { auth } from "../../../../services/firebase";
 
 import { useProjects } from "../../../../contexts/ProjectsContext";
 
@@ -32,7 +32,6 @@ function CreateProjectModal({ isOpen, onClose }: UseModalProps) {
   const [title, setTitle] = useState("");
   const [type, setType] = useState("");
   const { createProject } = useProjects();
-  
 
   const {
     register,
@@ -57,7 +56,7 @@ function CreateProjectModal({ isOpen, onClose }: UseModalProps) {
   async function onSubmit() {
     setLoading(true);
     try {
-      await createProject({ title, type, user:auth.currentUser! });
+      await createProject({ title, type, user: auth.currentUser! });
     } finally {
       onModalClose();
       setLoading(false);
@@ -82,7 +81,7 @@ function CreateProjectModal({ isOpen, onClose }: UseModalProps) {
       <ModalOverlay />
       <ModalContent p="10px">
         <ModalHeader pl="36px">
-          <Heading variant="21px-500-light800">Criar projeto</Heading>
+          <Heading variant="modal-title">Criar projeto</Heading>
         </ModalHeader>
         <ModalCloseButton m="15px 10px 0 0" onClick={onModalClose} />
         <ModalBody>
@@ -108,11 +107,11 @@ function CreateProjectModal({ isOpen, onClose }: UseModalProps) {
                   focusBorderColor={!!errors.title ? "red.500" : "main.500"}
                 />
                 {!!errors && (
-                  <Tooltip 
-                  label={errors.title?.message} 
-                  placement="right"             
-                  fontSize="13px"
-                  fontFamily="Inter"
+                  <Tooltip
+                    label={errors.title?.message}
+                    placement="right"
+                    fontSize="13px"
+                    fontFamily="Inter"
                   >
                     <FormErrorMessage ml={-7} mt={0} zIndex="tooltip">
                       <InfoOutlineIcon color="red.500" w={4} h={4} />
@@ -162,8 +161,12 @@ function CreateProjectModal({ isOpen, onClose }: UseModalProps) {
                   <option value="Premisas">Premisas</option>
                 </Select>
                 {!!errors.type && (
-                  <Tooltip label={errors.type?.message} placement="right" fontSize="13px"
-                  fontFamily="Inter">
+                  <Tooltip
+                    label={errors.type?.message}
+                    placement="right"
+                    fontSize="13px"
+                    fontFamily="Inter"
+                  >
                     <FormErrorMessage
                       transform="translateX(-20px)"
                       ml={-7}
@@ -187,19 +190,19 @@ function CreateProjectModal({ isOpen, onClose }: UseModalProps) {
 
             <Flex justifyContent="flex-end">
               <Button
-              onClick={onModalClose}
-              mr="10px"
-              w="120px"
-              bg="gray.100"
-              color="gray.700"
-              fontWeight="400"
-              transition=".2s"
-              _hover={{
-                bg:"rgba(226,232,240,.8)"
-              }}
-              _active={{
-                bgColor:"gray.200"
-              }}
+                onClick={onModalClose}
+                mr="10px"
+                w="120px"
+                bg="gray.100"
+                color="gray.700"
+                fontWeight="400"
+                transition=".2s"
+                _hover={{
+                  bg: "rgba(226,232,240,.8)",
+                }}
+                _active={{
+                  bgColor: "gray.200",
+                }}
               >
                 Cancelar
               </Button>
@@ -212,10 +215,10 @@ function CreateProjectModal({ isOpen, onClose }: UseModalProps) {
                 color="white"
                 transition=".2s"
                 _hover={{
-                  bg:"main.400"
+                  bg: "main.400",
                 }}
                 _active={{
-                  bgColor:"main.500"
+                  bgColor: "main.500",
                 }}
               >
                 {isLoading ? <Spinner color="white" /> : "Criar"}

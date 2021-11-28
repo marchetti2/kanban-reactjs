@@ -32,38 +32,20 @@ function Dashboard({ project }: DashboardProps): JSX.Element {
     <CommentsProvider>
       <Header projectTitle={project?.title} current="Quadro de problemas" />
       <FilterAndSearchBar project={project} />
-      <Box
-        h="410px"
-        w="calc(100vw - 334px)"
-      >
+      <Box h="410px" w="calc(100vw - 334px)">
         <Flex justifyContent="space-between" w="980px">
-          <Box
-            w="320px"
-            h="50px"
-            borderRadius="6px 6px 0 0"
-            bgColor="gray.50"
-          >
-            <Heading variant="13px-500-light600-upper" m="15px 10px">
+          <Box w="320px" h="50px" borderRadius="6px 6px 0 0" bgColor="gray.50">
+            <Heading variant="kanban-board-status" m="15px 10px">
               não iniciado
             </Heading>
           </Box>
-          <Box
-            w="320px"
-            h="50px"
-            borderRadius="6px 6px 0 0"
-            bgColor="gray.50"
-          >
-            <Heading variant="13px-500-light600-upper" m="15px 10px">
+          <Box w="320px" h="50px" borderRadius="6px 6px 0 0" bgColor="gray.50">
+            <Heading variant="kanban-board-status" m="15px 10px">
               em progresso
             </Heading>
           </Box>
-          <Box
-            w="320px"
-            h="50px"
-            borderRadius="6px 6px 0 0"
-            bgColor="gray.50"
-          >
-            <Heading variant="13px-500-light600-upper" m="15px 10px">
+          <Box w="320px" h="50px" borderRadius="6px 6px 0 0" bgColor="gray.50">
+            <Heading variant="kanban-board-status" m="15px 10px">
               concluído
             </Heading>
           </Box>

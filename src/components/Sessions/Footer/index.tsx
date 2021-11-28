@@ -1,4 +1,11 @@
-import { Button, Box, Text, HStack, Divider } from "@chakra-ui/react";
+import {
+  Button,
+  Box,
+  Text,
+  HStack,
+  Divider,
+  useColorMode,
+} from "@chakra-ui/react";
 
 interface FooterProps {
   currentPage: string;
@@ -6,23 +13,26 @@ interface FooterProps {
 }
 
 function Footer({ currentPage, handleTogglePage }: FooterProps) {
+  const { colorMode } = useColorMode();
+
   return (
     <>
       {currentPage === "signIn" ? (
         <Box>
-          <Divider mb="20px" borderColor="#D5D8DE" />
+          <Divider
+            mb="20px"
+            borderColor={colorMode === "dark" ? "dark.500" : "gray.200"}
+          />
           <HStack w="100%" align="center" justifyContent="center">
             <Button
               variant="link"
               onClick={() => handleTogglePage("forgotPassword")}
             >
               <Text
-                fontSize="14px"
-                lineHeight="20px"
-                textAlign="center"
+                variant="sessions-footer"
                 transition=".2s"
                 _hover={{
-                  color:"main.400"
+                  color: colorMode === "dark" ? "main.300" : "main.400",
                 }}
               >
                 Esqueceu a senha?
@@ -31,14 +41,12 @@ function Footer({ currentPage, handleTogglePage }: FooterProps) {
             <Text>•</Text>
             <Button variant="link" onClick={() => handleTogglePage("signUp")}>
               <Text
-                fontSize="14px"
-                lineHeight="20px"
+                variant="sessions-footer"
                 fontWeight="700"
-                textAlign="center"
                 transition=".2s"
-                color="main.400"
+                color={colorMode === "dark" ? "main.300" : "main.400"}
                 _hover={{
-                  color:"main.500"
+                  color: colorMode === "dark" ? "main.400" : "main.500",
                 }}
               >
                 Crie uma conta
@@ -48,24 +56,19 @@ function Footer({ currentPage, handleTogglePage }: FooterProps) {
         </Box>
       ) : currentPage === "signUp" ? (
         <Box>
-          <Divider mb="20px" borderColor="#D5D8DE" />
+          <Divider
+            mb="20px"
+            borderColor={colorMode === "dark" ? "dark.500" : "gray.200"}
+          />
           <HStack w="100%" align="center" justifyContent="center">
-            <Text
-              fontSize="14px"
-              lineHeight="20px"
-              textAlign="center"
-            >
-              Já tem uma conta?
-            </Text>
+            <Text variant="sessions-footer">Já tem uma conta?</Text>
             <Button variant="link" onClick={() => handleTogglePage("signIn")}>
               <Text
-                fontSize="14px"
-                lineHeight="20px"
+                variant="sessions-footer"
                 fontWeight="700"
-                textAlign="center"
-                color="main.400"
+                color={colorMode === "dark" ? "main.300" : "main.400"}
                 _hover={{
-                  color:"main.500"
+                  color: colorMode === "dark" ? "main.400" : "main.500",
                 }}
               >
                 Entrar
@@ -75,24 +78,19 @@ function Footer({ currentPage, handleTogglePage }: FooterProps) {
         </Box>
       ) : (
         <Box>
-          <Divider mb="20px" borderColor="#D5D8DE" />
+          <Divider
+            mb="20px"
+            borderColor={colorMode === "dark" ? "dark.500" : "gray.200"}
+          />
           <HStack w="100%" align="center" justifyContent="center">
-            <Text
-              fontSize="14px"
-              lineHeight="20px"
-              textAlign="center"
-            >
-              Já tem uma conta?
-            </Text>
+            <Text variant="sessions-footer">Já tem uma conta?</Text>
             <Button variant="link" onClick={() => handleTogglePage("signIn")}>
               <Text
-                fontSize="14px"
-                lineHeight="20px"
+                variant="sessions-footer"
                 fontWeight="700"
-                textAlign="center"
-                color="main.400"
+                color={colorMode === "dark" ? "main.300" : "main.400"}
                 _hover={{
-                  color:"main.500"
+                  color: colorMode === "dark" ? "main.400" : "main.500",
                 }}
               >
                 Entrar

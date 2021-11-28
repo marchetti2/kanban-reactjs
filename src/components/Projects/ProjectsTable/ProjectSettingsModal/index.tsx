@@ -115,7 +115,7 @@ function ProjectSettingsModal({
       <ModalOverlay />
       <ModalContent>
         <ModalHeader px="36px" pt="20px">
-          <Heading variant="21px-500-light800">Definições do projeto</Heading>
+          <Heading variant="modal-title">Definições do projeto</Heading>
         </ModalHeader>
         <ModalCloseButton m="8px 8px 0 0" onClick={onClose} />
 
@@ -322,15 +322,15 @@ function ProjectSettingsModal({
                     mr={2}
                     fontSize="13px"
                     bg="gray.100"
-                  color="gray.700"
-                  fontWeight="400"
-                  transition=".2s"
-                  _hover={{
-                    bg:"rgba(226,232,240,.8)"
-                  }}
-                  _active={{
-                    bgColor:"gray.200"
-                  }}
+                    color="gray.700"
+                    fontWeight="400"
+                    transition=".2s"
+                    _hover={{
+                      bg: "rgba(226,232,240,.8)",
+                    }}
+                    _active={{
+                      bgColor: "gray.200",
+                    }}
                     onClick={() => setIsEditingDescription(false)}
                   >
                     Cancelar
@@ -340,15 +340,15 @@ function ProjectSettingsModal({
                     h="32px"
                     fontSize="13px"
                     bg="main.300"
-                  fontWeight="400"
-                  color="white"
-                  transition=".2s"
-                  _hover={{
-                    bg:"main.400"
-                  }}
-                  _active={{
-                    bgColor:"main.500"
-                  }}
+                    fontWeight="400"
+                    color="white"
+                    transition=".2s"
+                    _hover={{
+                      bg: "main.400",
+                    }}
+                    _active={{
+                      bgColor: "main.500",
+                    }}
                     onClick={handleSaveDescriptionChanges}
                   >
                     {isLoading ? <Spinner color="white" /> : "Salvar"}
@@ -362,20 +362,20 @@ function ProjectSettingsModal({
         <ModalFooter mb="15px">
           <Flex justifyContent="flex-end">
             <Button
-             onClick={onCloseModal}
-             mr="10px"
-             w="120px"
-             bg="gray.100"
-             color="gray.700"
-             fontWeight="400"
-             transition=".2s"
-             _hover={{
-               bg:"rgba(226,232,240,.8)"
-             }}
-             _active={{
-               bgColor:"gray.200"
-             }}
-             >
+              onClick={onCloseModal}
+              mr="10px"
+              w="120px"
+              bg="gray.100"
+              color="gray.700"
+              fontWeight="400"
+              transition=".2s"
+              _hover={{
+                bg: "rgba(226,232,240,.8)",
+              }}
+              _active={{
+                bgColor: "gray.200",
+              }}
+            >
               Cancelar
             </Button>
             <Button
@@ -392,10 +392,10 @@ function ProjectSettingsModal({
               color="white"
               transition=".2s"
               _hover={{
-                bg:"main.400"
+                bg: "main.400",
               }}
               _active={{
-                bgColor:"main.500"
+                bgColor: "main.500",
               }}
               onClick={handleSubmit(onSubmit)}
             >

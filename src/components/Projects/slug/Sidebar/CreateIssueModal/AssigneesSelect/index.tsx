@@ -156,7 +156,7 @@ function AssigneesSelect({
       formatCreateLabel={(inputValue: string) => (
         <div>convidar: {inputValue}</div>
       )}
-      placeholder="Selecione"
+      placeholder="Digite"
       options={options}
       styles={{
         multiValue: () => ({

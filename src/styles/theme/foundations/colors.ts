@@ -15,19 +15,8 @@ export default {
     "400": "#5cc378",
     "500": "#49bc69",
   },
-
-  light: {
-    "100": "#FFFFFF", // background
-    "200": "#F4F5F7", // surface
-    "300": "#EBECF0", // button-background
-    "400": "#DFE1E6", // button-background-2
-    "500": "#C1C7D0", // divider
-    "600": "#5E6C84", // text-info
-    "700": "#42526E", // button-text
-    "800": "#172B4D", // heading
-  },
   dark: {
-    "100": "#121212", // background
+    "100": "#121214", // background
     "200": "#1f2127", // button-background
     "300": "#202024", // surface
     "400": "#0d0e11", // button-background-2
@@ -38,7 +27,6 @@ export default {
     "900": "#FFFFFF", // heading
   },
 };
-
 
 /*
 #9178b4

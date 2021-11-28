@@ -3,6 +3,9 @@ import { StyleOptionsDTO } from "./StyleOptionsDTO";
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
   global: (props: StyleOptionsDTO) => ({
+    html:{
+      scrollBehavior: "smooth"
+    },
     body: {
       boxSizing: "border-box",
       margin: "0",

@@ -1,3 +1,4 @@
+import { Box } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 
 import { useProjects } from "../../contexts/ProjectsContext";
@@ -25,8 +26,9 @@ function Projects(): JSX.Element {
   }, 3000);
 
   return (
-    <>
+    <Box h="100vh" w="100vw" overflow="hidden">
       <ProjectsHeader />
+      <Box px={{ base: "15px", sm: "20px", md: "40px" }}>
       {projects.length > 0 ? (
         <ProjectsTable>
           <TableBody />
@@ -38,7 +40,8 @@ function Projects(): JSX.Element {
           <CreateProject />
         </ProjectsTable>
       )}
-    </>
+      </Box>
+    </Box>
   );
 }
 

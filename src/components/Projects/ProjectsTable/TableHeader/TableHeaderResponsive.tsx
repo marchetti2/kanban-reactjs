@@ -1,11 +1,11 @@
-import { HStack, VStack, Text, Box, Thead, Tr, Th } from "@chakra-ui/react";
+import { HStack, VStack, Text, Thead, Tr, Th } from "@chakra-ui/react";
 import { ChevronDownIcon, ChevronUpIcon } from "@chakra-ui/icons";
 import { useState } from "react";
 
 import { useProjects } from "../../../../contexts/ProjectsContext";
 import { useAuth } from "../../../../contexts/AuthContext";
 
-function TableHeader() {
+function TableHeaderResponsive() {
   const [toggleFilter, setToggleFilter] = useState(false);
 
 
@@ -22,27 +22,47 @@ function TableHeader() {
   }
 
   return (
-      <Thead>
+      <Thead 
+      opacity={{
+        base: "1",
+        md:"0",
+      }}
+      visibility={{
+        base: "visible",
+        md: "hidden",
+      }}
+      >
         <Tr
         h={{
           base: "42.5px",
-          sm: "48px",
-          md: "56px",
+          md: "0",
         }}
         pointerEvents={projects.length > 0 ? "auto" : "none"}
         >
+          
           <Th
+          p={{
+            base: "4px 16px",
+            md: "0",
+          }}
             w="460px"
-            borderBottomColor="gray.300"
-            transition=".3s"
+            borderBottomColor={{
+              base: "gray.300",
+              md: "none",
+            }}
+/*             transition={{
+              base: ".3s",
+              sm: "0",
+            }}
             _hover={{
               bgColor: "gray.100",
-            }}
+            }} */
             _active={{
               bgColor: "gray.200",
             }}
           >
             <HStack 
+            display={{base:"flex", md:"none"}}
             as="button" 
             spacing={{
               base: "4px",
@@ -73,21 +93,37 @@ function TableHeader() {
               </VStack>
             </HStack>
           </Th>
+
           <Th
+            p={{
+              base: "4px 16px",
+              md: "0",
+            }}
             w="195px"
-            borderBottomColor="gray.300"
-            transition=".3s"
+            borderBottomColor={{
+              base: "gray.300",
+              md: "none",
+            }}
+            /* transition={{
+              base: ".3s",
+              sm: "0",
+            }}
             _hover={{
               bgColor: "gray.100",
-            }}
+            }} */
             _active={{
               bgColor: "gray.200",
             }}
           >
-            <HStack as="button" spacing={{
+            <HStack 
+            as="button" 
+            spacing={{
               base: "4px",
               sm: "8px"
-            }}  onClick={() => handleFilter("type")}>
+            }} 
+            display={{base:"flex", md:"none"}} 
+            onClick={() => handleFilter("type")}
+            >
               <Text 
               textTransform="uppercase" 
               //letterSpacing=".5px"
@@ -112,20 +148,35 @@ function TableHeader() {
             </HStack>
           </Th>
           <Th
+          p={{
+            base: "4px 16px",
+            md: "0",
+          }}
             w="195px"
-            borderBottomColor="gray.300"
-            transition=".3s"
+            borderBottomColor={{
+              base: "gray.300",
+              md: "none",
+            }}
+            /* transition={{
+              base: ".3s",
+              sm: "0",
+            }}
             _hover={{
               bgColor: "gray.100",
-            }}
+            }} */
             _active={{
               bgColor: "gray.200",
             }}
           >
-            <HStack as="button" spacing={{
+            <HStack 
+            as="button" 
+            spacing={{
               base: "4px",
               sm: "8px"
-            }}  onClick={() => handleFilter("leader")}>
+            }}  
+            display={{base:"Flex", md:"none"}}
+            onClick={() => handleFilter("leader")}
+            >
               <Text 
               textTransform="uppercase" 
               //letterSpacing=".5px"
@@ -150,20 +201,35 @@ function TableHeader() {
             </HStack>
           </Th>
           <Th
+          p={{
+            base: "4px 16px",
+            md: "0",
+          }}
             w="120px"
-            borderBottomColor="gray.300"
-            transition=".3s"
+            borderBottomColor={{
+              base: "gray.300",
+              md: "none",
+            }}
+            /* transition={{
+              base: ".3s",
+              sm: "0",
+            }}
             _hover={{
               bgColor: "gray.100",
-            }}
+            }} */
             _active={{
               bgColor: "gray.200",
             }}
           >
-            <HStack as="button" spacing={{
+            <HStack 
+            as="button" 
+            spacing={{
               base: "4px",
               sm: "8px"
-            }}  onClick={() => handleFilter("createdAt")}>
+            }}  
+            display={{base:"Flex", md:"none"}} 
+            onClick={() => handleFilter("createdAt")}
+            >
               <Text 
               textTransform="uppercase" 
               //letterSpacing=".5px"
@@ -189,12 +255,32 @@ function TableHeader() {
           </Th>
           <Th 
           w="70px"
-         
-          borderBottomColor="gray.300"
+          borderBottomColor={{
+            base: "gray.300",
+            md: "none",
+          }}
+          p={{
+            base: "4px 16px",
+            md: "0",
+          }}
           />
+
+
+
+
         </Tr>
       </Thead>
   );
 }
 
-export { TableHeader };
+export { TableHeaderResponsive };
+
+
+
+/*
+
+
+
+
+
+*/

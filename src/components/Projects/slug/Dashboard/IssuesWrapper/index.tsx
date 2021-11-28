@@ -283,9 +283,6 @@ function IssuesWrapper({ project }: IssuesWrapperProps) {
               alignItems="stretch"
               bgColor="gray.50"
             >
-              {/* <Heading variant="13px-500-light600-upper" m="15px 10px">
-                {column.id}
-              </Heading> */}
               <Droppable key={column.id} droppableId={column.id}>
                 {(provided) => (
                   <Flex

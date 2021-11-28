@@ -1,4 +1,4 @@
-import { Tabs, TabList, TabPanels, TabPanel } from "@chakra-ui/react";
+import { Tabs, TabList, TabPanels, TabPanel, Box } from "@chakra-ui/react";
 import Head from "next/head";
 import { Flex } from "@chakra-ui/react";
 import { useRouter } from "next/router";
@@ -15,6 +15,7 @@ import { Sidebar } from "../../../components/Projects/slug/Sidebar";
 import { Aside } from "../../../components/Projects/slug/Aside";
 
 import { useProjects } from "../../../contexts/ProjectsContext";
+import ProjectResponsive from "./_projectResponsive/ProjectResponsive";
 
 
 interface UserData {
@@ -60,7 +61,11 @@ function Project(/* { project }: ProjectProps */): JSX.Element {
 
   return (
     <IssuesProvider>
-      <Flex h="100vh" flexDirection="row">
+      <Flex 
+      display={{base:'none', sm:"flex"}} 
+      h="100vh" 
+      flexDirection="row"
+      >
         <Head>
           <title>Dashboard</title>
           <link rel="icon" href="/favicon.png" />
@@ -107,6 +112,13 @@ function Project(/* { project }: ProjectProps */): JSX.Element {
           </Flex>
         </Tabs>
       </Flex>
+      <Box 
+      h="100vh" 
+      w="100vw" 
+      display={{base:"inline", sm:'none'}} 
+      >
+        <ProjectResponsive project={project}/>
+      </Box>
     </IssuesProvider>
   );
 }

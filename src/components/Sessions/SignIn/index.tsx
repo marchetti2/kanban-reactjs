@@ -11,13 +11,14 @@ import {
   FormErrorMessage,
   Tooltip,
   Spinner,
+  useColorMode,
 } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
-import { useRouter } from "next/router";
 import { EmailIcon, LockIcon, InfoOutlineIcon } from "@chakra-ui/icons";
 import { FcGoogle } from "react-icons/fc";
 import { AiFillFacebook } from "react-icons/ai";
 import { useForm } from "react-hook-form";
+import { useId } from "@reach/auto-id";
 
 import { useAuth } from "../../../contexts/AuthContext";
 
@@ -27,12 +28,13 @@ interface SignInProps {
 }
 
 function SignIn({ username, setUsername }: SignInProps): JSX.Element {
+  const { colorMode } = useColorMode();
   const [password, setPassword] = useState("");
   const [opacity, setOpacity] = useState(false);
   const [isLoading, setLoading] = useState(false);
+  const id = useId();
 
   const { login } = useAuth();
-  const router = useRouter();
 
   const {
     register,
@@ -65,8 +67,7 @@ function SignIn({ username, setUsername }: SignInProps): JSX.Element {
     setLoading(true);
     try {
       await login(username, password);
-    } catch(err) {
-    }
+    } catch (err) {}
     setLoading(false);
   }
 
@@ -81,11 +82,22 @@ function SignIn({ username, setUsername }: SignInProps): JSX.Element {
     >
       <Box
         transition="transform .5s"
-        transform={username ? "translateY(85px)" : "none"}
+        transform={{
+          base: "none",
+          sm: username ? "translateY(85px)" : "none",
+        }}
       >
         <Box mb="20px">
           <FormControl
-            h="50px"
+            h={{
+              base: "42.5px",
+              sm: "45px",
+              md: "47.5px",
+              lg: "42.5px",
+              xl: "45px",
+              "2xl": "47.5px",
+              "4xl": "50px",
+            }}
             mb="10px"
             display="flex"
             flexDirection="row"
@@ -93,25 +105,41 @@ function SignIn({ username, setUsername }: SignInProps): JSX.Element {
             isInvalid={!!errors.email}
           >
             <InputLeftElement h="100%" w="50px" pointerEvents="none">
-              <EmailIcon color="gray.300" />
+              <EmailIcon
+                color={colorMode === "dark" ? "dark.800" : "gray.300"}
+              />
             </InputLeftElement>
             <Input
-              id="field-1"
+              id={id}
               type="email"
               h="100%"
               pl="50px"
               placeholder="Digite seu e-mail"
+              borderColor={colorMode === "dark" ? "dark.300" : "gray.200"}
               _placeholder={{
-                fontSize: "14px",
+                fontSize: [
+                  "12px",
+                  "13px",
+                  "14px",
+                  "12px",
+                  "13px",
+                  "14px",
+                  "14px",
+                ],
                 fontWeight: "400",
+                color: colorMode === "dark" ? "dark.800" : "gray.400",
               }}
+              bg={colorMode === "dark" ? "dark.300" : "gray.50"}
               focusBorderColor={!!errors.email ? "red.500" : "main.500"}
               {...register("email", formValidations.email)}
-              //formNoValidate
             />
             {!!errors && (
-              <Tooltip label={errors.email?.message} placement="right" fontSize="13px"
-              fontFamily="Inter">
+              <Tooltip
+                label={errors.email?.message}
+                placement="right"
+                fontSize="13px"
+                fontFamily="Inter"
+              >
                 <FormErrorMessage ml={-7} mt={0} zIndex="tooltip">
                   <InfoOutlineIcon color="red.500" w={4} h={4} />
                 </FormErrorMessage>
@@ -120,14 +148,24 @@ function SignIn({ username, setUsername }: SignInProps): JSX.Element {
           </FormControl>
 
           <FormControl
-            h="50px"
+            h={{
+              base: "42.5px",
+              sm: "45px",
+              md: "47.5px",
+              lg: "42.5px",
+              xl: "45px",
+              "2xl": "47.5px",
+              "4xl": "50px",
+            }}
             display="flex"
             flexDirection="row"
             alignItems="center"
             isInvalid={!!errors.password}
           >
             <InputLeftElement h="100%" w="50px" pointerEvents="none">
-              <LockIcon color="gray.300" />
+              <LockIcon
+                color={colorMode === "dark" ? "dark.800" : "gray.300"}
+              />
             </InputLeftElement>
             <Input
               id="field-4"
@@ -135,16 +173,31 @@ function SignIn({ username, setUsername }: SignInProps): JSX.Element {
               h="100%"
               pl="50px"
               placeholder="Digite sua senha"
+              borderColor={colorMode === "dark" ? "dark.300" : "gray.200"}
               _placeholder={{
-                fontSize: "14px",
+                fontSize: [
+                  "12px",
+                  "13px",
+                  "14px",
+                  "12px",
+                  "13px",
+                  "14px",
+                  "14px",
+                ],
                 fontWeight: "400",
+                color: colorMode === "dark" ? "dark.800" : "gray.400",
               }}
+              bg={colorMode === "dark" ? "dark.300" : "gray.50"}
               focusBorderColor={!!errors.password ? "red.500" : "main.500"}
               {...register("password", formValidations.password)}
             />
             {!!errors && (
-              <Tooltip label={errors.password?.message} placement="right" fontSize="13px"
-              fontFamily="Inter">
+              <Tooltip
+                label={errors.password?.message}
+                placement="right"
+                fontSize="13px"
+                fontFamily="Inter"
+              >
                 <FormErrorMessage ml={-7} mt={0} zIndex="tooltip">
                   <InfoOutlineIcon color="red.500" w={4} h={4} />
                 </FormErrorMessage>
@@ -157,39 +210,65 @@ function SignIn({ username, setUsername }: SignInProps): JSX.Element {
           type="submit"
           variant="session"
           pointerEvents={isLoading ? "none" : "auto"}
+          fontSize={["14px", "15px", "16px", "14px", "14px", "15px", "16px"]}
+          mb="20px"
         >
-          {isLoading ? <Spinner color="white" /> : "Continuar"}
+          {isLoading ? <Spinner color="white" /> : "Entrar"}
         </Button>
       </Box>
 
       <Box
         transition="opacity 1s"
-        opacity={!username ? "1" : "0"}
-        visibility={!username ? "visible" : "hidden"}
+        opacity={{
+          base: "1",
+          sm: !username ? "1" : "0",
+        }}
+        visibility={{
+          base: "visible",
+          sm: !username ? "visible" : "hidden",
+        }}
       >
         <Center>
-          <Text mb="20px">ou</Text>
+          <Text
+            fontSize={["12px", "13px", "14px", "12px", "13px", "14px", "14px"]}
+            mb="20px"
+          >
+            ou
+          </Text>
         </Center>
 
         <Button
           type="button"
           variant="session-social"
           mb="16px"
+          bg="white"
           //onClick={googleAuthProvider}
           cursor="not-allowed"
-          _hover={{
-            bg: "none",
-          }}
-          _active={{
-            bg: "none",
-          }}
-          _focus={{
-            outline: "none",
-          }}
+          // _hover={{
+          //   bg: "none",
+          // }}
+          // _active={{
+          //   bg: "none",
+          // }}
+          // _focus={{
+          //   outline: "none",
+          // }}
         >
           <HStack justifyContent="space-between" w="100%">
             <Icon as={FcGoogle} w={5} h={5} />
-            <Text>Continuar com Google</Text>
+            <Text
+              fontSize={[
+                "12px",
+                "13px",
+                "14px",
+                "12px",
+                "13px",
+                "14px",
+                "14px",
+              ]}
+            >
+              Continuar com Google
+            </Text>
             <Box />
           </HStack>
         </Button>
@@ -198,21 +277,33 @@ function SignIn({ username, setUsername }: SignInProps): JSX.Element {
           //disabled
           variant="session-social"
           //onClick={() => {}}
-
+          bg="white"
           cursor="not-allowed"
-          _hover={{
-            bg: "none",
-          }}
-          _active={{
-            bg: "none",
-          }}
-          _focus={{
-            outline: "none",
-          }}
+          // _hover={{
+          //   bg: "none",
+          // }}
+          // _active={{
+          //   bg: "none",
+          // }}
+          // _focus={{
+          //   outline: "none",
+          // }}
         >
           <HStack justifyContent="space-between" w="100%">
             <Icon as={AiFillFacebook} w={5} h={5} color="#4267B2" />
-            <Text>Continuar com Facebook</Text>
+            <Text
+              fontSize={[
+                "12px",
+                "13px",
+                "14px",
+                "12px",
+                "13px",
+                "14px",
+                "14px",
+              ]}
+            >
+              Continuar com Facebook
+            </Text>
             <Box />
           </HStack>
         </Button>

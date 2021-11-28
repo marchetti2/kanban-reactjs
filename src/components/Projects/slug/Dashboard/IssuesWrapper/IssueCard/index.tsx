@@ -158,23 +158,39 @@ function IssueCard({
             boxShadow={
               snapshot.isDragging
                 ? "5px 10px 30px 0px rgba(9, 30, 66, 0.15)"
-                : "md"//"0px 1px 2px rgba(9, 30, 66, 0.25)"
+                : "md" //"0px 1px 2px rgba(9, 30, 66, 0.25)"
             }
             userSelect="none"
             onClick={() => onOpenModal(id, "issue")}
             //position="relative"
           >
-            <Heading maxW="250px" textAlign="left" variant="15px-500" pb="10px">
+            <Heading
+              maxW="250px"
+              fontWeight="500"
+              textAlign="left"
+              fontSize="15px"
+              lineHeight="18px"
+              pb="10px"
+            >
               {summary}
             </Heading>
             <HStack justifyContent="space-between">
               <Flex>
-                <Tooltip textTransform="capitalize" label={type} gutter={2} fontSize="13px"
-                  fontFamily="Inter">
+                <Tooltip
+                  textTransform="capitalize"
+                  label={type}
+                  gutter={2}
+                  fontSize="13px"
+                  fontFamily="Inter"
+                >
                   <Box mr="5px">{handleTypeIcon(type)}</Box>
                 </Tooltip>
-                <Tooltip label={`Prioridade ${priority}`} gutter={2} fontSize="13px"
-                  fontFamily="Inter">
+                <Tooltip
+                  label={`Prioridade ${priority}`}
+                  gutter={2}
+                  fontSize="13px"
+                  fontFamily="Inter"
+                >
                   <Box>{handlePriorityIcon(priority)}</Box>
                 </Tooltip>
               </Flex>
@@ -187,8 +203,12 @@ function IssueCard({
               >
                 {assignees?.map((assignee) => (
                   <Box key={assignee.email} h="24px" w="24px">
-                    <Tooltip label={assignee.name} gutter={2} fontSize="13px"
-                  fontFamily="Inter">
+                    <Tooltip
+                      label={assignee.name}
+                      gutter={2}
+                      fontSize="13px"
+                      fontFamily="Inter"
+                    >
                       <Avatar
                         //ml={-1}
                         //borderWidth="1px"
