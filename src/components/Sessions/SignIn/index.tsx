@@ -34,7 +34,7 @@ function SignIn({ username, setUsername }: SignInProps): JSX.Element {
   const [isLoading, setLoading] = useState(false);
   const id = useId();
 
-  const { login, googleAuthProvider } = useAuth();
+  const { login, googleAuthProvider, facebookAuthProvider } = useAuth();
 
   const {
     register,
@@ -264,20 +264,10 @@ function SignIn({ username, setUsername }: SignInProps): JSX.Element {
         </Button>
         <Button
           type="button"
-          //disabled
           variant="session-social"
-          //onClick={() => {}}
+          mb="16px"
           bg={colorMode === "dark" ? "dark.300" : "white"}
-          cursor="not-allowed"
-          // _hover={{
-          //   bg: "none",
-          // }}
-          // _active={{
-          //   bg: "none",
-          // }}
-          // _focus={{
-          //   outline: "none",
-          // }}
+          onClick={facebookAuthProvider}
         >
           <HStack justifyContent="space-between" w="100%">
             <Icon as={AiFillFacebook} w={5} h={5} color="#4267B2" />

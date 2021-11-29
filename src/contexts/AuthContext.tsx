@@ -12,6 +12,7 @@ import {
   signOut,
   signInWithPopup,
   GoogleAuthProvider,
+  FacebookAuthProvider ,
   createUserWithEmailAndPassword,
   updateProfile,
   User,
@@ -73,6 +74,7 @@ interface AuthContextProps {
   currentPage: string;
   setCurrentPage: (page: string) => void;
   googleAuthProvider: () => Promise<void>;
+  facebookAuthProvider: () => Promise<void>;
   logout: () => Promise<void>;
   createUser: (email: string, password: string, name: string) => Promise<void>;
   login: (email: string, password: string) => Promise<void>;
@@ -372,7 +374,7 @@ function AuthProvider({ children }: AuthProviderProps): JSX.Element {
     const provider = new GoogleAuthProvider();
 
     signInWithPopup(auth, provider)
-      .then((userCredential) => {
+      .then(async(userCredential) => {
         const { uid, displayName, photoURL, email } = userCredential.user;
 
         setUser({
@@ -381,7 +383,80 @@ function AuthProvider({ children }: AuthProviderProps): JSX.Element {
           email: email || "",
           avatar: photoURL || "",
         });
+        const querySnapshot = await getDocs(collection(database, "users"));
 
+        const users = querySnapshot.docs.map((doc) => doc.data()) as Users;
+        
+        const userExists = users.find(user=> user.email === email)
+
+        if(!userExists){
+          try {
+            await setDoc(
+              doc(database, "users", email!),
+              {
+                id: uid,
+                name: displayName,
+                email: email,
+                avatar: photoURL,
+              },
+              { merge: true }
+            );
+            await createNotification({
+              content: `Olá ${userCredential.user.displayName}, bem vindo ao Kanban!`,
+              userId: userCredential.user.uid,
+              type: "welcome",
+            });
+          } catch (e) {
+            console.error("Error adding document: ", e);
+          }
+        }
+        setIsLogged(true);
+      })
+      .catch(() => {
+        ToastServerError();
+      });
+  }
+
+  async function facebookAuthProvider() {
+    const provider = new FacebookAuthProvider();
+
+    signInWithPopup(auth, provider)
+      .then(async(userCredential) => {
+        const { uid, displayName, photoURL, email } = userCredential.user;
+
+        setUser({
+          id: uid,
+          name: displayName || "",
+          email: email || "",
+          avatar: photoURL || "",
+        });
+        const querySnapshot = await getDocs(collection(database, "users"));
+
+        const users = querySnapshot.docs.map((doc) => doc.data()) as Users;
+        
+        const userExists = users.find(user=> user.email === email)
+
+        if(!userExists){
+          try {
+            await setDoc(
+              doc(database, "users", email!),
+              {
+                id: uid,
+                name: displayName,
+                email: email,
+                avatar: photoURL,
+              },
+              { merge: true }
+            );
+            await createNotification({
+              content: `Olá ${userCredential.user.displayName}, bem vindo ao Kanban!`,
+              userId: userCredential.user.uid,
+              type: "welcome",
+            });
+          } catch (e) {
+            console.error("Error adding document: ", e);
+          }
+        }
         setIsLogged(true);
       })
       .catch(() => {
@@ -408,6 +483,7 @@ function AuthProvider({ children }: AuthProviderProps): JSX.Element {
         updateUser,
         user,
         googleAuthProvider,
+        facebookAuthProvider,
         logout,
         createUser,
         login,
@@ -421,7 +497,6 @@ function AuthProvider({ children }: AuthProviderProps): JSX.Element {
         uploadAvatarProgress,
         localAvatarUrl,
         setLocalAvatarUrl,
-
         setUploadAvatarProgress,
       }}
     >
