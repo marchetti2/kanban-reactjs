@@ -20,12 +20,12 @@ export default {
         "2xl": "left",
       },
     },
-    "kanban-board-status": {
+    "kanban-board-status": ({ colorMode }: StyleOptionsDTO) => ({
       fontSize: "13px",
       lineHeight: "15px",
-      color: "gray.500",
+      color: colorMode === "dark" ? "dark.800" : "gray.500",
       textTransform: "uppercase",
-    },
+    }),
     "modal-title": {
       fontSize: "21px",
       lineHeight: "25px",

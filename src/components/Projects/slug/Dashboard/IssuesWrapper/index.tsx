@@ -12,6 +12,7 @@ import {
   MenuList,
   Text,
   IconButton,
+  useColorMode,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
@@ -87,6 +88,7 @@ import { IssueCard } from "./IssueCard";
 
 function IssuesWrapper({ project }: IssuesWrapperProps) {
   const router = useRouter();
+  const { colorMode } = useColorMode();
   const { onClose } = useDisclosure();
   const {
     issues,
@@ -281,7 +283,7 @@ function IssuesWrapper({ project }: IssuesWrapperProps) {
               borderRadius="0 0 6px 6px"
               flexDirection="column"
               alignItems="stretch"
-              bgColor="gray.50"
+              bgColor={colorMode === "dark" ? "dark.300" : "gray.50"}
             >
               <Droppable key={column.id} droppableId={column.id}>
                 {(provided) => (

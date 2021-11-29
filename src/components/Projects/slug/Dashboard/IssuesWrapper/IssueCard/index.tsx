@@ -16,6 +16,7 @@ import {
   MenuList,
   Text,
   IconButton,
+  useColorMode,
 } from "@chakra-ui/react";
 import {
   BiChevronUp,
@@ -53,6 +54,9 @@ function IssueCard({
   type,
   onOpenModal,
 }: IssueCardProps) {
+  
+  const { colorMode } = useColorMode();
+  
   function handlePriorityIcon(priority: string) {
     switch (priority) {
       case "muito alta":
@@ -143,12 +147,12 @@ function IssueCard({
             minH="90px"
             flexDir="column"
             justifyContent="space-between"
-            bgColor="white"
+            bgColor={colorMode === "dark" ? "rgba(153, 153, 153,0.175)" : "white"} 
             borderRadius="4px"
             p="12px"
             transition=".3s"
             _hover={{
-              bgColor: "gray.100",
+              bgColor: colorMode === "dark" ? "rgba(153, 153, 153,0.3)" : "gray.100",
             }}
             transform={
               snapshot.isDragging && !snapshot.isDropAnimating
@@ -166,10 +170,7 @@ function IssueCard({
           >
             <Heading
               maxW="250px"
-              fontWeight="500"
               textAlign="left"
-              fontSize="15px"
-              lineHeight="18px"
               pb="10px"
             >
               {summary}
@@ -198,7 +199,7 @@ function IssueCard({
               <AvatarGroup
                 size="xs"
                 max={4}
-                borderColor="light.100"
+                borderColor="white"
                 spacing={-1}
               >
                 {assignees?.map((assignee) => (
@@ -210,9 +211,6 @@ function IssueCard({
                       fontFamily="Inter"
                     >
                       <Avatar
-                        //ml={-1}
-                        //borderWidth="1px"
-                        //borderColor="light.100"
                         size="xs"
                         name={assignee.name}
                         src={assignee.avatar}
