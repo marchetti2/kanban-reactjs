@@ -52,7 +52,7 @@ function App(): JSX.Element {
         }}
       >
         <Flex
-          m={colorMode === "dark" ? "auto 65px auto auto" : "auto"}
+          m="auto"
           maxW="630px"
           h="540px"
           alignItems="center"

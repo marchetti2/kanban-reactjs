@@ -129,7 +129,7 @@ function Sessions(): JSX.Element {
       alignItems="stretch"
       justifyContent="space-between"
       p="32px 40px"
-      m={colorMode === "dark" ? "auto auto auto 100px" : "auto"}
+      m="auto"
       h={{
         base: currentPage === "forgotPassword" ? "385px" : "495px",
         sm: username || currentPage === "forgotPassword" ? "415px" : "525px",

@@ -241,7 +241,7 @@ function SignIn({ username, setUsername }: SignInProps): JSX.Element {
           type="button"
           variant="session-social"
           mb="16px"
-          bg="white"
+          bg={colorMode === "dark" ? "dark.300" : "white"}
           //onClick={googleAuthProvider}
           cursor="not-allowed"
           // _hover={{
@@ -277,7 +277,7 @@ function SignIn({ username, setUsername }: SignInProps): JSX.Element {
           //disabled
           variant="session-social"
           //onClick={() => {}}
-          bg="white"
+          bg={colorMode === "dark" ? "dark.300" : "white"}
           cursor="not-allowed"
           // _hover={{
           //   bg: "none",
