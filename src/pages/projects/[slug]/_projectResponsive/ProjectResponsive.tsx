@@ -96,20 +96,20 @@ function ProjectResponsive({ project }: ProjectResponsiveProps): JSX.Element {
           as="header"
           w="100vw"
           h="60px"
-          bgColor="main.400"
+          bgColor={colorMode === "dark" ? "main.300" : "main.400"}
           alignItems="center"
           justifyContent="space-between"
           px="24px"
         >
-          <Icon as={BsKanban} w={9} h={9} color="light.100" />
+          <Icon as={BsKanban} w={9} h={9} color="white" />
           <HStack spacing="20px">
             <NotificationsResponsive />
 
             <Flex onClick={toggleColorMode}>
               {colorMode === "dark" ? (
-                <Icon as={FaSun} w={5} h={5} color="light.100" />
+                <Icon as={FaSun} w={5} h={5} color="white" />
               ) : (
-                <Icon as={FaMoon} w={5} h={5} color="light.100" />
+                <Icon as={FaMoon} w={5} h={5} color="white" />
               )}
             </Flex>
 
@@ -123,7 +123,7 @@ function ProjectResponsive({ project }: ProjectResponsiveProps): JSX.Element {
               </MenuButton>
               <MenuList boxShadow="md">
                 <MenuGroup
-                  color="light.600"
+                  color={colorMode === "dark" ? "white" : "gray.500"}
                   textTransform="capitalize"
                   fontWeight="500"
                   title={auth.currentUser?.displayName!}
@@ -153,8 +153,8 @@ function ProjectResponsive({ project }: ProjectResponsiveProps): JSX.Element {
         <Flex
           h="80px"
           w="100%"
-          bgColor="gray.100"
-          borderBottomWidth="1px"
+          bgColor={colorMode === "dark" ? "dark.300" : "gray.100"}
+          borderBottomWidth={colorMode === "dark" ? "0" : "1px"}
           boxShadow="sm"
           alignItems="center"
           justifyContent="space-between"
@@ -169,13 +169,13 @@ function ProjectResponsive({ project }: ProjectResponsiveProps): JSX.Element {
                   textTransform="capitalize"
                   isTruncated
                 >
-                  asdasdasdasdasdasdas
+                  {project?.title}
                 </Heading>
                 <Icon
                   as={MdSettings}
                   width="20px"
                   height="20px"
-                  color="gray.400"
+                  color={colorMode === "dark" ? "dark.800" : "gray.400"} 
                 />
               </HStack>
 
@@ -183,10 +183,10 @@ function ProjectResponsive({ project }: ProjectResponsiveProps): JSX.Element {
                 maxW="190px"
                 fontFamily="Inter"
                 fontSize="13px"
-                fontColor="gray.500"
+                fontColor={colorMode === "dark" ? "dark.600" : "gray.500"} 
                 isTruncated
               >
-                aaaaa
+               {project?.type}
               </Text>
             </VStack>
           </HStack>
@@ -196,17 +196,17 @@ function ProjectResponsive({ project }: ProjectResponsiveProps): JSX.Element {
             borderRadius="20px"
             width="40px"
             height="40px"
-            bgColor="gray.200"
+            bgColor={colorMode === "dark" ? "rgba(153, 153, 153,0.175)" : "gray.200"}
             onClick={() => router.push("/projects")}
             _hover={{
-              bg: "gray.300",
+              bg: colorMode === "dark" ? "rgba(153, 153, 153,0.25)" : "gray.300"
             }}
           >
             <Icon
               as={IoMdArrowRoundBack}
               width="20px"
               height="20px"
-              color="gray.400"
+              color={colorMode === "dark" ? "dark.600" :"gray.400"}
             />
           </Flex>
         </Flex>
@@ -222,37 +222,37 @@ function ProjectResponsive({ project }: ProjectResponsiveProps): JSX.Element {
               <HStack mb="10px">
                 <Link href="/projects" passHref>
                   <Text
+                    variant="breadcrumb"
                     fontSize="12px"
-                    fontFamily="Inter"
                     cursor="pointer"
                     textDecoration="underline"
                     _hover={{
-                      color: "gray.700",
+                      color: colorMode === "dark" ? "white" :"gray.700",
                     }}
                   >
                     Projetos
                   </Text>
                 </Link>
-                <Text fontSize="12px" fontFamily="Inter">
+                <Text 
+                variant="breadcrumb"
+                fontSize="12px"
+                >
                   {" "}
                   /{" "}
                 </Text>
                 <Text
+                  variant="breadcrumb"
                   maxW="200px"
                   fontSize="12px"
-                  fontFamily="Inter"
                   textTransform="capitalize"
                   isTruncated
                 >
-                  asdasdasdasd
+                  {project?.title}
                 </Text>
               </HStack>
 
               <Heading
-                fontSize="24px"
-                textAlign="center"
-                color="gray.700"
-                fontWeight="500"
+                variant="project-responsive-title"
                 mb="20px"
               >
                 Quadro de problemas
@@ -265,7 +265,6 @@ function ProjectResponsive({ project }: ProjectResponsiveProps): JSX.Element {
               w="95%"
               m="auto"
               overflowX="scroll"
-              //border="1px solid #333"
               position="absolute"
               marginLeft="auto"
               marginRight="auto"
@@ -277,7 +276,7 @@ function ProjectResponsive({ project }: ProjectResponsiveProps): JSX.Element {
                   w="320px"
                   h="50px"
                   borderRadius="6px 6px 0 0"
-                  bgColor="gray.50"
+                  bgColor={colorMode === "dark" ? "dark.300" : "gray.50"}
                 >
                   <Heading variant="kanban-board-status" m="15px 10px">
                     não iniciado
@@ -287,7 +286,7 @@ function ProjectResponsive({ project }: ProjectResponsiveProps): JSX.Element {
                   w="320px"
                   h="50px"
                   borderRadius="6px 6px 0 0"
-                  bgColor="gray.50"
+                  bgColor={colorMode === "dark" ? "dark.300" : "gray.50"}
                 >
                   <Heading variant="kanban-board-status" m="15px 10px">
                     em progresso
@@ -297,7 +296,7 @@ function ProjectResponsive({ project }: ProjectResponsiveProps): JSX.Element {
                   w="320px"
                   h="50px"
                   borderRadius="6px 6px 0 0"
-                  bgColor="gray.50"
+                  bgColor={colorMode === "dark" ? "dark.300" : "gray.50"}
                 >
                   <Heading variant="kanban-board-status" m="15px 10px">
                     concluído
@@ -315,9 +314,10 @@ function ProjectResponsive({ project }: ProjectResponsiveProps): JSX.Element {
             <Input
               h="100%"
               pl="20px"
-              color="gray.700"
-              bgColor="gray.50"
-              focusBorderColor="main.500"
+              borderColor={colorMode === "dark" ? "dark.300" : "gray.200"}
+              color={colorMode === "dark" ? "white" : "gray.700"}
+              bgColor={colorMode === "dark" ? "dark.300" : "gray.50"}
+              focusBorderColor={colorMode === "dark" ? "main.300" : "main.500"}
               placeholder="Buscar problema"
               _placeholder={{
                 fontSize: "13px",

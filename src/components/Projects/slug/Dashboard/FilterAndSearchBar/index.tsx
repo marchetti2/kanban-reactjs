@@ -133,7 +133,7 @@ function FilterAndSearchBar({ project }: FilterAndSearchBarProps) {
           <Icon as={AiOutlineSearch} w={5} h={5} color="gray.300" />
         </InputRightElement>
       </InputGroup>
-      <AvatarGroup size="sm" max={4} borderColor="light.100" spacing={-2}>
+      <AvatarGroup size="sm" max={4} borderColor="white" spacing={-2}>
         <IconButton
           w="36px"
           h="36px"

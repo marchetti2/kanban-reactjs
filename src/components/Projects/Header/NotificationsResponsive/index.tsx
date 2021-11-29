@@ -46,7 +46,7 @@ function NotificationsResponsive() {
       <PopoverTrigger>
         <Box position="relative" alignItems="center" justifyContent="center">
           <Box display={{ base: "flex", sm: "none" }}>
-            <Icon as={BellIcon} w={6} h={6} color="light.100" />
+            <Icon as={BellIcon} w={6} h={6} color="white" />
           </Box>
 
           {notifications.length > 0 ? (
@@ -56,8 +56,8 @@ function NotificationsResponsive() {
               borderRadius="6px"
               bg="red.500"
               position="absolute"
-              top="7px"
-              right="7px"
+              top="0"
+              right="0"
               alignItems="center"
               justifyContent="center"
             >

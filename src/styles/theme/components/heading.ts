@@ -41,6 +41,12 @@ export default {
       lineHeight: ["14px", "18px", "18px", "14px", "18px", "18px", "18px"],
       textAlign: "center",
     },
+    "project-responsive-title": ({ colorMode }: StyleOptionsDTO) => ({
+      fontSize:"24px",
+      textAlign:"center",
+      color:colorMode === "dark" ? "white" : "gray.700",
+      fontWeight:"500",
+    }),
 
     default: {
       fontSize: "15px",
