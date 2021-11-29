@@ -149,21 +149,19 @@ export default {
       fontWeight: "400",
       w: "100%",
       bg: colorMode === "dark" ? "dark.200" : "gray.100",
-      //fontSize: ["12px", "13px", "14px", "12px", "13px", "14px", "14px"],
-      //lineHeight: "40px",
       textAlign: "center",
       color: "#42526E",
       boxShadow: "1px 1px 5px rgba(0, 0, 0, 0.2)",
       borderRadius: "6px",
-      // _hover: {
-      //   bg:
-      //     colorMode === "dark"
-      //       ? "rgba(31, 33, 39, .9)"
-      //       : "rgba(226,232,240,.8)",
-      // },
-      // _active: {
-      //   bgColor: colorMode === "dark" ? "rgba(31, 33, 39, .6)" : "gray.200",
-      // },
+      _hover: {
+        bg:
+          colorMode === "dark"
+            ? "rgba(31, 33, 39, .9)"
+            : "rgba(226,232,240,.2)",
+      },
+      _active: {
+        bgColor: colorMode === "dark" ? "rgba(153, 153, 153,0.2)" : "gray.100",
+      },
     }),
   },
   defaultProps: {

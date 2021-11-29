@@ -34,7 +34,7 @@ function SignIn({ username, setUsername }: SignInProps): JSX.Element {
   const [isLoading, setLoading] = useState(false);
   const id = useId();
 
-  const { login } = useAuth();
+  const { login, googleAuthProvider } = useAuth();
 
   const {
     register,
@@ -242,17 +242,7 @@ function SignIn({ username, setUsername }: SignInProps): JSX.Element {
           variant="session-social"
           mb="16px"
           bg={colorMode === "dark" ? "dark.300" : "white"}
-          //onClick={googleAuthProvider}
-          cursor="not-allowed"
-          // _hover={{
-          //   bg: "none",
-          // }}
-          // _active={{
-          //   bg: "none",
-          // }}
-          // _focus={{
-          //   outline: "none",
-          // }}
+          onClick={googleAuthProvider}
         >
           <HStack justifyContent="space-between" w="100%">
             <Icon as={FcGoogle} w={5} h={5} />
