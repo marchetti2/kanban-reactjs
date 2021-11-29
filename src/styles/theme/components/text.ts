@@ -39,6 +39,10 @@ export default {
       lineHeight: "20px",
       textAlign: "center",
     },
+    "breadcrumb": {
+      fontSize:"15px",
+      fontFamily:"Inter"
+    },
     default: {
       fontSize: "14px",
       lineHeight: "18px",

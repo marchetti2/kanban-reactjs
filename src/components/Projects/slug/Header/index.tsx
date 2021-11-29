@@ -60,28 +60,26 @@ function Header({ projectTitle, current }: HeaderProps) {
           <HStack mb="10px">
             <Link href="/projects" passHref>
               <Text
-                fontSize="15px"
-                fontFamily="Inter"
+                variant="breadcrumb"
                 cursor="pointer"
                 _hover={{
-                  color: "gray.700",
+                  color: colorMode === "dark" ? "white" : "gray.700",
                   textDecoration: "underline",
                 }}
               >
                 Projetos
               </Text>
             </Link>
-            <Text fontSize="15px" fontFamily="Inter">
+            <Text variant="breadcrumb">
               {" "}
               /{" "}
             </Text>
             {projectTitle === undefined ? (
               <SkeletonText w="120px" noOfLines={1} />
             ) : (
-              <Text
+              <Text 
+                variant="breadcrumb"
                 maxW="200px"
-                fontSize="15px"
-                fontFamily="Inter"
                 textTransform="capitalize"
                 isTruncated
               >
@@ -90,7 +88,7 @@ function Header({ projectTitle, current }: HeaderProps) {
             )}
           </HStack>
 
-          <Heading fontSize="24px" fontWeight="500" mb="30px">
+          <Heading fontSize="24px" mb="30px">
             {current}
           </Heading>
         </Flex>
@@ -100,15 +98,15 @@ function Header({ projectTitle, current }: HeaderProps) {
           <IconButton
             isRound
             aria-label="Color-mode"
-            bgColor="light.100"
-            color="light.700"
+            bgColor={colorMode === "dark" ? "dark.100" : "white"}
+            color={colorMode === "dark" ? "white" : 'gray.600'}
             transition=".3s"
             _hover={{
-              color: "main.400",
-              bgColor: "gray.100",
+              color: colorMode === "dark" ? "main.300" : "main.400",
+              bgColor: colorMode === "dark" ? "rgba(153, 153, 153,0.175)" : "gray.100",
             }}
             _active={{
-              bgColor: "rgba(105,73,188, 0.5)",
+              bgColor: colorMode === "dark" ? "main.300" : "rgba(105,73,188, 0.5)",
             }}
             onClick={toggleColorMode}
           >
@@ -120,13 +118,13 @@ function Header({ projectTitle, current }: HeaderProps) {
               as={IconButton}
               isRound
               aria-label="config"
-              bgColor="light.100"
+              bgColor={colorMode === "dark" ? "dark.100" : "white"}
               transition=".3s"
               _hover={{
-                bg: "gray.100",
+                bg: colorMode === "dark" ? "rgba(153, 153, 153,0.175)" : "gray.100",
               }}
               _active={{
-                bgColor: "rgba(105,73,188, 0.5)",
+                bgColor: colorMode === "dark" ? "main.300" : "rgba(105,73,188, 0.5)" ,
               }}
             >
               <Avatar

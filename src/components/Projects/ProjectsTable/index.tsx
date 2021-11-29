@@ -71,7 +71,7 @@ function ProjectsTable({ children }: ProjectsTableProps) {
                   pl="20px"
                   borderColor={colorMode === "dark" ? "dark.300" : "gray.200"}
                   color={colorMode === "dark" ? "white" : "gray.700"}
-                  bg={colorMode === "dark" ? "dark.300" : "gray.50"}
+                  bgColor={colorMode === "dark" ? "dark.300" : "gray.50"}
                   focusBorderColor={colorMode === "dark" ? "main.300" : "main.500"}
                   onChange={(e) => handleInputChange(e.target.value)}
                 />

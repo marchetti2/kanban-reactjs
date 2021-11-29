@@ -12,6 +12,7 @@ import {
   Icon,
   IconButton,
   Tooltip,
+  useColorMode, Text
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 
@@ -42,7 +43,7 @@ interface FilterAndSearchBarProps {
 }
 function FilterAndSearchBar({ project }: FilterAndSearchBarProps) {
   const [active, setActive] = useState<Array<string>>([]);
-
+  const { colorMode } = useColorMode();
   const { searchListIssueData, issues, setSearchListIssueData } = useIssues();
 
   function verify(buttonName: string) {
@@ -123,13 +124,13 @@ function FilterAndSearchBar({ project }: FilterAndSearchBarProps) {
           pl="20px"
           fontSize="14px"
           placeholder="Buscar problema"
-          color="gray.700"
-          bgColor="gray.50"
-          focusBorderColor="main.500"
+          color={colorMode === "dark" ? "white" : "gray.700"}
+          bgColor={colorMode === "dark" ? "dark.300" : "gray.50"}
+          focusBorderColor={colorMode === "dark" ? "main.300" : "main.500"}
           onChange={(e) => handleInputFilterChange(e.target.value)}
         />
         <InputRightElement pointerEvents="none">
-          <Icon as={AiOutlineSearch} w={5} h={5} color="light.500" />
+          <Icon as={AiOutlineSearch} w={5} h={5} color="gray.300" />
         </InputRightElement>
       </InputGroup>
       <AvatarGroup size="sm" max={4} borderColor="light.100" spacing={-2}>
@@ -188,31 +189,12 @@ function FilterAndSearchBar({ project }: FilterAndSearchBarProps) {
 
       <HStack spacing="5px">
         <Button
-          bg="none"
-          fontWeight="400"
-          fontSize="14px"
-          color="gray.700"
-          transition=".2s"
-          _hover={{
-            bg: "gray.100",
-          }}
-          _active={{
-            color: "white",
-            bgColor: "main.400",
-          }}
+          variant="filter"
           isActive={isActive(auth.currentUser?.displayName!)}
           onClick={() => verify(auth.currentUser?.displayName!)}
         >
           Meu problemas
         </Button>
-        {/* <Button
-          variant="filter"
-          isDisabled
-          isActive={isActive("Problemas recentes")}
-          onClick={() => verify("Problemas recentes")}
-        >
-          Problemas recentes
-        </Button> */}
       </HStack>
       <Flex
         transition=".2s"
@@ -222,12 +204,15 @@ function FilterAndSearchBar({ project }: FilterAndSearchBarProps) {
       >
         <Center height="32px">
           <Divider
-            borderColor="gray.300"
+            borderColor={colorMode === "dark" ? "dark.500" : "gray.300"}
             m="0 15px 0 0"
             orientation="vertical"
           />
         </Center>
-        <Button variant="link" color="gray.700" onClick={() => setActive([])}>
+        <Button 
+        variant="link" 
+        color={colorMode === "dark" ? "dark.600" : "gray.700" }
+        onClick={() => setActive([])}>
           Limpar
         </Button>
       </Flex>

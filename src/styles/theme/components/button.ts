@@ -10,20 +10,20 @@ export default {
       h: "40px",
       color: "light.600",
     },
-    filter: {
-      fontSize: "14px",
-      lineHeight: "14px",
-      fontWeight: "400",
-      color: "light.700",
-      bg: "none",
-      _hover: {
-        bg: "light.300",
+    filter: ({ colorMode }: StyleOptionsDTO) => ({
+      bg: colorMode === "dark" ? "dark.200" : "none",
+      fontWeight:"400",
+      fontSize:"14px",
+      color: colorMode === "dark" ? "white" : "gray.700",
+      transition:".2s",
+      _hover:{
+        bg: colorMode === "dark" ? "rgba(153, 153, 153,0.25)" : "gray.100",
       },
-      _active: {
-        bg: "rgba(207, 102, 121, 0.15)",
-        color: "main.400",
+      _active:{
+        color: "white",
+        bgColor: colorMode === "dark" ? "main.300" : "main.400", 
       },
-    },
+    }),
     link: {
       fontSize: "14px",
       lineHeight: "14px",
