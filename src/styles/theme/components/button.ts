@@ -92,6 +92,24 @@ export default {
       },
     },
 
+    'aside': ({ colorMode }: StyleOptionsDTO) => ({
+      w:"190px",
+      h:"40px",
+      color:colorMode === "dark" ? "dark.600" : "gray.600",
+      borderRadius:"6px",
+      _selected:{ bg: colorMode === "dark" ? "rgba(153, 153, 153,0.175)" : "gray.200" },
+      _focus:{
+        outline: "none",
+        boxShadow: "none",
+      },
+      _hover:{
+        bg: colorMode === "dark" ? "rgba(153, 153, 153,0.175)" : "gray.200",
+        color: colorMode === "dark" ? "main.300" : "main.500", 
+      },
+      justifyContent:"space-between",
+      alignItems:"center",
+    }),
+
     "session-cancel": ({ colorMode }: StyleOptionsDTO) => ({
       height: {
         base: "42.5px",

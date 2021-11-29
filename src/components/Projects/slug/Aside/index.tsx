@@ -8,6 +8,7 @@ import {
   SkeletonText,
   Icon,
   useColorMode,
+  Button
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { BsKanban } from "react-icons/bs";
@@ -67,21 +68,27 @@ function Aside({ project }: AsideProps) {
         <Tab
           w="190px"
           h="40px"
-          color="gray.600"
+          color={colorMode === "dark" ? "dark.600" : "gray.600"}
           borderRadius="6px"
-          _selected={{ bg: "gray.200" }}
+          _selected={{ bg: colorMode === "dark" ? "rgba(153, 153, 153,0.175)" : "gray.200" }}
           _focus={{
             outline: "none",
             boxShadow: "none",
           }}
           _hover={{
-            bg: "gray.200",
-            color: "main.500",
+            bg: colorMode === "dark" ? "rgba(153, 153, 153,0.175)" : "gray.200",
+            color: colorMode === "dark" ? "main.300" : "main.500",
           }}
           px="10px"
           justifyContent="space-between"
         >
-          <Icon mr="7px" as={BsKanban} w={4} h={4} color="gray.400" />
+          <Icon 
+          mr="7px" 
+          as={BsKanban} 
+          w={4} 
+          h={4} 
+          color={colorMode === "dark" ? "dark.800" : "gray.400"} 
+          />
           <Text          
           fontSize="14px"
           fontFamily="Inter"
@@ -94,16 +101,16 @@ function Aside({ project }: AsideProps) {
         <Tab
           w="190px"
           h="40px"
-          color="gray.600"
+          color={colorMode === "dark" ? "dark.600" : "gray.600"}
           borderRadius="6px"
-          _selected={{ bg: "gray.200" }}
+          _selected={{ bg: colorMode === "dark" ? "rgba(153, 153, 153,0.175)" : "gray.200" }}
           _focus={{
             outline: "none",
             boxShadow: "none",
           }}
           _hover={{
-            bg: "gray.200",
-            color: "main.500",
+            bg: colorMode === "dark" ? "rgba(153, 153, 153,0.175)" : "gray.200",
+            color: colorMode === "dark" ? "main.300" : "main.500", 
           }}
           px="10px"
           justifyContent="space-between"
@@ -112,12 +119,12 @@ function Aside({ project }: AsideProps) {
             as={IoSettingsSharp}
             w={4}
             h={4}
-            color="gray.400"
+            color={colorMode === "dark" ? "dark.800" : "gray.400"}
           />
           <Text  
-          w="100%"        
+          w="100%" 
+          fontFamily="Inter"       
           fontSize="14px"
-          fontFamily="Inter"
           fontWeight="400"
           color="inherit"
           >
@@ -128,26 +135,12 @@ function Aside({ project }: AsideProps) {
 
       <Divider borderColor={colorMode === "dark" ? "dark.500" : "gray.300"} my="30px" />
 
-      <Flex
+      <Button
         as="button"
-        w="190px"
-        h="40px"
-        color={colorMode === "dark" ? "dark.600" : "gray.600"}
-        borderRadius="6px"
-        _selected={{ bg: colorMode === "dark" ? "rgba(153, 153, 153,0.175)" : "gray.200", }}
-        _focus={{
-          outline: "none",
-          boxShadow: "none",
-        }}
-        _hover={{
-          bg: colorMode === "dark" ? "rgba(153, 153, 153,0.175)" : "gray.200",
-          color: colorMode === "dark" ? "main.300" : "main.500", 
-        }}
+        variant="aside"
         onClick={() => router.push("/projects")}
         pl="10px"
         pr="10px"
-        justifyContent="space-between"
-        alignItems="center"
       >
         <Icon
           as={GoLinkExternal}
@@ -164,7 +157,7 @@ function Aside({ project }: AsideProps) {
         >
           Meus projetos
         </Text>
-      </Flex>
+      </Button>
     </Flex>
   );
 }
