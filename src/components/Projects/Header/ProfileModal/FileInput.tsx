@@ -9,6 +9,7 @@ import {
   FormErrorMessage,
   Flex,
   Tooltip,
+  useColorMode,
 } from "@chakra-ui/react";
 import {
   useState,
@@ -54,6 +55,7 @@ const FileInputBase: ForwardRefRenderFunction<
   },
   ref
 ) => {
+  const { colorMode } = useColorMode();
   const { uploadAvatar, uploadAvatarProgress } = useAuth();
   const [isSending, setIsSending] = useState(false);
   const { setUploadAvatarProgress } = useAuth();
@@ -122,7 +124,7 @@ const FileInputBase: ForwardRefRenderFunction<
         htmlFor={name}
         cursor={isSending ? "progress" : "pointer"}
         opacity={isSending ? 0.5 : 1}
-        bgColor="light.200"
+        bgColor={colorMode === "dark" ? "rgba(153, 153, 153,0.175)" : "gray.50"}//"light.200"
         borderColor="gray.200"
         borderWidth="1px"
         borderRadius="110px"

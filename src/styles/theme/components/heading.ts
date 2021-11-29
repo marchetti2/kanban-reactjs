@@ -26,11 +26,11 @@ export default {
       color: colorMode === "dark" ? "dark.800" : "gray.500",
       textTransform: "uppercase",
     }),
-    "modal-title": {
+    "modal-title": ({ colorMode }: StyleOptionsDTO) => ({
       fontSize: "21px",
       lineHeight: "25px",
-      color: "gray.700",
-    },
+      color: colorMode === "dark" ? "white" : "gray.700",
+    }),
     "notifications-title": {
       fontSize: "16px",
       lineHeight: "18px",
