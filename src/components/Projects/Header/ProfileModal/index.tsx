@@ -18,6 +18,7 @@ import {
   FormControl,
   Tooltip,
   FormErrorMessage,
+  useColorMode,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -35,6 +36,7 @@ import { useEffect } from "react";
 import { FileInput } from "./FileInput";
 
 function ProfileModal({ isOpen, onClose }: UseModalProps) {
+  const { colorMode } = useColorMode();
   const { user, updateUser } = useAuth();
 
   const [isLoading, setLoading] = useState(false);
@@ -122,7 +124,8 @@ function ProfileModal({ isOpen, onClose }: UseModalProps) {
     <>
       <Modal size="md" isOpen={isOpen} onClose={onCloseModal} isCentered>
         <ModalOverlay />
-        <ModalContent>
+        <ModalContent bg={colorMode === "dark" ? "dark.200" : "white"}
+        >
           <ModalHeader px="36px" pt="20px">
             <Heading variant="modal-title">Meu perfil</Heading>
           </ModalHeader>
@@ -152,11 +155,11 @@ function ProfileModal({ isOpen, onClose }: UseModalProps) {
                 display="flex"
                 h="40px"
                 mb="20px"
-                bgColor="gray.50"
-                borderColor="gray.200"
+                bgColor={colorMode === "dark" ? "rgba(153, 153, 153,0.175)" : "gray.50"}
+                borderColor={colorMode === "dark" ? "dark.300" : "gray.200"}
                 borderWidth="1px"
                 borderRadius="6px"
-                color="light.800"
+                color={colorMode === "dark" ? "white" : "gray.700"}
               >
                 <Input
                   readOnly
@@ -205,7 +208,7 @@ function ProfileModal({ isOpen, onClose }: UseModalProps) {
                     <IconButton
                       aria-label="Check Icon"
                       bg="none"
-                      color="gray.500"
+                      color={colorMode === "dark" ? "dark.800" : "gray.500"} 
                       _hover={{
                         bg: "none",
                       }}
@@ -219,7 +222,7 @@ function ProfileModal({ isOpen, onClose }: UseModalProps) {
                     <IconButton
                       aria-label="Close Icon"
                       bg="none"
-                      color="gray.500"
+                      color={colorMode === "dark" ? "dark.800" : "gray.500"} 
                       _hover={{
                         bg: "none",
                       }}
@@ -237,7 +240,7 @@ function ProfileModal({ isOpen, onClose }: UseModalProps) {
                       pr="10px"
                       aria-label="edit Icon"
                       bg="none"
-                      color="gray.500"
+                      color={colorMode === "dark" ? "dark.800" : "gray.500"} 
                       _hover={{
                         bg: "none",
                       }}
@@ -259,7 +262,7 @@ function ProfileModal({ isOpen, onClose }: UseModalProps) {
                 display="flex"
                 h="40px"
                 mb="20px"
-                bgColor="gray.50"
+                bgColor={colorMode === "dark" ? "none" : "gray.50"}
                 borderColor="gray.200"
                 borderWidth="1px"
                 borderRadius="6px"

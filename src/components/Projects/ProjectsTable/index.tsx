@@ -72,7 +72,7 @@ function ProjectsTable({ children }: ProjectsTableProps) {
                 <Input
                   h="100%"
                   pl="20px"
-                  borderColor={colorMode === "dark" ? "dark.300" : "gray.200"}
+                  //borderColor={colorMode === "dark" ? "dark.300" : "gray.200"}
                   color={colorMode === "dark" ? "white" : "gray.700"}
                   bgColor={colorMode === "dark" ? "dark.300" : "gray.50"}
                   focusBorderColor={
