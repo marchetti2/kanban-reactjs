@@ -1,4 +1,4 @@
-import { Flex, Icon, Box, useDisclosure, Button } from "@chakra-ui/react";
+import { Flex, Icon, Box, useDisclosure, Button, useColorMode } from "@chakra-ui/react";
 import { BsKanban, BsQuestionCircle } from "react-icons/bs";
 import { HiOutlinePlusSm } from "react-icons/hi";
 import { IoSearchOutline } from "react-icons/io5";
@@ -29,6 +29,7 @@ interface SidebarProps {
 }
 
 function Sidebar({project}:SidebarProps) {
+  const { colorMode } = useColorMode();
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
@@ -36,7 +37,7 @@ function Sidebar({project}:SidebarProps) {
       className="sidebar"
       h="100%"
       w="64px"
-      bgColor="main.400"
+      bgColor={colorMode === "dark" ? "main.300" : "main.400"}
       py="30px"
       flexDirection="column"
       position="absolute"
@@ -48,7 +49,7 @@ function Sidebar({project}:SidebarProps) {
         boxShadow: "7px 0px 30px 0px rgba(32,32,36,0.3)",
       }}
     >
-      <Icon as={BsKanban} w={9} h={9} color="light.100" />
+      <Icon as={BsKanban} w={9} h={9} color="white" />
       <Flex
         w="64px"
         h="100%"
