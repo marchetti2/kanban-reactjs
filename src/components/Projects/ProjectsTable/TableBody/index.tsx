@@ -81,7 +81,7 @@ function TableBody() {
     try {
       await deleteProject(id);
     } finally {
-      onClose();
+      onCloseModal();
       setLoading(false);
     }
   }
@@ -96,13 +96,13 @@ function TableBody() {
   }
 
   return (
-    <Box 
-    overflowY="auto"
-    overflowX={{
-      base:"auto", 
-      md:"hidden"
-    }}
-    maxH="400px"
+    <Box
+      overflowY="auto"
+      overflowX={{
+        base: "auto",
+        md: "hidden",
+      }}
+      maxH="400px"
     >
       <ConfirmDeleteModal
         isOpen={isOpenConfirmDelete}
@@ -143,9 +143,9 @@ function TableBody() {
                 borderBottomColor="gray.300"
               >
                 <HStack spacing={3}>
-                  <Box 
-                  //maxW={{ base: "50px", md: "428px" }}
-                  maxW= "428px"
+                  <Box
+                    //maxW={{ base: "50px", md: "428px" }}
+                    maxW="428px"
                   >
                     <Text
                       transition=".3s"
@@ -183,8 +183,8 @@ function TableBody() {
                 maxW="195px"
                 borderBottomColor="gray.300"
               >
-                <HStack >
-                  <Box 
+                <HStack>
+                  <Box
                   //display={{base:'none', sm:"inline"}}
                   >
                     <Avatar
@@ -277,7 +277,7 @@ function TableBody() {
         display={{ base: "flex", sm: "none" }}
         onClick={() => onOpenModal({ modalName: "createProjects" })}
         bgColor="main.300"
-        boxShadow="lg"//"xl"
+        boxShadow="lg" //"xl"
         position="absolute"
         bottom="10px"
         right="20px"
@@ -285,7 +285,7 @@ function TableBody() {
         justifyContent="center"
         _active={{
           bgColor: "main.400",
-          boxShadow:"base"//"xl"
+          boxShadow: "base", //"xl"
         }}
       >
         <AddIcon color="white" />
