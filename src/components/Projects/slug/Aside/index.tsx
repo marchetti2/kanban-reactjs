@@ -7,6 +7,7 @@ import {
   Tab,
   SkeletonText,
   Icon,
+  useColorMode,
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { BsKanban } from "react-icons/bs";
@@ -36,6 +37,7 @@ interface AsideProps {
 }
 
 function Aside({ project }: AsideProps) {
+  const { colorMode } = useColorMode();
   const router = useRouter();
 
   return (
@@ -59,7 +61,7 @@ function Aside({ project }: AsideProps) {
           <Text fontFamily="Inter" fontSize="13px">{project?.type}</Text>
         )}
       </VStack>
-      <Divider borderColor="gray.300" my="30px" />
+      <Divider borderColor={colorMode === "dark" ? "dark.500" : "gray.300"} my="30px" />
 
       <VStack>
         <Tab
@@ -124,22 +126,22 @@ function Aside({ project }: AsideProps) {
         </Tab>
       </VStack>
 
-      <Divider borderColor="gray.300" my="30px" />
+      <Divider borderColor={colorMode === "dark" ? "dark.500" : "gray.300"} my="30px" />
 
       <Flex
         as="button"
         w="190px"
         h="40px"
-        color="gray.600"
+        color={colorMode === "dark" ? "dark.600" : "gray.600"}
         borderRadius="6px"
-        _selected={{ bg: "gray.200" }}
+        _selected={{ bg: colorMode === "dark" ? "rgba(153, 153, 153,0.175)" : "gray.200", }}
         _focus={{
           outline: "none",
           boxShadow: "none",
         }}
         _hover={{
-          bg: "gray.200",
-          color: "main.500",
+          bg: colorMode === "dark" ? "rgba(153, 153, 153,0.175)" : "gray.200",
+          color: colorMode === "dark" ? "main.300" : "main.500", 
         }}
         onClick={() => router.push("/projects")}
         pl="10px"
@@ -151,7 +153,7 @@ function Aside({ project }: AsideProps) {
           as={GoLinkExternal}
           w={4}
           h={4}
-          color="gray.400"
+          color={colorMode === "dark" ? "dark.800" : "gray.400"}
         />
         <Text  
           w="100%"        

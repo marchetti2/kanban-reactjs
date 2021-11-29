@@ -1,4 +1,4 @@
-import { Tabs, TabList, TabPanels, TabPanel, Box } from "@chakra-ui/react";
+import { Tabs, TabList, TabPanels, TabPanel, Box, useColorMode } from "@chakra-ui/react";
 import Head from "next/head";
 import { Flex } from "@chakra-ui/react";
 import { useRouter } from "next/router";
@@ -40,7 +40,7 @@ interface ProjectProps {
 }
 
 function Project(/* { project }: ProjectProps */): JSX.Element {
-
+  const { colorMode } = useColorMode();
   const [tabIndex, setTabIndex] = useState(0)
 
   const {getProject, project} = useProjects();
@@ -87,9 +87,9 @@ function Project(/* { project }: ProjectProps */): JSX.Element {
             display="flex"
             h="100%"
             w="294px"
-            bgColor="gray.100"
-            borderRightWidth="1px"
-            borderColor="gray.300"
+            bgColor={colorMode === "dark" ? "dark.300" : "gray.100"}
+            borderRightWidth={colorMode === "dark" ? "0" : "1px"}
+            borderColor={colorMode === "dark" ? "none" : "gray.300"}
             justifyContent="right"
           >
             <Aside project={project} />
@@ -150,7 +150,8 @@ export async function getServerSideProps(/* { params: { slug } }: any */) {
 
 /*   const docRef = doc(database, "projects", slug);
   const docSnap = await getDoc(docRef);
-  const project = docSnap.data(); */
+  const project = docSnap.data(); 
+  colorMode === "dark" ? "rgba(153, 153, 153,0.175)" : "gray.100",*/
 
   return {
     props: {/*  project  */},
