@@ -112,7 +112,7 @@ function AuthProvider({ children }: AuthProviderProps): JSX.Element {
   const toast = useToast();
   const router = useRouter();
 
-/*   useEffect(() => {
+  useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
         const { uid, displayName, photoURL, email } = user;
@@ -129,7 +129,7 @@ function AuthProvider({ children }: AuthProviderProps): JSX.Element {
         return setIsLogged(false);
       }
     });
-  }, []); */
+  }, []);
 
   async function updateUser({ user, name, avatar, password }: UpdateUserProps) {
     try {
@@ -341,14 +341,6 @@ function AuthProvider({ children }: AuthProviderProps): JSX.Element {
   }
 
   async function getAllUsers() {
-    const querySnapshot = await getDocs(collection(database, "users"));
-
-    const users = querySnapshot.docs.map((doc) => doc.data()) as Users;
-
-    setUsers(users);
-  }
-
-  async function getUser(id: string) {
     const querySnapshot = await getDocs(collection(database, "users"));
 
     const users = querySnapshot.docs.map((doc) => doc.data()) as Users;
