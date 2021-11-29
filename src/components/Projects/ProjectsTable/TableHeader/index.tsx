@@ -1,4 +1,4 @@
-import { HStack, VStack, Text, Box, Thead, Tr, Th } from "@chakra-ui/react";
+import { HStack, VStack, Text, Box, Thead, Tr, Th, useColorMode } from "@chakra-ui/react";
 import { ChevronDownIcon, ChevronUpIcon } from "@chakra-ui/icons";
 import { useState } from "react";
 
@@ -7,8 +7,7 @@ import { useAuth } from "../../../../contexts/AuthContext";
 
 function TableHeader() {
   const [toggleFilter, setToggleFilter] = useState(false);
-
-
+  const { colorMode } = useColorMode();
   const { getAllProjects,  projects } = useProjects();
   const { user } = useAuth();
 
@@ -20,7 +19,7 @@ function TableHeader() {
     });
     setToggleFilter(!toggleFilter);
   }
-
+  
   return (
       <Thead>
         <Tr
@@ -33,13 +32,13 @@ function TableHeader() {
         >
           <Th
             w="460px"
-            borderBottomColor="gray.300"
+            borderBottomColor={colorMode === "dark" ? "dark.500" : "gray.300"}
             transition=".3s"
             _hover={{
-              bgColor: "gray.100",
+              bgColor: colorMode === "dark" ? "dark.200" : "gray.100"
             }}
             _active={{
-              bgColor: "gray.200",
+              bgColor: colorMode === "dark" ? "dark.300" : "gray.200" 
             }}
           >
             <HStack 
@@ -75,13 +74,13 @@ function TableHeader() {
           </Th>
           <Th
             w="195px"
-            borderBottomColor="gray.300"
+            borderBottomColor={colorMode === "dark" ? "dark.500" : "gray.300"}
             transition=".3s"
             _hover={{
-              bgColor: "gray.100",
+              bgColor: colorMode === "dark" ? "dark.200" : "gray.100"
             }}
             _active={{
-              bgColor: "gray.200",
+              bgColor: colorMode === "dark" ? "dark.300" : "gray.200" 
             }}
           >
             <HStack as="button" spacing={{
@@ -113,13 +112,13 @@ function TableHeader() {
           </Th>
           <Th
             w="195px"
-            borderBottomColor="gray.300"
+            borderBottomColor={colorMode === "dark" ? "dark.500" : "gray.300"}
             transition=".3s"
             _hover={{
-              bgColor: "gray.100",
+              bgColor: colorMode === "dark" ? "dark.200" : "gray.100"
             }}
             _active={{
-              bgColor: "gray.200",
+              bgColor: colorMode === "dark" ? "dark.300" : "gray.200" 
             }}
           >
             <HStack as="button" spacing={{
@@ -151,13 +150,13 @@ function TableHeader() {
           </Th>
           <Th
             w="120px"
-            borderBottomColor="gray.300"
+            borderBottomColor={colorMode === "dark" ? "dark.500" : "gray.300"}
             transition=".3s"
             _hover={{
-              bgColor: "gray.100",
+              bgColor: colorMode === "dark" ? "dark.200" : "gray.100"
             }}
             _active={{
-              bgColor: "gray.200",
+              bgColor: colorMode === "dark" ? "dark.300" : "gray.200" 
             }}
           >
             <HStack as="button" spacing={{
@@ -190,7 +189,7 @@ function TableHeader() {
           <Th 
           w="70px"
          
-          borderBottomColor="gray.300"
+          borderBottomColor={colorMode === "dark" ? "dark.500" : "gray.300"}
           />
         </Tr>
       </Thead>

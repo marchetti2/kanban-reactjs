@@ -55,7 +55,7 @@ function ProjectsHeader(): JSX.Element {
         w="100vw"
         h={{ base: "60px", sm: "70px", md: "80px" }}
         borderBottomWidth=" 1px"
-        borderBottomColor="gray.300"
+        borderBottomColor={colorMode === "dark" ? "dark.500" : "gray.300"}
       >
         <Flex
           maxW="1120px"
@@ -67,7 +67,7 @@ function ProjectsHeader(): JSX.Element {
         >
           <Heading
             fontSize={{ base: "18px", md: "22px", "2xl": "24px" }}
-            color="gray.800"
+            color={colorMode === "dark" ? "white" : "gray.800"}
           >
             Meus projetos
           </Heading>
@@ -77,15 +77,15 @@ function ProjectsHeader(): JSX.Element {
             <IconButton
               isRound
               aria-label="Color-mode"
-              bgColor="light.100"
-              color="light.700"
+              bgColor={colorMode === "dark" ? "dark.100" : "white"}
+              color={colorMode === "dark" ? "white" : 'gray.600'}
               transition=".3s"
               _hover={{
-                color: "main.400",
-                bgColor: "gray.100",
+                color: colorMode === "dark" ? "main.300" : "main.400",
+                bgColor: colorMode === "dark" ? "rgba(153, 153, 153,0.175)" : "gray.100",
               }}
               _active={{
-                bgColor: "rgba(105,73,188, 0.5)",
+                bgColor: colorMode === "dark" ? "main.300" : "rgba(105,73,188, 0.5)",
               }}
               onClick={toggleColorMode}
             >
@@ -97,13 +97,13 @@ function ProjectsHeader(): JSX.Element {
                 as={IconButton}
                 isRound
                 aria-label="config"
-                bgColor="light.100"
+                bgColor={colorMode === "dark" ? "dark.100" : "white"}
                 transition=".3s"
                 _hover={{
-                  bg: "gray.100",
+                  bg: colorMode === "dark" ? "rgba(153, 153, 153,0.175)" : "gray.100",
                 }}
                 _active={{
-                  bgColor: "rgba(105,73,188, 0.5)",
+                  bgColor: colorMode === "dark" ? "main.300" : "rgba(105,73,188, 0.5)" ,
                 }}
               >
                 <Avatar
@@ -114,7 +114,7 @@ function ProjectsHeader(): JSX.Element {
               </MenuButton>
               <MenuList boxShadow="md">
                 <MenuGroup
-                  color="light.600"
+                  color={colorMode === "dark" ? "dark.700" : "gray.500"}
                   textTransform="capitalize"
                   fontWeight="500"
                   title={auth.currentUser?.displayName!}

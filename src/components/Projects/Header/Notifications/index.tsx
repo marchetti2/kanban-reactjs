@@ -23,6 +23,9 @@ import { useNotifications } from "../../../../contexts/NotificationsContext";
 import { auth } from "../../../../services/firebase";
 
 function Notifications() {
+
+  const { colorMode, toggleColorMode } = useColorMode();
+
   const {
     notifications,
     getNotifications,
@@ -46,15 +49,15 @@ function Notifications() {
             className="notification-icon"
             isRound
             aria-label="config"
-            color="gray.600"
-            bgColor="white"
+            color={colorMode === "dark" ? "white" : 'gray.600'}
+            bgColor={colorMode === "dark" ? "dark.100" : "white"}
             transition=".3s"
             _hover={{
-              color: "main.400",
-              bgColor: "gray.100",
+              color: colorMode === "dark" ? "main.300" : "main.400",
+              bgColor: colorMode === "dark" ? "rgba(153, 153, 153,0.175)" : "gray.100",
             }}
             _active={{
-              bgColor: "rgba(105,73,188, 0.5)",
+              bgColor: colorMode === "dark" ? "main.300" : "rgba(105,73,188, 0.5)",
             }}
           >
             <BellIcon w={6} h={6} />

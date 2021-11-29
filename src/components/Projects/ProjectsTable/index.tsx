@@ -5,7 +5,7 @@ import {
   Input,
   InputRightElement,
   Button,
-  useDisclosure, Box, Table
+  useDisclosure, Box, Table, useColorMode,
 } from "@chakra-ui/react";
 import { ReactNode } from "react";
 import { Search2Icon } from "@chakra-ui/icons";
@@ -20,6 +20,8 @@ interface ProjectsTableProps {
 }
 
 function ProjectsTable({ children }: ProjectsTableProps) {
+  const { colorMode } = useColorMode();
+
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const { projects, setSearchListData, searchListData } = useProjects();
@@ -48,7 +50,7 @@ function ProjectsTable({ children }: ProjectsTableProps) {
   return (
     <Flex as="main" h="calc(100vh - 80px)">
       <Flex p="30px 0" flexDir="column" w="1120px" m="0 auto">
-        <Flex w="100%" h="100%" flexDir="column">
+        <Flex w="100%" h="100%" flexDir="column" >
           {projects.length > 0 ? (
             <Flex
               h={{ base: "auto", sm: "40px" }}
@@ -57,7 +59,7 @@ function ProjectsTable({ children }: ProjectsTableProps) {
               w={{base:"100%", sm:"440px", md:"100%"}}
               m="0 auto 35px auto"
               alignItems={{ base: "center", sm: "normal" }}
-              justifyContent="space-between"
+              justifyContent="space-between" 
             >
               <InputGroup
                 h={{ base: "40px", sm: "100%" }}
@@ -67,9 +69,10 @@ function ProjectsTable({ children }: ProjectsTableProps) {
                 <Input
                   h="100%"
                   pl="20px"
-                  color="gray.700"
-                  bgColor="gray.50"
-                  focusBorderColor="main.500"
+                  borderColor={colorMode === "dark" ? "dark.300" : "gray.200"}
+                  color={colorMode === "dark" ? "white" : "gray.700"}
+                  bg={colorMode === "dark" ? "dark.300" : "gray.50"}
+                  focusBorderColor={colorMode === "dark" ? "main.300" : "main.500"}
                   onChange={(e) => handleInputChange(e.target.value)}
                 />
                 <InputRightElement h="100%" pointerEvents="none">
@@ -79,9 +82,8 @@ function ProjectsTable({ children }: ProjectsTableProps) {
 
               <Button
                 type="button"
-                variant="session"
+                variant="create-project"
                 w="140px"
-                h={{ base: "40px", sm: "100%" }}
                 display={{ base: "none", sm: "flex" }}
                 transition="0"
                 onClick={onOpen}
@@ -91,9 +93,11 @@ function ProjectsTable({ children }: ProjectsTableProps) {
             </Flex>
           ) : null}
           <CreateProjectModal onClose={onClose} isOpen={isOpen} />
-          <Box 
+          <Flex 
+          flexDirection="column"
           w={{base:"340px", sm:"440px", md:"100%"}}
           m="0 auto"
+          h="100%"
           >
           <Box display={{base:"none", md:"inline"}}>
             <Table size="sm">
@@ -101,7 +105,7 @@ function ProjectsTable({ children }: ProjectsTableProps) {
             </Table>
           </Box>
             {children}
-          </Box>
+          </Flex>
         </Flex>
       </Flex>
     </Flex>

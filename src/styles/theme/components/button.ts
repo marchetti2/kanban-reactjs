@@ -77,6 +77,21 @@ export default {
       },
     },
 
+    'create-project': {
+      height: '40px',
+      fontWeight: "500",
+      w: "100%",
+      bg: "main.300",
+      color: "#fff",
+      transition: ".2s",
+      _hover: {
+        bg: "main.400",
+      },
+      _active: {
+        bgColor: "main.500",
+      },
+    },
+
     "session-cancel": ({ colorMode }: StyleOptionsDTO) => ({
       height: {
         base: "42.5px",
@@ -89,7 +104,7 @@ export default {
       },
       w: "100%",
       bg: colorMode === "dark" ? "dark.200" : "gray.100",
-      color: colorMode === "dark" ? "dark.600" : "white",
+      color: colorMode === "dark" ? "dark.600" : "gray.600",
       fontWeight: "400",
       transition: ".2s",
       _hover: {

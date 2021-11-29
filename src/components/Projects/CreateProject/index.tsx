@@ -4,16 +4,19 @@ import {
   Image,
   Text,
   Button,
-  useDisclosure,
+  useDisclosure, useColorMode
 } from "@chakra-ui/react";
 
 import { CreateProjectModal } from "./CreateProjectModal";
 
 function CreateProject() {
+  const { colorMode } = useColorMode();
   const { isOpen, onOpen, onClose } = useDisclosure();
+
   return (
     <Flex
       maxW={{ base: "300px", md: "350px" }}
+      h="100%"
       m="auto"
       flexDir="column"
       alignItems="center"
@@ -33,7 +36,7 @@ function CreateProject() {
         fontSize={{ base: "12px", sm: "13px", md: "14px" }}
         lineHeight="20px"
         textAlign="center"
-        color="gray.700"
+        color={colorMode === "dark" ? "dark.600" : "gray.700"}
         mb="24px"
       >
         Crie um novo projeto sozinho, ou com a sua equipe para planear,

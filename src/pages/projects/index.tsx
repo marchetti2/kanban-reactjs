@@ -1,4 +1,4 @@
-import { Box } from "@chakra-ui/react";
+import { Box, useColorModeValue } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 
 import { useProjects } from "../../contexts/ProjectsContext";
@@ -11,6 +11,8 @@ import { CreateProject } from "../../components/Projects/CreateProject";
 import { TableBody } from "../../components/Projects/ProjectsTable/TableBody";
 
 function Projects(): JSX.Element {
+
+  const bgColorMode = useColorModeValue("white", "dark.100");
   const { updatedProjectsListener, projects } = useProjects();
   const [hasProject, setHasProject] = useState(false);
 
@@ -26,7 +28,7 @@ function Projects(): JSX.Element {
   }, 3000);
 
   return (
-    <Box h="100vh" w="100vw" overflow="hidden">
+    <Box h="100vh" w="100vw" overflow="hidden" bgColor={bgColorMode}>
       <ProjectsHeader />
       <Box px={{ base: "15px", sm: "20px", md: "40px" }}>
       {projects.length > 0 ? (

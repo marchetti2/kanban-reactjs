@@ -16,7 +16,7 @@ import {
   Box,
   Spinner,
   Button,
-  Flex,
+  Flex, useColorMode
 } from "@chakra-ui/react";
 import { HiOutlineDotsHorizontal } from "react-icons/hi";
 import { useRouter } from "next/router";
@@ -44,7 +44,7 @@ function TableBody() {
   const [isOpenCreateProject, setIsOpenCreateProject] = useState(false);
 
   const [isLoadingProject, setLoadingProject] = useState<Array<boolean>>([]);
-
+  const { colorMode } = useColorMode()
   const { onClose } = useDisclosure();
   const router = useRouter();
 
@@ -129,10 +129,10 @@ function TableBody() {
               h="56px"
               transition=".3s"
               _hover={{
-                bgColor: "gray.100",
+                bgColor: colorMode === "dark" ? "dark.200" : "gray.100"
               }}
               _active={{
-                bgColor: "gray.200",
+                bgColor: colorMode === "dark" ? "dark.300" : "gray.200" 
               }}
               opacity={isLoadingProject[index] ? ".3" : 1}
             >
@@ -140,7 +140,7 @@ function TableBody() {
                 onClick={() => handleNavigate(project.id, index)}
                 w="460px"
                 maxW="460px"
-                borderBottomColor="gray.300"
+                borderBottomColor={colorMode === "dark" ? "dark.500" : "gray.300"}
               >
                 <HStack spacing={3}>
                   <Box
@@ -151,7 +151,7 @@ function TableBody() {
                       transition=".3s"
                       sx={{
                         ".tableButton:hover &": {
-                          color: "main.400",
+                          color: colorMode === "dark" ? "main.300" : "main.400",
                         },
                       }}
                       fontWeight="500"
@@ -171,7 +171,7 @@ function TableBody() {
                 onClick={() => handleNavigate(project?.id, index)}
                 w="195px"
                 maxW="195px"
-                borderBottomColor="gray.300"
+                borderBottomColor={colorMode === "dark" ? "dark.500" : "gray.300"}
               >
                 <Text fontSize={{ base: "12px", md: "14px" }} isTruncated>
                   {project?.type}
@@ -181,7 +181,7 @@ function TableBody() {
                 onClick={() => handleNavigate(project?.id, index)}
                 w="195px"
                 maxW="195px"
-                borderBottomColor="gray.300"
+                borderBottomColor={colorMode === "dark" ? "dark.500" : "gray.300"}
               >
                 <HStack>
                   <Box
@@ -202,7 +202,7 @@ function TableBody() {
                 onClick={() => handleNavigate(project?.id, index)}
                 w="120px"
                 maxW="120px"
-                borderBottomColor="gray.300"
+                borderBottomColor={colorMode === "dark" ? "dark.500" : "gray.300"}
               >
                 <Text fontSize={{ base: "12px", md: "14px" }} isTruncated>
                   {project?.createdAt}
@@ -211,7 +211,7 @@ function TableBody() {
               <Td
                 w="70px"
                 maxW="70px"
-                borderBottomColor="gray.300"
+                borderBottomColor={colorMode === "dark" ? "dark.500" : "gray.300"}
                 cursor="default"
               >
                 <Menu gutter={3} placement="bottom-end">
@@ -223,7 +223,7 @@ function TableBody() {
                     border="none"
                     transition=".3s"
                     _hover={{
-                      bgColor: "gray.200",
+                      bgColor: colorMode === "dark" ? "rgba(153, 153, 153,0.1)" : "gray.200",
                     }}
                     _active={{
                       bgColor: "gray.300",
@@ -234,7 +234,7 @@ function TableBody() {
                       as={HiOutlineDotsHorizontal}
                       w={5}
                       h={5}
-                      color="gray.500"
+                      color={colorMode === "dark" ? "dark.600" : "gray.500"}
                     />
                   </MenuButton>
                   <MenuList boxShadow="md">
