@@ -5,7 +5,10 @@ import {
   Input,
   InputRightElement,
   Button,
-  useDisclosure, Box, Table, useColorMode,
+  useDisclosure,
+  Box,
+  Table,
+  useColorMode,
 } from "@chakra-ui/react";
 import { ReactNode } from "react";
 import { Search2Icon } from "@chakra-ui/icons";
@@ -50,16 +53,16 @@ function ProjectsTable({ children }: ProjectsTableProps) {
   return (
     <Flex as="main" h="calc(100vh - 80px)">
       <Flex p="30px 0" flexDir="column" w="1120px" m="0 auto">
-        <Flex w="100%" h="100%" flexDir="column" >
+        <Flex w="100%" h="100%" flexDir="column">
           {projects.length > 0 ? (
             <Flex
               h={{ base: "auto", sm: "40px" }}
               flexDir="row"
               //w="100%"
-              w={{base:"100%", sm:"440px", md:"100%"}}
+              w={{ base: "100%", sm: "440px", md: "100%" }}
               m="0 auto 35px auto"
               alignItems={{ base: "center", sm: "normal" }}
-              justifyContent="space-between" 
+              justifyContent="space-between"
             >
               <InputGroup
                 h={{ base: "40px", sm: "100%" }}
@@ -72,7 +75,9 @@ function ProjectsTable({ children }: ProjectsTableProps) {
                   borderColor={colorMode === "dark" ? "dark.300" : "gray.200"}
                   color={colorMode === "dark" ? "white" : "gray.700"}
                   bgColor={colorMode === "dark" ? "dark.300" : "gray.50"}
-                  focusBorderColor={colorMode === "dark" ? "main.300" : "main.500"}
+                  focusBorderColor={
+                    colorMode === "dark" ? "main.300" : "main.500"
+                  }
                   onChange={(e) => handleInputChange(e.target.value)}
                 />
                 <InputRightElement h="100%" pointerEvents="none">
@@ -93,17 +98,22 @@ function ProjectsTable({ children }: ProjectsTableProps) {
             </Flex>
           ) : null}
           <CreateProjectModal onClose={onClose} isOpen={isOpen} />
-          <Flex 
-          flexDirection="column"
-          w={{base:"340px", sm:"440px", md:"100%"}}
-          m="0 auto"
-          h="100%"
+          <Flex
+            flexDirection="column"
+            w={{ base: "340px", sm: "440px", md: "100%" }}
+            m="0 auto"
+            h="100%"
           >
-          <Box display={{base:"none", md:"inline"}}>
-            <Table size="sm">
-              <TableHeader />
-            </Table>
-          </Box>
+            <Box
+              display={{
+                base: projects.length > 0 ? "none" : "inline",
+                md: "inline",
+              }}
+            >
+              <Table size="sm">
+                <TableHeader />
+              </Table>
+            </Box>
             {children}
           </Flex>
         </Flex>

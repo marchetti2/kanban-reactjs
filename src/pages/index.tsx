@@ -22,10 +22,6 @@ function App(): JSX.Element {
         md: "100vh",
       }}
       width="100vw"
-      overflow={{
-        base: "auto",
-        sm: "hidden",
-      }}
       flexDirection={{
         base: "column",
         lg: "row",
