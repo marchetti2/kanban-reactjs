@@ -112,7 +112,10 @@ function ProjectsHeader(): JSX.Element {
                   src={auth.currentUser?.photoURL!}
                 />
               </MenuButton>
-              <MenuList boxShadow="md" bg={colorMode === "dark" ? "dark.200" : "white"}>
+              <MenuList 
+              boxShadow="md" 
+              bg={colorMode === "dark" ? "dark.200" : "white"}
+              >
                 <MenuGroup
                   color={colorMode === "dark" ? "dark.700" : "gray.500"}
                   textTransform="capitalize"

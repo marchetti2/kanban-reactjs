@@ -226,7 +226,7 @@ function TableBody() {
                       bgColor: colorMode === "dark" ? "rgba(153, 153, 153,0.1)" : "gray.200",
                     }}
                     _active={{
-                      bgColor: "gray.300",
+                      bgColor: colorMode === "dark" ? "rgba(153, 153, 153,0.2)" : "gray.300",
                     }}
                     pt="3px"
                   >
@@ -237,7 +237,10 @@ function TableBody() {
                       color={colorMode === "dark" ? "dark.600" : "gray.500"}
                     />
                   </MenuButton>
-                  <MenuList boxShadow="md">
+                  <MenuList 
+                  boxShadow="md"
+                  bg={colorMode === "dark" ? "dark.200" : "white"}
+                  >
                     <MenuItem
                       variant="link"
                       w="100%"

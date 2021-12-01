@@ -18,6 +18,7 @@ import {
   FormErrorMessage,
   Spinner,
   Flex,
+  useColorMode,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -28,6 +29,7 @@ import { auth } from "../../../../services/firebase";
 import { useProjects } from "../../../../contexts/ProjectsContext";
 
 function CreateProjectModal({ isOpen, onClose }: UseModalProps) {
+  const { colorMode } = useColorMode();
   const [isLoading, setLoading] = useState(false);
   const [title, setTitle] = useState("");
   const [type, setType] = useState("");
@@ -79,7 +81,12 @@ function CreateProjectModal({ isOpen, onClose }: UseModalProps) {
       onClose={onModalClose}
     >
       <ModalOverlay />
-      <ModalContent p="10px">
+      <ModalContent 
+      p="10px"
+      bg={colorMode === "dark" ? "dark.200" : "white"}
+      borderColor={colorMode === "dark" ? "rgba(255, 255, 255, 0.24)" : "none"}
+      borderWidth={colorMode === "dark" ? "1px" : "0"}
+      >
         <ModalHeader pl="36px">
           <Heading variant="modal-title">Criar projeto</Heading>
         </ModalHeader>
@@ -101,8 +108,9 @@ function CreateProjectModal({ isOpen, onClose }: UseModalProps) {
                 <Input
                   pl="20px"
                   type="text"
-                  bgColor="gray.50"
-                  color="gray.700"
+                  bgColor={colorMode === "dark" ? "rgba(153, 153, 153,0.175)" : "gray.50"}
+                  borderColor={colorMode === "dark" ? "dark.300" : "gray.200"}
+                  color={colorMode === "dark" ? "white" : "gray.700"}
                   {...register("title", formValidations.title)}
                   focusBorderColor={!!errors.title ? "red.500" : "main.500"}
                 />
@@ -122,7 +130,7 @@ function CreateProjectModal({ isOpen, onClose }: UseModalProps) {
               <Text
                 font-size="12px"
                 lineHeight="15px"
-                color="gray.500"
+                color={colorMode === "dark" ? "dark.600" : "gray.500"}
                 mb="20px"
               >
                 Crie um nome para seu projeto.
@@ -144,13 +152,14 @@ function CreateProjectModal({ isOpen, onClose }: UseModalProps) {
                   mb="5px"
                   variant="filled"
                   borderWidth="1px"
-                  borderColor="gray.200"
-                  bgColor="gray.50"
+                  bgColor={colorMode === "dark" ? "rgba(153, 153, 153,0.175)" : "gray.50"}
+                  borderColor={colorMode === "dark" ? "dark.300" : "gray.200"}
+                  color={colorMode === "dark" ? "white" : "gray.700"}
                   placeholder="Selecione"
                   transition=" .3s"
                   _hover={{
-                    bgColor: "gray.50",
-                    borderColor: "gray.300",
+                    bgColor: colorMode === "dark" ? "rgba(153, 153, 153,0.175)" : "gray.50",
+                    borderColor: colorMode === "dark" ? "dark.300" : "gray.200",
                   }}
                   {...register("type", formValidations.type)}
                   focusBorderColor={!!errors.type ? "red.500" : "main.500"}
@@ -181,7 +190,7 @@ function CreateProjectModal({ isOpen, onClose }: UseModalProps) {
               <Text
                 font-size="12px"
                 lineHeight="15px"
-                color="gray.500"
+                color={colorMode === "dark" ? "dark.600" : "gray.500"}
                 mb="20px"
               >
                 Defina o tipo do projeto.
@@ -190,36 +199,18 @@ function CreateProjectModal({ isOpen, onClose }: UseModalProps) {
 
             <Flex justifyContent="flex-end">
               <Button
+                variant="modal-cancel"
                 onClick={onModalClose}
                 mr="10px"
                 w="120px"
-                bg="gray.100"
-                color="gray.700"
-                fontWeight="400"
-                transition=".2s"
-                _hover={{
-                  bg: "rgba(226,232,240,.8)",
-                }}
-                _active={{
-                  bgColor: "gray.200",
-                }}
               >
                 Cancelar
               </Button>
               <Button
+                variant="modal-submit"
                 type="submit"
                 mr={3}
                 w="120px"
-                bg="main.300"
-                fontWeight="400"
-                color="white"
-                transition=".2s"
-                _hover={{
-                  bg: "main.400",
-                }}
-                _active={{
-                  bgColor: "main.500",
-                }}
               >
                 {isLoading ? <Spinner color="white" /> : "Criar"}
               </Button>

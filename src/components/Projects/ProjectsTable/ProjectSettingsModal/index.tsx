@@ -19,6 +19,7 @@ import {
   ButtonGroup,
   IconButton,
   FormControl,
+  useColorMode,
 } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
@@ -37,6 +38,7 @@ function ProjectSettingsModal({
   id,
   onClose,
 }: ConfirmDeleteModalProps) {
+  const { colorMode } = useColorMode();
   const [isLoading, setLoading] = useState(false);
   const [title, setTitle] = useState("");
   const [initialTitle, setInitialTitle] = useState("");
@@ -113,7 +115,11 @@ function ProjectSettingsModal({
   return (
     <Modal size="2xl" isOpen={isOpen} onClose={onCloseModal} isCentered>
       <ModalOverlay />
-      <ModalContent>
+      <ModalContent
+      bg={colorMode === "dark" ? "dark.200" : "white"}
+      borderColor={colorMode === "dark" ? "rgba(255, 255, 255, 0.24)" : "none"}
+      borderWidth={colorMode === "dark" ? "1px" : "0"}
+      >
         <ModalHeader px="36px" pt="20px">
           <Heading variant="modal-title">Definições do projeto</Heading>
         </ModalHeader>
@@ -121,8 +127,8 @@ function ProjectSettingsModal({
 
         <ModalBody>
           <Container
-            fontWeight="500"
-            color="gray.700"
+            /* fontWeight="500"
+            color="gray.700" */
             mt="10px"
             maxWidth="680px"
           >
@@ -133,11 +139,11 @@ function ProjectSettingsModal({
               display="flex"
               h="40px"
               mb="20px"
-              bgColor="gray.50"
-              borderColor="gray.200"
+              bgColor={colorMode === "dark" ? "rgba(153, 153, 153,0.175)" : "gray.50"}
+              borderColor={colorMode === "dark" ? "dark.300" : "gray.200"}
+              color={colorMode === "dark" ? "white" : "gray.700"}
               borderWidth="1px"
               borderRadius="6px"
-              color="light.800"
               alignItems="center"
             >
               <Input
@@ -187,7 +193,7 @@ function ProjectSettingsModal({
                   <IconButton
                     aria-label="Check Icon"
                     bg="none"
-                    color="gray.500"
+                    color={colorMode === "dark" ? "dark.800" : "gray.500"} 
                     _hover={{
                       bg: "none",
                     }}
@@ -201,7 +207,7 @@ function ProjectSettingsModal({
                   <IconButton
                     aria-label="Close Icon"
                     bg="none"
-                    color="gray.500"
+                    color={colorMode === "dark" ? "dark.800" : "gray.500"} 
                     _hover={{
                       bg: "none",
                     }}
@@ -219,7 +225,7 @@ function ProjectSettingsModal({
                     pr="10px"
                     aria-label="edit Icon"
                     bg="none"
-                    color="gray.500"
+                    color={colorMode === "dark" ? "dark.800" : "gray.500"} 
                     _hover={{
                       bg: "none",
                     }}
@@ -242,13 +248,13 @@ function ProjectSettingsModal({
               h="40px"
               mb="20px"
               variant="filled"
-              borderColor="gray.200"
-              borderWidth="1px"
-              bgColor="gray.50"
+              bgColor={colorMode === "dark" ? "rgba(153, 153, 153,0.175)" : "gray.50"}
+              borderColor={colorMode === "dark" ? "dark.300" : "gray.200"}
+              color={colorMode === "dark" ? "white" : "gray.700"}
               transition=" .3s"
               _hover={{
-                bgColor: "gray.50",
-                borderColor: "gray.300",
+                bgColor: colorMode === "dark" ? "rgba(153, 153, 153,0.175)" : "gray.50",
+                borderColor: colorMode === "dark" ? "dark.300" : "gray.200",
               }}
               {...register("type", formValidations.type)}
               focusBorderColor="main.500"
@@ -362,19 +368,10 @@ function ProjectSettingsModal({
         <ModalFooter mb="15px">
           <Flex justifyContent="flex-end">
             <Button
+              variant="modal-cancel"
               onClick={onCloseModal}
               mr="10px"
               w="120px"
-              bg="gray.100"
-              color="gray.700"
-              fontWeight="400"
-              transition=".2s"
-              _hover={{
-                bg: "rgba(226,232,240,.8)",
-              }}
-              _active={{
-                bgColor: "gray.200",
-              }}
             >
               Cancelar
             </Button>
@@ -387,16 +384,7 @@ function ProjectSettingsModal({
               type="submit"
               mr={3}
               w="120px"
-              bg="main.300"
-              fontWeight="400"
-              color="white"
-              transition=".2s"
-              _hover={{
-                bg: "main.400",
-              }}
-              _active={{
-                bgColor: "main.500",
-              }}
+              variant="modal-submit"
               onClick={handleSubmit(onSubmit)}
             >
               {isLoading ? <Spinner color="white" /> : "Salvar"}

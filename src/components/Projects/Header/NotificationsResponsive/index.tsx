@@ -25,6 +25,7 @@ import { useNotifications } from "../../../../contexts/NotificationsContext";
 import { auth } from "../../../../services/firebase";
 
 function NotificationsResponsive() {
+  const { colorMode} = useColorMode();
   const {
     notifications,
     getNotifications,
@@ -42,7 +43,7 @@ function NotificationsResponsive() {
     await updatedNotificationsListener(auth.currentUser?.uid!);
   }
   return (
-    <Popover id={id} arrowShadowColor="#A38FD6">
+    <Popover id={id} arrowShadowColor={colorMode === "dark" ? "rgba(255, 255, 255, 0.24)" : "#A38FD6"}>
       <PopoverTrigger>
         <Box position="relative" alignItems="center" justifyContent="center">
           <Box display={{ base: "flex", sm: "none" }}>
@@ -71,7 +72,7 @@ function NotificationsResponsive() {
       <Portal>
         <PopoverContent
           _focus={{
-            borderColor: "main.300",
+            borderColor: colorMode === "dark" ? "rgba(255, 255, 255, 0.24)" : "main.300",
             borderWidth: "1px",
             boxShadow: "md",
           }}

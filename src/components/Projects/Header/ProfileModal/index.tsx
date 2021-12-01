@@ -124,7 +124,10 @@ function ProfileModal({ isOpen, onClose }: UseModalProps) {
     <>
       <Modal size="md" isOpen={isOpen} onClose={onCloseModal} isCentered>
         <ModalOverlay />
-        <ModalContent bg={colorMode === "dark" ? "dark.200" : "white"}
+        <ModalContent 
+        bg={colorMode === "dark" ? "dark.200" : "white"}
+        borderColor={colorMode === "dark" ? "rgba(255, 255, 255, 0.24)" : "none"}
+        borderWidth={colorMode === "dark" ? "1px" : "0"}
         >
           <ModalHeader px="36px" pt="20px">
             <Heading variant="modal-title">Meu perfil</Heading>
@@ -157,9 +160,9 @@ function ProfileModal({ isOpen, onClose }: UseModalProps) {
                 mb="20px"
                 bgColor={colorMode === "dark" ? "rgba(153, 153, 153,0.175)" : "gray.50"}
                 borderColor={colorMode === "dark" ? "dark.300" : "gray.200"}
+                color={colorMode === "dark" ? "white" : "gray.700"}
                 borderWidth="1px"
                 borderRadius="6px"
-                color={colorMode === "dark" ? "white" : "gray.700"}
               >
                 <Input
                   readOnly

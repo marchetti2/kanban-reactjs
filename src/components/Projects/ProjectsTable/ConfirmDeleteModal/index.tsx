@@ -9,6 +9,7 @@ import {
   Text,
   Button,
   Flex,
+  useColorMode,
 } from "@chakra-ui/react";
 
 interface ConfirmDeleteModalProps extends UseModalProps {
@@ -23,10 +24,15 @@ function ConfirmDeleteModal({
   handleDelete,
   isLoading,
 }: ConfirmDeleteModalProps) {
+  const { colorMode } = useColorMode();
   return (
     <Modal size="sm" isOpen={isOpen} onClose={onClose} isCentered>
       <ModalOverlay />
-      <ModalContent>
+      <ModalContent
+      bg={colorMode === "dark" ? "dark.200" : "white"}
+      borderColor={colorMode === "dark" ? "rgba(255, 255, 255, 0.24)" : "none"}
+      borderWidth={colorMode === "dark" ? "1px" : "0"}
+      >
         <ModalBody>
           <Flex
             w="100%"
@@ -48,32 +54,14 @@ function ConfirmDeleteModal({
         <ModalFooter pt="0">
           <Flex w="100%" align="center" justify="center" mb="15px">
           <Button
-              w="100px"
-              bg="gray.100"
-              color="gray.700"
-              fontWeight="400"
-              transition=".2s"
-              _hover={{
-                bg:"rgba(226,232,240,.8)"
-              }}
-              _active={{
-                bgColor:"gray.200"
-              }}
-              onClick={onClose}
+            variant="modal-cancel"
+            w="100px"
+            onClick={onClose}
             >
               Cancelar
             </Button>
             <Button
-              bgColor="red.300"
-              fontWeight="400"
-              _hover={{
-                bgColor: "red.400",
-              }}
-              _active={{
-                bgColor: "red.500",
-              }}
-              color="white"
-              transition=".2s"
+              variant="modal-confirm-logout"
               ml="20px"
               w="100px"
               onClick={() => handleDelete(id)}
