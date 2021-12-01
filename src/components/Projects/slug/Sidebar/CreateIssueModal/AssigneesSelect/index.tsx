@@ -114,8 +114,8 @@ function AssigneesSelect({
       <Tag
         size="lg"
         borderRadius="full"
-        bgColor= {colorMode === "dark" ? "rgba(153, 153, 153,0.175)" : "gray.200"}
-        borderColor="gray.300"
+        bgColor= {colorMode === "dark" ? "rgba(153, 153, 153,0.3)" : "gray.200"}
+        borderColor={colorMode === "dark" ? "rgba(153, 153, 153,0.3)" : "gray.300"}
         borderWidth="1px"
         mr={1}
         my="2px"
@@ -130,7 +130,7 @@ function AssigneesSelect({
   const Option = (props: OptionProps<any>) => {
     return (
       <Tooltip label={props.data.value} fontSize="13px" fontFamily="Inter">
-        <Box>
+        <Box  /* bg="red" */ >
           <components.Option {...props} />
         </Box>
       </Tooltip>
@@ -141,7 +141,7 @@ function AssigneesSelect({
     return (
       <components.DropdownIndicator {...props}>
         <Flex alignItems="center" justifyContent="center">
-          <ChevronDownIcon w={5} h={5} color="black" />
+          <ChevronDownIcon w={5} h={5} color={colorMode === "dark" ? "dark.600" : "gray.700"} />
         </Flex>
       </components.DropdownIndicator>
     );
@@ -162,27 +162,42 @@ function AssigneesSelect({
       styles={{
         multiValue: () => ({
           display: "flex",
-          background: colorMode === "dark" ? "rgba(153, 153, 153,0.175)" : "none",
+          background: colorMode === "dark" ? "none" : "none",
         }),
         valueContainer: (styles: any) => ({
           ...styles,
-          backgroundColor: colorMode === "dark" ? "rgba(153, 153, 153,0.175)" : "#F7FAFC",
+          backgroundColor: colorMode === "dark" ? "none" : "#F7FAFC",
         }),
-        placeholder: (styles: any) => ({
+       /*  placeholder: (styles: any) => ({
           ...styles,
-          color: "gray.400",
-        }),
+          color: "red",
+        }), */
         control: () => ({
+          color: "red",          
           display: "flex",
-          background: colorMode === "dark" ? "rgba(153, 153, 153,0.175)" : "none",
+          background: colorMode === "dark" ? "none" : "none",
         }),
+        menuList: (styles: any) => ({
+          ...styles,
+          background: colorMode === "dark" ? "#444449" : "none",
+          borderRadius: "6px",
+        }), 
+        menu: (styles: any) => ({
+          ...styles,
+          borderRadius: "6px",
+          background: colorMode === "dark" ? "#444449" : "none",
+        }), 
+        noOptionsMessage: (styles: any) => ({
+          ...styles,
+          background: colorMode === "dark" ? "#444449" : "none",
+        }), 
         multiValueRemove: () => ({
-          color: "999",
+          color: "#999",
           marginLeft: "5px",
           marginTop: "3px",
           transition: ".2s",
           ":hover": {
-            color: "#666",
+            color: colorMode === "dark" ? "white" : "#666",
           },
         }),
         dropdownIndicator: (styles: any) => ({
@@ -191,15 +206,17 @@ function AssigneesSelect({
         }),
         indicatorsContainer: (styles: any) => ({
           ...styles,
-          backgroundColor: colorMode === "dark" ? "rgba(153, 153, 153,0.175)" : "#F7FAFC",
+          backgroundColor: colorMode === "dark" ? "gray.200" : "#F7FAFC",
           borderRadius: "0 6px 6px 0",
         }),
         container: (styles: any) => ({
           ...styles,
+          color: "red", 
           height: "auto",
           backgroundColor: colorMode === "dark" ? "rgba(153, 153, 153,0.175)" : "#F7FAFC",
           borderRadius: "6px",
-          border: colorMode === "dark" ? "1px solid #202024" : "1px solid #E2E8F0"
+          border: colorMode === "dark" ? "1px solid #202024" : "1px solid #E2E8F0",
+          color: colorMode === "dark" ? "#d8d8d8" : "#4A5568"
         }),
       }}
       components={{
