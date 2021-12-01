@@ -124,8 +124,8 @@ const FileInputBase: ForwardRefRenderFunction<
         htmlFor={name}
         cursor={isSending ? "progress" : "pointer"}
         opacity={isSending ? 0.5 : 1}
-        bgColor={colorMode === "dark" ? "rgba(153, 153, 153,0.175)" : "gray.50"}//"light.200"
-        borderColor="gray.200"
+        bgColor={colorMode === "dark" ? "rgba(153, 153, 153,0.175)" : "gray.50"}
+        borderColor={colorMode === "dark" ? "dark.300" : "gray.200"}
         borderWidth="1px"
         borderRadius="110px"
         transition=" .3s"
@@ -237,7 +237,7 @@ const FileInputBase: ForwardRefRenderFunction<
                   justifyContent="center"
                   flexDir="column"
                 >
-                  <Icon as={FiPlus} w={14} h={14} color="light.800" />
+                  <Icon as={FiPlus} w={14} h={14} color={colorMode === "dark" ? "dark.600" : "gray.700"} />
                   <Text as="span" pt={2} textAlign="center">
                     Adicione sua imagem
                   </Text>

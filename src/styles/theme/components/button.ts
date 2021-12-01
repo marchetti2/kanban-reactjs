@@ -163,6 +163,48 @@ export default {
         bgColor: colorMode === "dark" ? "rgba(153, 153, 153,0.2)" : "gray.100",
       },
     }),
+
+
+    "modal-cancel": ({ colorMode }: StyleOptionsDTO) => ({
+      bg:colorMode === "dark" ? "dark.200" : "gray.100",//"gray.100",
+      color:colorMode === "dark" ? "dark.600" : "gray.700",//"gray.700",
+      fontWeight:"400",
+      transition:".2s",
+      _hover: {
+        bg:
+          colorMode === "dark"
+            ?  "rgba(153, 153, 153,0.175)"
+            : "rgba(226,232,240,.8)",
+      },
+      _active: {
+        bgColor: colorMode === "dark" ? "rgba(153, 153, 153,0.3)" : "gray.200",
+      },
+    }),
+    "modal-submit": {
+      bg:"main.300",
+      fontWeight:"400",
+      color:"white",
+      transition:".2s",
+      _hover:{
+        bg: "main.400",
+      },
+      _active:{
+        bgColor: "main.500",
+      },
+    },
+
+    "modal-confirm-logout": {
+      bgColor:"red.300",
+      fontWeight:"400",
+      _hover:{
+        bgColor: "red.400",
+      },
+      _active:{
+        bgColor: "red.500",
+      },
+      color:"white",
+      transition:".2s",
+    },
   },
   defaultProps: {
     font: "Poppins",

@@ -262,11 +262,11 @@ function ProfileModal({ isOpen, onClose }: UseModalProps) {
                 display="flex"
                 h="40px"
                 mb="20px"
-                bgColor={colorMode === "dark" ? "none" : "gray.50"}
-                borderColor="gray.200"
+                bgColor={colorMode === "dark" ? "rgba(153, 153, 153,0.175)" : "gray.50"}
+                borderColor={colorMode === "dark" ? "dark.300" : "gray.200"}
                 borderWidth="1px"
                 borderRadius="6px"
-                color="light.800"
+                color={colorMode === "dark" ? "white" : "gray.700"}
                 isInvalid={!!errors.password}
               >
                 <Input
@@ -324,7 +324,7 @@ function ProfileModal({ isOpen, onClose }: UseModalProps) {
                     <IconButton
                       aria-label="Check Icon"
                       bg="none"
-                      color="gray.500"
+                      color={colorMode === "dark" ? "dark.800" : "gray.500"}
                       _hover={{
                         bg: "none",
                       }}
@@ -338,7 +338,7 @@ function ProfileModal({ isOpen, onClose }: UseModalProps) {
                     <IconButton
                       aria-label="Close Icon"
                       bg="none"
-                      color="gray.500"
+                      color={colorMode === "dark" ? "dark.800" : "gray.500"}
                       _hover={{
                         bg: "none",
                       }}
@@ -357,7 +357,7 @@ function ProfileModal({ isOpen, onClose }: UseModalProps) {
                       ml="10px"
                       aria-label="edit Icon"
                       bg="none"
-                      color="gray.500"
+                      color={colorMode === "dark" ? "dark.800" : "gray.500"}
                       _hover={{
                         bg: "none",
                       }}
@@ -375,36 +375,18 @@ function ProfileModal({ isOpen, onClose }: UseModalProps) {
 
               <Flex justifyContent="flex-end" mt="40px" mb="25px">
                 <Button
-                  //variant="ghost"
+                  variant="modal-cancel"
                   onClick={onCloseModal}
-                  mr="10px"
                   w="120px"
-                  bg="gray.100"
-                  color="gray.700"
-                  fontWeight="400"
-                  transition=".2s"
-                  _hover={{
-                    bg: "rgba(226,232,240,.8)",
-                  }}
-                  _active={{
-                    bgColor: "gray.200",
-                  }}
+                  mr="10px"
                 >
                   Cancelar
                 </Button>
                 <Button
+                  variant="modal-submit"
                   type="submit"
                   w="120px"
-                  bg="main.300"
-                  fontWeight="400"
-                  color="white"
-                  transition=".2s"
-                  _hover={{
-                    bg: "main.400",
-                  }}
-                  _active={{
-                    bgColor: "main.500",
-                  }}
+                  
                 >
                   {isLoading ? <Spinner color="white" /> : "Salvar"}
                 </Button>

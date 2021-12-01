@@ -8,13 +8,15 @@ import {
   Heading,
   Button,
   Flex,
-  Spinner
+  Spinner,
+  useColorMode
 } from "@chakra-ui/react";
 import { useState } from "react";
 
 import { useAuth } from "../../../../contexts/AuthContext";
 
 function ConfirmLogoutModal({ isOpen, onClose }: UseModalProps) {
+  const { colorMode } = useColorMode();
   const [isLoading, setLoading] = useState(false);
   const { logout } = useAuth();
 
@@ -35,7 +37,12 @@ function ConfirmLogoutModal({ isOpen, onClose }: UseModalProps) {
   return (
     <Modal size="xs" isOpen={isOpen} onClose={onCloseModal} isCentered>
       <ModalOverlay />
-      <ModalContent p="20px">
+      <ModalContent 
+      p="20px 19px 20px 19px" 
+      bg={colorMode === "dark" ? "dark.200" : "white"}
+      borderColor={colorMode === "dark" ? "rgba(255, 255, 255, 0.24)" : "none"}
+      borderWidth={colorMode === "dark" ? "1px" : "0"}
+      >
         <ModalBody py="15px">
           <Flex  flexDir="column" align="center" justify="center">
             <Heading fontSize="20px">Deseja realmente sair?</Heading>
@@ -45,32 +52,14 @@ function ConfirmLogoutModal({ isOpen, onClose }: UseModalProps) {
         <ModalFooter>
           <Flex w="100%" align="center" justify="center">
             <Button
+              variant="modal-cancel"
               w="100px"
-              bg="gray.100"
-              color="gray.700"
-              fontWeight="400"
-              transition=".2s"
-              _hover={{
-                bg:"rgba(226,232,240,.8)"
-              }}
-              _active={{
-                bgColor:"gray.200"
-              }}
               onClick={onClose}
             >
               Cancelar
             </Button>
             <Button
-              bgColor="red.300"
-              fontWeight="400"
-              _hover={{
-                bgColor: "red.400",
-              }}
-              _active={{
-                bgColor: "red.500",
-              }}
-              color="#fff"
-              transition=".2s"
+              variant="modal-confirm-logout"
               ml="20px"
               w="100px"
               onClick={handleLogOut}

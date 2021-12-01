@@ -42,7 +42,7 @@ function Notifications() {
     await updatedNotificationsListener(auth.currentUser?.uid!);
   }
   return (
-    <Popover id="popover-trigger-2" arrowShadowColor="#A38FD6">
+    <Popover id="popover-trigger-2" arrowShadowColor={colorMode === "dark" ? "rgba(255, 255, 255, 0.24)" : "#A38FD6"} >
       <PopoverTrigger>
         <Box position="relative" alignItems="center" justifyContent="center">
           <IconButton
@@ -84,10 +84,11 @@ function Notifications() {
       <Portal>
         <PopoverContent
           _focus={{
-            borderColor: "main.300",
+            borderColor: colorMode === "dark" ? "rgba(255, 255, 255, 0.24)" : "main.300",
             borderWidth: "1px",
             boxShadow: "md",
           }}
+          bg={colorMode === "dark" ? "dark.200" : "white"}
         >
           <PopoverArrow /* boxShadow="base" */ />
           <PopoverHeader>
