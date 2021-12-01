@@ -177,7 +177,7 @@ function AssigneesSelect({
           background: colorMode === "dark" ? "rgba(153, 153, 153,0.175)" : "none",
         }),
         multiValueRemove: () => ({
-          color: "red",
+          color: "999",
           marginLeft: "5px",
           marginTop: "3px",
           transition: ".2s",
