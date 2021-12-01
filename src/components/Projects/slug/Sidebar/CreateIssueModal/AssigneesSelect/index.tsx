@@ -176,11 +176,11 @@ function AssigneesSelect({
         }), */
         control: () => ({        
           display: "flex",
-          background: colorMode === "dark" ? "none" : "none",
+          background: "none",
         }),
         menuList: (styles: any) => ({
           ...styles,
-          background: colorMode === "dark" ? "#444449" : "none",
+          background: colorMode === "dark" ? "#444449" : '#F7FAFC',
           borderRadius: "6px",
           color: colorMode === "dark" ? "#fff" : "#2D3748",
           
@@ -188,12 +188,12 @@ function AssigneesSelect({
         menu: (styles: any) => ({
           ...styles,
           borderRadius: "6px",
-          background: colorMode === "dark" ? "#444449" : "none",
+          background: colorMode === "dark" ? "#444449" : '#F7FAFC',
           
         }), 
         noOptionsMessage: (styles: any) => ({
           ...styles,
-          background: colorMode === "dark" ? "#444449" : "none",
+          background: colorMode === "dark" ? "#444449" : '#F7FAFC',
         }), 
         multiValueRemove: () => ({
           color: "#999",
@@ -227,8 +227,9 @@ function AssigneesSelect({
         }),
         option:(styles: any) => ({
           ...styles,
+          backgroundColor: "none",
           "&:hover":{
-            backgroundColor: "#999",
+            backgroundColor: colorMode === "dark" ? "#666" : '#EDF2F7',
           }
         })
       }}
