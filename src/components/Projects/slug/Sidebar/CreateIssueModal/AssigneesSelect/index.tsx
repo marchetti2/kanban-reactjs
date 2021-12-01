@@ -130,7 +130,7 @@ function AssigneesSelect({
   const Option = (props: OptionProps<any>) => {
     return (
       <Tooltip label={props.data.value} fontSize="13px" fontFamily="Inter">
-        <Box  /* bg="red" */ >
+        <Box >
           <components.Option {...props} />
         </Box>
       </Tooltip>
@@ -162,18 +162,19 @@ function AssigneesSelect({
       styles={{
         multiValue: () => ({
           display: "flex",
-          background: colorMode === "dark" ? "none" : "none",
+          background:"none",
+          
         }),
         valueContainer: (styles: any) => ({
           ...styles,
           backgroundColor: colorMode === "dark" ? "none" : "#F7FAFC",
+          
         }),
        /*  placeholder: (styles: any) => ({
           ...styles,
           color: "red",
         }), */
-        control: () => ({
-          color: "red",          
+        control: () => ({        
           display: "flex",
           background: colorMode === "dark" ? "none" : "none",
         }),
@@ -181,11 +182,14 @@ function AssigneesSelect({
           ...styles,
           background: colorMode === "dark" ? "#444449" : "none",
           borderRadius: "6px",
+          color: colorMode === "dark" ? "#fff" : "#2D3748",
+          
         }), 
         menu: (styles: any) => ({
           ...styles,
           borderRadius: "6px",
           background: colorMode === "dark" ? "#444449" : "none",
+          
         }), 
         noOptionsMessage: (styles: any) => ({
           ...styles,
@@ -210,14 +214,23 @@ function AssigneesSelect({
           borderRadius: "0 6px 6px 0",
         }),
         container: (styles: any) => ({
-          ...styles,
-          color: "red", 
+          ...styles, 
           height: "auto",
           backgroundColor: colorMode === "dark" ? "rgba(153, 153, 153,0.175)" : "#F7FAFC",
           borderRadius: "6px",
           border: colorMode === "dark" ? "1px solid #202024" : "1px solid #E2E8F0",
-          color: colorMode === "dark" ? "#d8d8d8" : "#4A5568"
+          color: colorMode === "dark" ? "#fff" : "#4A5568"
         }),
+        input:(styles: any) => ({
+          ...styles,
+          color: colorMode === "dark" ? "#fff" : "#2D3748",
+        }),
+        option:(styles: any) => ({
+          ...styles,
+          "&:hover":{
+            backgroundColor: "#999",
+          }
+        })
       }}
       components={{
         MultiValueContainer,
