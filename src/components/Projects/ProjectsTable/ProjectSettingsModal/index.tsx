@@ -258,6 +258,7 @@ function ProjectSettingsModal({
               }}
               {...register("type", formValidations.type)}
               focusBorderColor="main.500"
+              value={type}
             >
               <option value="Santa ceia">Santa ceia</option>
               <option value="Slipknots">Slipknots</option>
@@ -359,16 +360,16 @@ function ProjectSettingsModal({
               Cancelar
             </Button>
             <Button
-              disabled={
-                isEditingTitle ||
-                isEditingDescription ||
-                (initialTitle === title && initialDescription === description)
-              }
-              type="submit"
-              mr={3}
-              w="120px"
-              variant="modal-submit"
-              onClick={handleSubmit(onSubmit)}
+            disabled={
+              isEditingTitle ||
+              isEditingDescription ||
+              (initialTitle === title && initialDescription === description)
+            }
+            type="submit"
+            mr={3}
+            w="120px"
+            variant="modal-submit"
+            onClick={handleSubmit(onSubmit)}
             >
               {isLoading ? <Spinner color="white" /> : "Salvar"}
             </Button>

@@ -10,6 +10,7 @@ import {
   ButtonGroup,
   IconButton,
   FormControl,
+  useColorMode,
 } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
@@ -44,7 +45,7 @@ interface ProjectSettingsProps {
 }
 
 function ProjectSettings({ project, setTabIndex }: ProjectSettingsProps): JSX.Element {
-
+  const { colorMode } = useColorMode();
   const [isLoading, setLoading] = useState(false);
   const [title, setTitle] = useState("");
   const [initialTitle, setInitialTitle] = useState("");
@@ -139,11 +140,11 @@ function ProjectSettings({ project, setTabIndex }: ProjectSettingsProps): JSX.El
               display="flex"
               h="40px"
               mb="20px"
-              bgColor="gray.50"
-              borderColor="gray.200"
+              bgColor={colorMode === "dark" ? "rgba(153, 153, 153,0.175)" : "gray.50"}
+              borderColor={colorMode === "dark" ? "dark.300" : "gray.200"}
+              color={colorMode === "dark" ? "white" : "gray.700"}
               borderWidth="1px"
               borderRadius="6px"
-              color="gray.700"
             >
               <Input
                 readOnly
@@ -194,7 +195,7 @@ function ProjectSettings({ project, setTabIndex }: ProjectSettingsProps): JSX.El
                   <IconButton
                     aria-label="Check Icon"
                     bg="none"
-                    color="gray.500"
+                    color={colorMode === "dark" ? "dark.800" : "gray.500"}
                     _hover={{
                       bg: "none",
                     }}
@@ -211,7 +212,7 @@ function ProjectSettings({ project, setTabIndex }: ProjectSettingsProps): JSX.El
                   <IconButton
                     aria-label="Close Icon"
                     bg="none"
-                    color="gray.500"
+                    color={colorMode === "dark" ? "dark.800" : "gray.500"}
                     _hover={{
                       bg: "none",
                     }}
@@ -232,7 +233,7 @@ function ProjectSettings({ project, setTabIndex }: ProjectSettingsProps): JSX.El
                     pr="10px"
                     aria-label="edit Icon"
                     bg="none"
-                    color="gray.500"
+                    color={colorMode === "dark" ? "dark.800" : "gray.500"}
                     _hover={{
                       bg: "none",
                     }}
@@ -258,13 +259,14 @@ function ProjectSettings({ project, setTabIndex }: ProjectSettingsProps): JSX.El
               h="40px"
               mb="20px"
               variant="filled"
-              borderColor="gray.200"
               borderWidth="1px"
-              bgColor="gray.50"
+              bgColor={colorMode === "dark" ? "rgba(153, 153, 153,0.175)" : "gray.50"}
+              borderColor={colorMode === "dark" ? "dark.300" : "gray.200"}
+              color={colorMode === "dark" ? "white" : "gray.700"}
               transition=" .3s"
               _hover={{
-                bgColor: "gray.50",
-                borderColor: "gray.300",
+                bgColor: colorMode === "dark" ? "rgba(153, 153, 153,0.175)" : "gray.50",
+                borderColor: colorMode === "dark" ? "dark.300" : "gray.200",
               }}
               {...register("type", formValidations.type)}
               focusBorderColor="main.500"
@@ -330,80 +332,44 @@ function ProjectSettings({ project, setTabIndex }: ProjectSettingsProps): JSX.El
                 />
                 <Flex mt="8px" h="32px">
                 <Button
-                    w="70px"
-                    h="32px"
-                    mr={2}
-                    fontSize="13px"
-                    bg="gray.100"
-                  color="gray.700"
-                  fontWeight="400"
-                  transition=".2s"
-                  _hover={{
-                    bg:"rgba(226,232,240,.8)"
-                  }}
-                  _active={{
-                    bgColor:"gray.200"
-                  }}
-                    onClick={() => setIsEditingDescription(false)}
-                  >
-                    Cancelar
-                  </Button>
-                  <Button
-                    w="70px"
-                    h="32px"
-                    fontSize="13px"
-                    bg="main.300"
-                  fontWeight="400"
-                  color="white"
-                  transition=".2s"
-                  _hover={{
-                    bg:"main.400"
-                  }}
-                  _active={{
-                    bgColor:"main.500"
-                  }}
-                    onClick={handleSaveDescriptionChanges}
-                  >
-                    {isLoading ? <Spinner color="white" /> : "Salvar"}
-                  </Button>
+                variant="modal-cancel"
+                w="70px"
+                h="32px"
+                mr={2}
+                fontSize="13px"
+                onClick={() => setIsEditingDescription(false)}
+                >
+                  Cancelar
+                </Button>
+                <Button
+                variant="modal-submit"
+                w="70px"
+                h="32px"
+                fontSize="13px"
+                onClick={handleSaveDescriptionChanges}
+                >
+                  {isLoading ? <Spinner color="white" /> : "Salvar"}
+                </Button>
                 </Flex>
               </Box>
             )}
 
             <Flex justifyContent="flex-end" mt="50px">
             <Button 
+            variant="modal-cancel"
             disabled={isEditingTitle || isEditingDescription || initialTitle === title && initialDescription === description}
             onClick={handleCancelChanges} 
             mr="10px"
             w="120px"
-            bg="gray.100"
-            color="gray.700"
-            fontWeight="400"
-            transition=".2s"
-            _hover={{
-              bg:"rgba(226,232,240,.8)"
-            }}
-            _active={{
-              bgColor:"gray.200"
-            }}
             >
               Cancelar
             </Button>
             <Button
+            variant="modal-submit"
             disabled={isEditingTitle || isEditingDescription || initialTitle === title && initialDescription === description}
-              type="submit"
-              w="120px"
-              bg="main.300"
-              fontWeight="400"
-              color="white"
-              transition=".2s"
-              _hover={{
-                bg:"main.400"
-              }}
-              _active={{
-                bgColor:"main.500"
-              }}
-              onClick={handleSubmit(onSubmit)}
+            type="submit"
+            w="120px"
+            onClick={handleSubmit(onSubmit)}
             >
               {isLoading ? <Spinner color="white" /> : "Salvar"}
             </Button>

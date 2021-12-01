@@ -133,9 +133,12 @@ function Header({ projectTitle, current }: HeaderProps) {
                 src={auth.currentUser?.photoURL!}
               />
             </MenuButton>
-            <MenuList boxShadow="md">
+            <MenuList 
+            boxShadow="md"
+            bg={colorMode === "dark" ? "dark.200" : "white"}
+            >
               <MenuGroup
-                color="light.600"
+                color={colorMode === "dark" ? "dark.700" : "gray.500"}
                 textTransform="capitalize"
                 fontWeight="500"
                 title={auth.currentUser?.displayName!}

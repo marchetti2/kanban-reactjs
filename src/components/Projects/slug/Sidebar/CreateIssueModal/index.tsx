@@ -25,6 +25,7 @@ import {
   MenuList,
   MenuItem,
   Icon,
+  useColorMode,
 } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
@@ -69,6 +70,7 @@ interface CreateIssueModalProps extends UseModalProps {
 }
 
 function CreateIssueModal({ isOpen, onClose, project }: CreateIssueModalProps) {
+  const { colorMode } = useColorMode(); 
   const { user, getAllUsers } = useAuth();
   const { createIssue, getIssues, updatedIssueListener } = useIssues();
   const { updateProject } = useProjects();
@@ -247,7 +249,12 @@ function CreateIssueModal({ isOpen, onClose, project }: CreateIssueModalProps) {
     <>
       <Modal trapFocus={false} size="3xl" isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
-        <ModalContent p="10px">
+        <ModalContent 
+        p="10px"
+        bg={colorMode === "dark" ? "dark.200" : "white"}
+        borderColor={colorMode === "dark" ? "rgba(255, 255, 255, 0.24)" : "none"}
+        borderWidth={colorMode === "dark" ? "1px" : "0"}
+        >
           <ModalHeader pl="36px">
             <Heading variant="modal-title">Criar problema</Heading>
           </ModalHeader>
@@ -272,18 +279,18 @@ function CreateIssueModal({ isOpen, onClose, project }: CreateIssueModalProps) {
                         as={Button}
                         rightIcon={<Icon as={BiChevronDown} w={5} h={5} />}
                         h="40px"
-                        bgColor="gray.50"
+                        bgColor={colorMode === "dark" ? "rgba(153, 153, 153,0.175)" : "gray.50"}
                         fontSize="14px"
                         fontWeight="400"
                         borderWidth={!!errors.type ? "2px" : "1px"}
-                        borderColor={!!errors.type ? "red.500" : "#E2E8F0"}
+                        borderColor={!!errors.type ? "red.500" : colorMode === "dark" ? "#202024" : "#E2E8F0"}
                         textAlign="left"
                         pl="10px"
                         pr="10px"
                         w="100%"
                         _hover={{
-                          bgColor: "gray.50",
-                          borderColor: "gray.300",
+                          bgColor: colorMode === "dark" ? "rgba(153, 153, 153,0.175)" : "gray.50",
+                          borderColor: colorMode === "dark" ? "dark.300" : "gray.300",
                         }}
                         {...register("type", formValidations.type)}
                         value={type}
@@ -294,7 +301,10 @@ function CreateIssueModal({ isOpen, onClose, project }: CreateIssueModalProps) {
                       >
                         {getIssueType()}
                       </MenuButton>
-                      <MenuList w="500px">
+                      <MenuList 
+                      w="500px"
+                      bg={colorMode === "dark" ? "dark.200" : "white"}
+                      >
                         <MenuItem
                           minH="40px"
                           onClick={() => {
@@ -377,8 +387,10 @@ function CreateIssueModal({ isOpen, onClose, project }: CreateIssueModalProps) {
                 <Input
                   mb="5px"
                   pl="20px"
-                  bgColor="gray.50"
-                  color="gray.700"
+                  bgColor={colorMode === "dark" ? "rgba(153, 153, 153,0.175)" : "gray.50"}
+                  color={colorMode === "dark" ? "white" : "gray.700"}
+                  borderColor={colorMode === "dark" ? "dark.300" : "gray.200"}
+                borderWidth="1px"
                   {...register("summary", formValidations.summary)}
                   focusBorderColor="main.500"
                 />
@@ -411,7 +423,12 @@ function CreateIssueModal({ isOpen, onClose, project }: CreateIssueModalProps) {
                   Líder
                 </Text>
 
-                <Tag size="lg" borderRadius="full" mb="20px" bgColor="gray.200">
+                <Tag 
+                size="lg" 
+                borderRadius="full" 
+                mb="20px" 
+                bgColor={colorMode === "dark" ? "rgba(153, 153, 153,0.175)" : "gray.200"}
+                >
                   <Avatar
                     src={user.avatar}
                     size="xs"
@@ -451,11 +468,11 @@ function CreateIssueModal({ isOpen, onClose, project }: CreateIssueModalProps) {
                         as={Button}
                         rightIcon={<Icon as={BiChevronDown} w={5} h={5} />}
                         h="40px"
-                        bgColor="gray.50"
+                        bgColor={colorMode === "dark" ? "rgba(153, 153, 153,0.175)" : "gray.50"}
                         fontSize="14px"
                         fontWeight="400"
                         borderWidth={!!errors.priority ? "2px" : "1px"}
-                        borderColor={!!errors.priority ? "red.500" : "#E2E8F0"}
+                        borderColor={!!errors.type ? "red.500" : colorMode === "dark" ? "#202024" : "#E2E8F0"}
                         textAlign="left"
                         pl="10px"
                         pr="10px"
@@ -467,13 +484,16 @@ function CreateIssueModal({ isOpen, onClose, project }: CreateIssueModalProps) {
                           boxShadow: "none",
                         }}
                         _hover={{
-                          bgColor: "gray.50",
-                          borderColor: "gray.300",
+                          bgColor: colorMode === "dark" ? "rgba(153, 153, 153,0.175)" : "gray.50",
+                          borderColor: colorMode === "dark" ? "dark.300" : "gray.300",
                         }}
                       >
                         {getIssuePriority()}
                       </MenuButton>
-                      <MenuList w="500px">
+                      <MenuList 
+                      w="500px"
+                      bg={colorMode === "dark" ? "dark.200" : "white"}
+                      >
                         <MenuItem
                           minH="40px"
                           onClick={() => {
@@ -597,35 +617,17 @@ function CreateIssueModal({ isOpen, onClose, project }: CreateIssueModalProps) {
 
                 <Flex justifyContent="flex-end" mb="20px">
                   <Button
+                    variant="modal-cancel"
                     w="120px"
                     onClick={onModalClose}
                     mr="10px"
-                    bg="gray.100"
-                    color="gray.700"
-                    fontWeight="400"
-                    transition=".2s"
-                    _hover={{
-                      bg: "rgba(226,232,240,.8)",
-                    }}
-                    _active={{
-                      bgColor: "gray.200",
-                    }}
                   >
                     Cancelar
                   </Button>
                   <Button
+                    variant="modal-submit"
                     type="submit"
                     w="120px"
-                    bg="main.300"
-                    fontWeight="400"
-                    color="white"
-                    transition=".2s"
-                    _hover={{
-                      bg: "main.400",
-                    }}
-                    _active={{
-                      bgColor: "main.500",
-                    }}
                   >
                     {isLoading ? <Spinner color="white" /> : "Criar"}
                   </Button>

@@ -8,7 +8,7 @@ import {
   OptionProps,
 } from "react-select";
 import { SetStateAction, useState } from "react";
-import { Tooltip, Tag, TagLabel, Avatar, Box, Flex } from "@chakra-ui/react";
+import { Tooltip, Tag, TagLabel, Avatar, Box, Flex, useColorMode } from "@chakra-ui/react";
 import { ChevronDownIcon } from "@chakra-ui/icons";
 
 import { useAuth } from "../../../../../../contexts/AuthContext";
@@ -52,6 +52,7 @@ function AssigneesSelect({
   setProjectAssignees,
   assignees,
 }: AssigneesSelectProps) {
+  const { colorMode } = useColorMode(); 
   const { users } = useAuth();
 
   const [searchListData, setSearchListData] = useState<UserData[]>([]);
@@ -113,7 +114,7 @@ function AssigneesSelect({
       <Tag
         size="lg"
         borderRadius="full"
-        bgColor="gray.200"
+        bgColor= {colorMode === "dark" ? "rgba(153, 153, 153,0.175)" : "gray.200"}
         borderColor="gray.300"
         borderWidth="1px"
         mr={1}
@@ -161,22 +162,22 @@ function AssigneesSelect({
       styles={{
         multiValue: () => ({
           display: "flex",
-          background: "none",
+          background: colorMode === "dark" ? "rgba(153, 153, 153,0.175)" : "none",
         }),
         valueContainer: (styles: any) => ({
           ...styles,
-          backgroundColor: "#F7FAFC",
+          backgroundColor: colorMode === "dark" ? "rgba(153, 153, 153,0.175)" : "#F7FAFC",
         }),
         placeholder: (styles: any) => ({
           ...styles,
-          color: "#light.600",
+          color: "gray.400",
         }),
         control: () => ({
           display: "flex",
-          background: "none",
+          background: colorMode === "dark" ? "rgba(153, 153, 153,0.175)" : "none",
         }),
         multiValueRemove: () => ({
-          color: "#999",
+          color: "red",
           marginLeft: "5px",
           marginTop: "3px",
           transition: ".2s",
@@ -190,15 +191,15 @@ function AssigneesSelect({
         }),
         indicatorsContainer: (styles: any) => ({
           ...styles,
-          backgroundColor: "#F7FAFC",
+          backgroundColor: colorMode === "dark" ? "rgba(153, 153, 153,0.175)" : "#F7FAFC",
           borderRadius: "0 6px 6px 0",
         }),
         container: (styles: any) => ({
           ...styles,
           height: "auto",
-          backgroundColor: "#F7FAFC",
+          backgroundColor: colorMode === "dark" ? "rgba(153, 153, 153,0.175)" : "#F7FAFC",
           borderRadius: "6px",
-          border: "1px solid #E2E8F0",
+          border: colorMode === "dark" ? "1px solid #202024" : "1px solid #E2E8F0"
         }),
       }}
       components={{

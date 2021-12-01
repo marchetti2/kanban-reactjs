@@ -1,4 +1,4 @@
-import { Box } from "@chakra-ui/react";
+import { Box, useColorMode } from "@chakra-ui/react";
 import { Dispatch, SetStateAction, useState } from "react";
 import dynamic from "next/dynamic";
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
@@ -10,6 +10,7 @@ interface TextEditorProps {
 }
 
 function TextEditor({ tempDescription, setTempDescription }: TextEditorProps) {
+  const { colorMode } = useColorMode();
   function handleChange(value: string) {
     setTempDescription(value);
   }
@@ -31,16 +32,18 @@ function TextEditor({ tempDescription, setTempDescription }: TextEditorProps) {
       sx={{
         ".ql-toolbar": {
           borderRadius: "6px 6px 0 0",
-          border: "1px solid #DFE1E6",
+          border: `1px solid ${colorMode === "dark" ? "rgba(153, 153, 153,0.175)" : "#DFE1E6"}`,
+          background: colorMode === "dark" ? "rgba(153, 153, 153,0.175)" : "gray.50"
         },
         ".ql-container": {
           borderRadius: "0 0 6px 6px",
-          border: "1px solid #DFE1E6",
+          border: `1px solid ${colorMode === "dark" ? "rgba(153, 153, 153,0.175)" : "#DFE1E6"}`,
           borderTop: "none",
+          background: colorMode === "dark" ? "rgba(153, 153, 153,0.175)" : "gray.50"
         },
         ".ql-editor": {
           minHeight: "110px",
-          color: "light.800",
+          color: colorMode === "dark" ? "white" : "gray.700",
           fontFamily: 'Poppins',
         },/* 
         ".ql-editor p": {
