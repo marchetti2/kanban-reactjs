@@ -323,38 +323,21 @@ function ProjectSettingsModal({
                 />
                 <Flex mt="8px" h="32px">
                   <Button
+                  variant="modal-cancel"
                     w="70px"
                     h="32px"
                     mr={2}
                     fontSize="13px"
-                    bg="gray.100"
-                    color="gray.700"
-                    fontWeight="400"
-                    transition=".2s"
-                    _hover={{
-                      bg: "rgba(226,232,240,.8)",
-                    }}
-                    _active={{
-                      bgColor: "gray.200",
-                    }}
                     onClick={() => setIsEditingDescription(false)}
                   >
                     Cancelar
                   </Button>
                   <Button
+                    variant="modal-submit"
                     w="70px"
                     h="32px"
                     fontSize="13px"
-                    bg="main.300"
                     fontWeight="400"
-                    color="white"
-                    transition=".2s"
-                    _hover={{
-                      bg: "main.400",
-                    }}
-                    _active={{
-                      bgColor: "main.500",
-                    }}
                     onClick={handleSaveDescriptionChanges}
                   >
                     {isLoading ? <Spinner color="white" /> : "Salvar"}
