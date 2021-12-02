@@ -10,7 +10,7 @@ import { useProjects } from "../../../contexts/ProjectsContext";
 
 import Dashboard from "./dashboard";
 import ProjectSettings from "./projectSettings";
-import ProjectResponsive from "./_projectResponsive/ProjectResponsive";
+import ProjectDashboardResponsive from "./_projectDashboardResponsive/ProjectDashboardResponsive";
 
 import { Sidebar } from "../../../components/Projects/slug/Sidebar";
 import { Aside } from "../../../components/Projects/slug/Aside";
@@ -111,7 +111,7 @@ function Project(): JSX.Element {
       display={{base:"inline", lg:'none'}} 
       >
         <CommentsProvider>
-          <ProjectResponsive project={project}/>
+          <ProjectDashboardResponsive project={project}/>
         </CommentsProvider>
       </Box>
     </IssuesProvider>

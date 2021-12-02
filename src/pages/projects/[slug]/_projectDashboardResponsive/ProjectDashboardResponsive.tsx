@@ -39,7 +39,8 @@ import { NotificationsResponsive } from "../../../../components/Projects/Header/
 import { IssuesWrapper } from "../../../../components/Projects/slug/Dashboard/IssuesWrapper";
 import {ConfirmLogoutModal} from "../../../../components/Projects/Header/ConfirmLogoutModal"
 import {ProfileModal} from "../../../../components/Projects/Header/ProfileModal"
-
+import ProjectSettingsResponsive from "../_projectSettingsResponsive/ProjectSettingsResponsive"
+ 
 
 interface UserData {
   id: string;
@@ -63,7 +64,7 @@ interface ProjectResponsiveProps {
   project: Project;
 }
 
-function ProjectResponsive({ project }: ProjectResponsiveProps): JSX.Element {
+function ProjectDashboardResponsive({ project }: ProjectResponsiveProps): JSX.Element {
   const { colorMode, toggleColorMode } = useColorMode();
   const id = useId();
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -72,6 +73,8 @@ function ProjectResponsive({ project }: ProjectResponsiveProps): JSX.Element {
 
   const [isOpenConfirmLogout, setIsOpenConfirmLogout] = useState(false);
   const [isOpenProfile, setIsOpenProfile] = useState(false);
+
+  const [isProjectSetings, setIsProjectSetings] = useState(false);
 
   function handleInputFilterChange(inputValue: string) {
     if (inputValue !== "") {
@@ -194,12 +197,16 @@ function ProjectResponsive({ project }: ProjectResponsiveProps): JSX.Element {
                 >
                   {project?.title}
                 </Heading>
+                <Box
+                onClick={()=>setIsProjectSetings(true)}
+                >
                 <Icon
                   as={MdSettings}
                   width="20px"
                   height="20px"
                   color={colorMode === "dark" ? "dark.800" : "gray.400"} 
                 />
+                </Box>
               </HStack>
 
               <Text
@@ -234,124 +241,134 @@ function ProjectResponsive({ project }: ProjectResponsiveProps): JSX.Element {
           </Flex>
         </Flex>
 
-        <Flex
-          h="calc(100vh - 140px)"
-          p="14px 24px 30px 24px"
-          flexDirection="column"
-          justifyContent="space-between"
-        >
-          <Box>
-            <Box>
-              <HStack mb="10px">
-                <Link href="/projects" passHref>
-                  <Text
-                    variant="breadcrumb"
-                    fontSize="12px"
-                    cursor="pointer"
-                    textDecoration="underline"
-                    _hover={{
-                      color: colorMode === "dark" ? "white" :"gray.700",
-                    }}
-                  >
-                    Projetos
-                  </Text>
-                </Link>
-                <Text 
-                variant="breadcrumb"
-                fontSize="12px"
-                >
-                  {" "}
-                  /{" "}
-                </Text>
-                <Text
-                  variant="breadcrumb"
-                  maxW="200px"
-                  fontSize="12px"
-                  textTransform="capitalize"
-                  isTruncated
-                >
-                  {project?.title}
-                </Text>
-              </HStack>
 
-              <Heading
-                variant="project-responsive-title"
-                mb="20px"
-              >
-                Quadro de problemas
-              </Heading>
-            </Box>
+        {
+          isProjectSetings ? (
+          <ProjectSettingsResponsive project={project}/>
+          ) : (
 
             <Flex
-              flexDirection="column"
-              h="350px"
-              w="95%"
-              m="auto"
-              overflowX="scroll"
-              position="absolute"
-              marginLeft="auto"
-              marginRight="auto"
-              left="0"
-              right="0"
-            >
-              <Flex justifyContent="space-between" w="980px">
-                <Box
-                  w="320px"
-                  h="50px"
-                  borderRadius="6px 6px 0 0"
-                  bgColor={colorMode === "dark" ? "dark.300" : "gray.50"}
+            h="calc(100vh - 140px)"
+            p="14px 24px 30px 24px"
+            flexDirection="column"
+            justifyContent="space-between"
+          >
+            <Box>
+              <Box>
+                <HStack mb="10px">
+                  <Link href="/projects" passHref>
+                    <Text
+                      variant="breadcrumb"
+                      fontSize="12px"
+                      cursor="pointer"
+                      textDecoration="underline"
+                      _hover={{
+                        color: colorMode === "dark" ? "white" :"gray.700",
+                      }}
+                    >
+                      Projetos
+                    </Text>
+                  </Link>
+                  <Text 
+                  variant="breadcrumb"
+                  fontSize="12px"
+                  >
+                    {" "}
+                    /{" "}
+                  </Text>
+                  <Text
+                    variant="breadcrumb"
+                    maxW="200px"
+                    fontSize="12px"
+                    textTransform="capitalize"
+                    isTruncated
+                  >
+                    {project?.title}
+                  </Text>
+                </HStack>
+  
+                <Heading
+                  variant="project-responsive-title"
+                  mb="20px"
                 >
-                  <Heading variant="kanban-board-status" m="15px 10px">
-                    não iniciado
-                  </Heading>
-                </Box>
-                <Box
-                  w="320px"
-                  h="50px"
-                  borderRadius="6px 6px 0 0"
-                  bgColor={colorMode === "dark" ? "dark.300" : "gray.50"}
-                >
-                  <Heading variant="kanban-board-status" m="15px 10px">
-                    em progresso
-                  </Heading>
-                </Box>
-                <Box
-                  w="320px"
-                  h="50px"
-                  borderRadius="6px 6px 0 0"
-                  bgColor={colorMode === "dark" ? "dark.300" : "gray.50"}
-                >
-                  <Heading variant="kanban-board-status" m="15px 10px">
-                    concluído
-                  </Heading>
-                </Box>
+                  Quadro de problemas
+                </Heading>
+              </Box>
+  
+              <Flex
+                flexDirection="column"
+                h="350px"
+                w="95%"
+                m="auto"
+                overflowX="scroll"
+                position="absolute"
+                marginLeft="auto"
+                marginRight="auto"
+                left="0"
+                right="0"
+              >
+                <Flex justifyContent="space-between" w="980px">
+                  <Box
+                    w="320px"
+                    h="50px"
+                    borderRadius="6px 6px 0 0"
+                    bgColor={colorMode === "dark" ? "dark.300" : "gray.50"}
+                  >
+                    <Heading variant="kanban-board-status" m="15px 10px">
+                      não iniciado
+                    </Heading>
+                  </Box>
+                  <Box
+                    w="320px"
+                    h="50px"
+                    borderRadius="6px 6px 0 0"
+                    bgColor={colorMode === "dark" ? "dark.300" : "gray.50"}
+                  >
+                    <Heading variant="kanban-board-status" m="15px 10px">
+                      em progresso
+                    </Heading>
+                  </Box>
+                  <Box
+                    w="320px"
+                    h="50px"
+                    borderRadius="6px 6px 0 0"
+                    bgColor={colorMode === "dark" ? "dark.300" : "gray.50"}
+                  >
+                    <Heading variant="kanban-board-status" m="15px 10px">
+                      concluído
+                    </Heading>
+                  </Box>
+                </Flex>
+  
+                <Flex justifyContent="space-between" w="980px">
+                  <IssuesWrapper project={project} />
+                </Flex>
               </Flex>
+            </Box>
+  
+            <InputGroup h="40px" w="250px">
+              <Input
+                h="100%"
+                pl="20px"
+                borderColor={colorMode === "dark" ? "dark.300" : "gray.200"}
+                color={colorMode === "dark" ? "white" : "gray.700"}
+                bgColor={colorMode === "dark" ? "dark.300" : "gray.50"}
+                focusBorderColor={colorMode === "dark" ? "main.300" : "main.500"}
+                placeholder="Buscar problema"
+                _placeholder={{
+                  fontSize: "13px",
+                }}
+                onChange={(e) => handleInputFilterChange(e.target.value)}
+              />
+              <InputRightElement h="100%" pointerEvents="none">
+                <Search2Icon w={4} h={4} color="gray.300" />
+              </InputRightElement>
+            </InputGroup>
+          </Flex>
+  
+          )
+        }
 
-              <Flex justifyContent="space-between" w="980px">
-                <IssuesWrapper project={project} />
-              </Flex>
-            </Flex>
-          </Box>
-
-          <InputGroup h="40px" w="250px">
-            <Input
-              h="100%"
-              pl="20px"
-              borderColor={colorMode === "dark" ? "dark.300" : "gray.200"}
-              color={colorMode === "dark" ? "white" : "gray.700"}
-              bgColor={colorMode === "dark" ? "dark.300" : "gray.50"}
-              focusBorderColor={colorMode === "dark" ? "main.300" : "main.500"}
-              placeholder="Buscar problema"
-              _placeholder={{
-                fontSize: "13px",
-              }}
-              onChange={(e) => handleInputFilterChange(e.target.value)}
-            />
-            <InputRightElement h="100%" pointerEvents="none">
-              <Search2Icon w={4} h={4} color="gray.300" />
-            </InputRightElement>
-          </InputGroup>
-        </Flex>
 
         <Flex
           w="50px"
@@ -377,4 +394,4 @@ function ProjectResponsive({ project }: ProjectResponsiveProps): JSX.Element {
     </>
   );
 }
-export default ProjectResponsive;
+export default ProjectDashboardResponsive;
