@@ -10,6 +10,7 @@ import {
   Button,
   Spinner,
   Text,
+  useColorMode,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { useComments } from "../../../../../../../contexts/CommentsContext";
@@ -27,6 +28,7 @@ interface CreateCommentProps {
 }
 
 function CreateComment({ issueId }: CreateCommentProps) {
+  const { colorMode } = useColorMode();
   const { createComment, updatedCommentsListener } = useComments();
   const { user } = useAuth();
 
@@ -66,10 +68,11 @@ function CreateComment({ issueId }: CreateCommentProps) {
           h="40px"
           pl="15px"
           alignItems="center"
-          borderColor="gray.200"
+          bgColor={colorMode === "dark" ? "rgba(153, 153, 153,0.175)" : "gray.50"}
+          borderColor={colorMode === "dark" ? "dark.300" : "gray.200"}
           borderWidth="1px"
           borderRadius="5px"
-          color="gray.400"
+          color={colorMode === "dark" ? "white" : "gray.400"}
           display={isEditingComment ? "none" : "flex"}
           onClick={() => setIsEditingComment(true)}
         >
@@ -81,11 +84,13 @@ function CreateComment({ issueId }: CreateCommentProps) {
             value={comment}
             onChange={(e: any) => setComment(e.target.value)}
             fontSize="15px"
+            bgColor={colorMode === "dark" ? "rgba(153, 153, 153,0.175)" : "gray.50"}
+            borderColor={colorMode === "dark" ? "dark.300" : "gray.200"}
             placeholder="Digite seu comentário.."
             _placeholder={{
               fontSize: "14px",
               lineHeight: "18px",
-              color: "light.600",
+              color: colorMode === "dark" ? "dark.800" : "gray.400",
             }}
             _focus={{
               border: "1px solid #856ac8",
@@ -93,38 +98,20 @@ function CreateComment({ issueId }: CreateCommentProps) {
           />
           <Flex mt="8px" h="32px">
             <Button
+             variant="modal-cancel"
               w="70px"
               h="32px"
               mr={2}
               fontSize="13px"
-              bg="gray.100"
-            color="gray.700"
-            fontWeight="400"
-            transition=".2s"
-            _hover={{
-              bg:"rgba(226,232,240,.8)"
-            }}
-            _active={{
-              bgColor:"gray.200"
-            }}
               onClick={handleCancelCreateComment}
             >
               Cancelar
             </Button>
             <Button
+              variant="modal-submit"
               w="70px"
               h="32px"
               fontSize="13px"
-              bg="main.300"
-            fontWeight="400"
-            color="white"
-            transition=".2s"
-            _hover={{
-              bg:"main.400"
-            }}
-            _active={{
-              bgColor:"main.500"
-            }}
               disabled={isLoading}
               onClick={handleCreateComment}
             >

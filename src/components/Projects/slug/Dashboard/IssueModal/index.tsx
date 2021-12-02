@@ -4,7 +4,8 @@ import {
   ModalContent,
   ModalHeader,
   ModalBody,
-  ModalCloseButton
+  ModalCloseButton,
+  useColorMode
 } from "@chakra-ui/react";
 import { Dispatch, SetStateAction } from "react";
 
@@ -59,6 +60,8 @@ function IssueModal({
   id,
 }: IssueModalProps) {
 
+  const { colorMode } = useColorMode(); 
+
   function handleClose() {
     onCloseModal();
   }
@@ -72,7 +75,12 @@ function IssueModal({
       onClose={handleClose}
     >
       <ModalOverlay />
-      <ModalContent p="20px">
+      <ModalContent 
+      p="20px"
+      bg={colorMode === "dark" ? "dark.200" : "white"}
+      borderColor={colorMode === "dark" ? "rgba(255, 255, 255, 0.24)" : "none"}
+      borderWidth={colorMode === "dark" ? "1px" : "0"}
+      >
         <ModalHeader p="0">
           <IssueHeader
             project={project}

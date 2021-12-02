@@ -12,6 +12,7 @@ import {
   Button,
   Spinner,
   useDisclosure,
+  useColorMode,
 } from "@chakra-ui/react";
 import { useState } from "react";
 
@@ -41,6 +42,7 @@ interface CommentsWrapperProps {
 }
 
 function CommentsWrapper({ commentData }: CommentsWrapperProps) {
+  const { colorMode } = useColorMode();
   const { deleteComment, updateComment } = useComments();
   const { isOpen, onClose, onOpen } = useDisclosure();
 
@@ -98,16 +100,16 @@ function CommentsWrapper({ commentData }: CommentsWrapperProps) {
               {auth.currentUser?.displayName!}
             </Text>
             <Flex>
-              <Text fontSize="13px" color="gray.400">
+              <Text fontSize="13px" color={colorMode === "dark" ? "dark.800" : "gray.400"}>
                 {commentData.createdAt}
               </Text>
 
               {commentData.updatedAt ? (
                 <>
-                  <Text mx="5px" fontSize="13px" color="gray.400">
+                  <Text mx="5px" fontSize="13px" color={colorMode === "dark" ? "dark.800" : "gray.400"}>
                     -
                   </Text>
-                  <Text fontStyle="italic" fontSize="13px" color="gray.400">
+                  <Text fontStyle="italic" fontSize="13px" color={colorMode === "dark" ? "dark.800" : "gray.400"}>
                     editado em {commentData.updatedAt}
                   </Text>
                 </>
@@ -121,17 +123,17 @@ function CommentsWrapper({ commentData }: CommentsWrapperProps) {
                 mb="12px"
                 fontSize="15px"
                 fontWeight="400"
-                color="light.600"
+                color={colorMode === "dark" ? "dark.600" : "gray.400"}
               >
                 {comment}
               </Text>
               <Flex>
                 <Box as="button" mr="7px">
                   <Text
-                    color="gray.500"
+                    color={colorMode === "dark" ? "dark.800" : "gray.400"}
                     transition=".2s"
                     _hover={{
-                      color: "light.800",
+                      color: colorMode === "dark" ? "white" :"gray.700",
                       textDecoration: "underline",
                     }}
                     onClick={() => setIsEditingComment(true)}
@@ -142,10 +144,10 @@ function CommentsWrapper({ commentData }: CommentsWrapperProps) {
                 <Text fontSize="12px">•</Text>
                 <Box as="button" ml="7px">
                   <Text
-                    color="gray.500"
+                    color={colorMode === "dark" ? "dark.800" : "gray.400"}
                     transition=".2s"
                     _hover={{
-                      color: "light.800",
+                      color: colorMode === "dark" ? "white" :"gray.700",
                       textDecoration: "underline",
                     }}
                     onClick={onOpen}
@@ -160,48 +162,37 @@ function CommentsWrapper({ commentData }: CommentsWrapperProps) {
               <Textarea
                 value={tempComment}
                 onChange={(e: any) => setTempComment(e.target.value)}
+                bgColor={colorMode === "dark" ? "rgba(153, 153, 153,0.175)" : "gray.50"}
+                borderColor={colorMode === "dark" ? "dark.300" : "gray.200"}
                 fontSize="15px"
                 placeholder="Digite seu comentário.."
+                _placeholder={{
+                  fontSize: "14px",
+                  lineHeight: "18px",
+                  color: colorMode === "dark" ? "dark.800" : "gray.400",
+                }}
                 _focus={{
                   border: "1px solid #856ac8",
                 }}
               />
               <Flex mt="8px" h="32px">
                 <Button
+                variant="modal-cancel"
                   w="70px"
                   h="32px"
                   mr={2}
                   fontSize="13px"
-                  bg="gray.100"
-                color="gray.700"
-                fontWeight="400"
-                transition=".2s"
-                _hover={{
-                  bg:"rgba(226,232,240,.8)"
-                }}
-                _active={{
-                  bgColor:"gray.200"
-                }}
                   onClick={handleCancelEditComment}
                 >
                   Cancelar
                 </Button>
                 <Button
-                  w="70px"
-                  h="32px"
-                  fontSize="13px"
-                  bg="main.300"
-                fontWeight="400"
-                color="white"
-                transition=".2s"
-                _hover={{
-                  bg:"main.400"
-                }}
-                _active={{
-                  bgColor:"main.500"
-                }}
-                  disabled={isLoading}
-                  onClick={handleEditComment}
+                variant="modal-submit"
+                w="70px"
+                h="32px"
+                fontSize="13px"
+                disabled={isLoading}
+                onClick={handleEditComment}
                 >
                   {isLoading ? (
                     <Spinner size="xs" color="main.400" />

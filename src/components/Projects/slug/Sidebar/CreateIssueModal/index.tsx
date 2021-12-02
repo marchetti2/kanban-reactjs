@@ -27,7 +27,7 @@ import {
   Icon,
   useColorMode,
 } from "@chakra-ui/react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useForm } from "react-hook-form";
 import { InfoOutlineIcon } from "@chakra-ui/icons";
 import { IoCheckbox, IoCopy, IoAlertCircleSharp } from "react-icons/io5";
@@ -72,7 +72,7 @@ interface CreateIssueModalProps extends UseModalProps {
 function CreateIssueModal({ isOpen, onClose, project }: CreateIssueModalProps) {
   const { colorMode } = useColorMode(); 
   const { user, getAllUsers } = useAuth();
-  const { createIssue, getIssues, updatedIssueListener } = useIssues();
+  const { createIssue, updatedIssueListener } = useIssues();
   const { updateProject } = useProjects();
   const { createNotification } = useNotifications();
 
@@ -155,9 +155,10 @@ function CreateIssueModal({ isOpen, onClose, project }: CreateIssueModalProps) {
 
   useEffect(() => {
     getAllUsers();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  function getIssueType() {
+  const getIssueType = useCallback(() => {
     switch (type) {
       case "tarefa":
         return (
@@ -195,9 +196,9 @@ function CreateIssueModal({ isOpen, onClose, project }: CreateIssueModalProps) {
           </Flex>
         );
     }
-  }
+  },[type])
 
-  function getIssuePriority() {
+  const getIssuePriority = useCallback(()=>{
     switch (priority) {
       case "muito alta":
         return (
@@ -243,7 +244,7 @@ function CreateIssueModal({ isOpen, onClose, project }: CreateIssueModalProps) {
           </Flex>
         );
     }
-  }
+  },[priority])
 
   return (
     <>
@@ -390,7 +391,7 @@ function CreateIssueModal({ isOpen, onClose, project }: CreateIssueModalProps) {
                   bgColor={colorMode === "dark" ? "rgba(153, 153, 153,0.175)" : "gray.50"}
                   color={colorMode === "dark" ? "white" : "gray.700"}
                   borderColor={colorMode === "dark" ? "dark.300" : "gray.200"}
-                borderWidth="1px"
+                  borderWidth="1px"
                   {...register("summary", formValidations.summary)}
                   focusBorderColor="main.500"
                 />

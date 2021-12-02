@@ -18,6 +18,7 @@ import {
   Badge,
   Input,
   ButtonGroup,
+  useColorMode,
 } from "@chakra-ui/react";
 import { useEffect, useState, useCallback } from "react";
 import {
@@ -76,8 +77,9 @@ interface IssueContentProps {
 }
 
 function IssueContent({ project, issue }: IssueContentProps) {
+  const { colorMode } = useColorMode(); 
   const { user } = useAuth();
-  const { updateIssue, updatedIssueListener, issues } = useIssues();
+  const { updateIssue, updatedIssueListener } = useIssues();
   const { comments, getComments } = useComments();
 
   const [isLoading, setLoading] = useState(false);
@@ -208,17 +210,18 @@ function IssueContent({ project, issue }: IssueContentProps) {
           w="60%"
           p="15px 15px 20px 20px"
           flexDir="column"
-          //justifyContent="space-between"
         >
           <Box>
             <Flex
               cursor="text"
               minH="40px"
-              borderColor={isEditingSummary ? "gray.200" : "none"}
-              borderWidth={isEditingSummary ? "1px" : "0"}
+              borderColor={isEditingSummary ? colorMode === "dark" ? "rgba(153, 153, 153,0.175)" : "gray.200" : "none"}
+              borderWidth={isEditingSummary ?colorMode === "dark" ? "0" : "1px" : "0"}
               borderRadius="6px"
               mb="20px"
               alignItems="center"
+              bgColor={colorMode === "dark" ? isEditingSummary ? "rgba(153, 153, 153,0.175)" : "none": "none"}
+
             >
               <Flex
                 id="preview-username-input"
@@ -234,7 +237,6 @@ function IssueContent({ project, issue }: IssueContentProps) {
                   fontSize="24px"
                   lineHeight="29px"
                   maxW="470px"
-                  color="gray.700"
                 >
                   {summary}
                 </Text>
@@ -255,7 +257,6 @@ function IssueContent({ project, issue }: IssueContentProps) {
                 value={tempSummary}
                 onChange={(e: any) => setTempSummary(e.target.value)}
                 fontSize="24px"
-                color="gray.700"
               />
               {isEditingSummary && (
                 <ButtonGroup
@@ -269,7 +270,7 @@ function IssueContent({ project, issue }: IssueContentProps) {
                     disabled={summary === tempSummary}
                     aria-label="Check Icon"
                     bg="none"
-                    color="gray.500"
+                    color={colorMode === "dark" ? "dark.800" : "gray.500"}
                     _hover={{
                       bg: "none",
                     }}
@@ -283,7 +284,7 @@ function IssueContent({ project, issue }: IssueContentProps) {
                   <IconButton
                     aria-label="Close Icon"
                     bg="none"
-                    color="gray.500"
+                    color={colorMode === "dark" ? "dark.800" : "gray.500"}
                     _hover={{
                       bg: "none",
                     }}
@@ -355,20 +356,11 @@ function IssueContent({ project, issue }: IssueContentProps) {
                   />
                   <Flex mt="8px" h="32px">
                     <Button
+                    variant="modal-cancel"
                       w="70px"
                       h="32px"
                       mr={2}
                       fontSize="13px"
-                      bg="gray.100"
-                      color="gray.700"
-                      fontWeight="400"
-                      transition=".2s"
-                      _hover={{
-                        bg: "rgba(226,232,240,.8)",
-                      }}
-                      _active={{
-                        bgColor: "gray.200",
-                      }}
                       onClick={() => {
                         setTempDescription(description);
                         return setIsEditingDescription(false);
@@ -377,19 +369,10 @@ function IssueContent({ project, issue }: IssueContentProps) {
                       Cancelar
                     </Button>
                     <Button
+                    variant="modal-submit"
                       w="70px"
                       h="32px"
                       fontSize="13px"
-                      bg="main.300"
-                      fontWeight="400"
-                      color="white"
-                      transition=".2s"
-                      _hover={{
-                        bg: "main.400",
-                      }}
-                      _active={{
-                        bgColor: "main.500",
-                      }}
                       onClick={handleSaveDescriptionChanges}
                     >
                       {isLoading ? <Spinner color="white" /> : "Salvar"}
@@ -434,11 +417,11 @@ function IssueContent({ project, issue }: IssueContentProps) {
                   as={Button}
                   rightIcon={<ChevronDownIcon />}
                   h="40px"
-                  bgColor="gray.50"
+                  bgColor={colorMode === "dark" ? "rgba(153, 153, 153,0.175)" : "gray.50"}
                   fontSize="16px"
                   fontWeight="400"
                   borderWidth="1px"
-                  borderColor="#E2E8F0"
+                  borderColor={ colorMode === "dark" ? "#202024" : "#E2E8F0"}
                   textAlign="left"
                   pl="10px"
                   pr="10px"
@@ -449,13 +432,16 @@ function IssueContent({ project, issue }: IssueContentProps) {
                     boxShadow: "none",
                   }}
                   _hover={{
-                    bgColor: "gray.50",
-                    borderColor: "gray.300",
+                    bgColor: colorMode === "dark" ? "rgba(153, 153, 153,0.175)" : "gray.50",
+                    borderColor: colorMode === "dark" ? "dark.300" : "gray.300",
                   }}
                 >
                   {getIssueStatus()}
                 </MenuButton>
-                <MenuList w="250px">
+                <MenuList 
+                bg={colorMode === "dark" ? "dark.200" : "white"}
+                w="250px"                
+                >
                   <MenuItem
                     minH="40px"
                     onClick={() => handleChangeIssueStatus("nao iniciado")}
@@ -483,7 +469,11 @@ function IssueContent({ project, issue }: IssueContentProps) {
                 Líder
               </Text>
 
-              <Tag size="lg" borderRadius="full" bgColor="gray.200">
+              <Tag 
+              size="lg" 
+              borderRadius="full" 
+              bgColor={colorMode === "dark" ? "rgba(153, 153, 153,0.175)" : "gray.200"}
+              >
                 <Avatar
                   src={user.avatar}
                   size="xs"
@@ -520,11 +510,11 @@ function IssueContent({ project, issue }: IssueContentProps) {
                   as={Button}
                   rightIcon={<Icon as={BiChevronDown} w={5} h={5} />}
                   h="40px"
-                  bgColor="gray.50"
+                  bgColor={colorMode === "dark" ? "rgba(153, 153, 153,0.175)" : "gray.50"}
                   fontSize="16px"
                   fontWeight="400"
-                  borderWidth="1px"
-                  borderColor="#E2E8F0"
+                  borderWidth= "1px" 
+                  borderColor={ colorMode === "dark" ? "#202024" : "#E2E8F0"}
                   textAlign="left"
                   pl="10px"
                   pr="10px"
@@ -535,13 +525,17 @@ function IssueContent({ project, issue }: IssueContentProps) {
                     boxShadow: "none",
                   }}
                   _hover={{
-                    bgColor: "gray.50",
-                    borderColor: "gray.300",
+                    bgColor: colorMode === "dark" ? "rgba(153, 153, 153,0.175)" : "gray.50",
+                    borderColor: colorMode === "dark" ? "dark.300" : "gray.300",
                   }}
                 >
                   {getIssuePriority()}
                 </MenuButton>
-                <MenuList w="250px">
+                <MenuList 
+                w="250px"
+                bg={colorMode === "dark" ? "dark.200" : "white"}
+
+                >
                   <MenuItem
                     minH="40px"
                     onClick={() => handleChangeIssuePriority("muito alta")}
@@ -621,7 +615,7 @@ function IssueContent({ project, issue }: IssueContentProps) {
               </Menu>
             </Box>
 
-            <Divider borderColor="gray.300" mb="20px" />
+            <Divider borderColor={colorMode === "dark" ? "dark.500" : "gray.300"} mb="20px" />
 
             <VStack alignItems="flex-start">
               <Text fontSize="13px">{`Criado em ${issue.createdAt}`}</Text>
