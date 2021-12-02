@@ -80,7 +80,6 @@ function IssueModal({
       bg={colorMode === "dark" ? "dark.200" : "white"}
       borderColor={colorMode === "dark" ? "rgba(255, 255, 255, 0.24)" : "none"}
       borderWidth={colorMode === "dark" ? "1px" : "0"}
-      overflow="hidden"
       >
         <ModalHeader p="0">
           <IssueHeader

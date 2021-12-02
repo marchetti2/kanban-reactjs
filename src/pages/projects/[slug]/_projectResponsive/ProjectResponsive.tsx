@@ -20,13 +20,14 @@ import {
   InputRightElement,
   useDisclosure,
 } from "@chakra-ui/react";
+import { useCallback, useState } from "react";
+import { useRouter } from "next/router";
 import { BsKanban } from "react-icons/bs";
 import { FaSun, FaMoon } from "react-icons/fa";
 import { MdSettings } from "react-icons/md";
 import { IoMdArrowRoundBack } from "react-icons/io";
-import { AddIcon } from "@chakra-ui/icons";
-import { Search2Icon } from "@chakra-ui/icons";
-import { useRouter } from "next/router";
+import { AddIcon, Search2Icon } from "@chakra-ui/icons";
+
 import { useId } from "@reach/auto-id";
 
 import { auth } from "../../../../services/firebase";
@@ -36,6 +37,9 @@ import { useIssues } from "../../../../contexts/IssuesContext";
 import { CreateIssueModal } from "../../../../components/Projects/slug/Sidebar/CreateIssueModal";
 import { NotificationsResponsive } from "../../../../components/Projects/Header/NotificationsResponsive";
 import { IssuesWrapper } from "../../../../components/Projects/slug/Dashboard/IssuesWrapper";
+import {ConfirmLogoutModal} from "../../../../components/Projects/Header/ConfirmLogoutModal"
+import {ProfileModal} from "../../../../components/Projects/Header/ProfileModal"
+
 
 interface UserData {
   id: string;
@@ -66,6 +70,9 @@ function ProjectResponsive({ project }: ProjectResponsiveProps): JSX.Element {
   const router = useRouter();
   const { searchListIssueData, issues, setSearchListIssueData } = useIssues();
 
+  const [isOpenConfirmLogout, setIsOpenConfirmLogout] = useState(false);
+  const [isOpenProfile, setIsOpenProfile] = useState(false);
+
   function handleInputFilterChange(inputValue: string) {
     if (inputValue !== "") {
       const filterBySummary = issues.filter(
@@ -87,9 +94,26 @@ function ProjectResponsive({ project }: ProjectResponsiveProps): JSX.Element {
     return;
   }
 
+  const onOpenModal = useCallback((modalName: string) => {
+    if (modalName === "confirmLogout") {
+      return setIsOpenConfirmLogout(true);
+    }
+    if (modalName === "profile") {
+      return setIsOpenProfile(true);
+    }
+  }, []);
+
+  function onCloseModal() {
+    setIsOpenConfirmLogout(false);
+    setIsOpenProfile(false);
+    return;
+  }
+
   return (
     <>
       <Box h="100vh" w="100vw">
+        <ProfileModal isOpen={isOpenProfile} onClose={onCloseModal} />
+        <ConfirmLogoutModal isOpen={isOpenConfirmLogout} onClose={onCloseModal} />
         <CreateIssueModal project={project} isOpen={isOpen} onClose={onClose} />
         <Flex
           as="header"
@@ -133,14 +157,14 @@ function ProjectResponsive({ project }: ProjectResponsiveProps): JSX.Element {
                     id={id}
                     //variant="link"
                     w="100%"
-                    // onClick={() => onOpenModal("profile")}
+                    onClick={() => onOpenModal("profile")}
                   >
                     <Text pl="5px">Meu perfil</Text>
                   </MenuItem>
                   <MenuItem
                     variant="link"
                     w="100%"
-                    //onClick={() => onOpenModal("confirmLogout")}
+                    onClick={() => onOpenModal("confirmLogout")}
                   >
                     <Text pl="5px">Sair</Text>
                   </MenuItem>
