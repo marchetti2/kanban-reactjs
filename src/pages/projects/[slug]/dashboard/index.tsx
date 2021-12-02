@@ -40,7 +40,7 @@ function Dashboard({ project }: DashboardProps): JSX.Element {
     <CommentsProvider>
       <Header projectTitle={project?.title} current="Quadro de problemas" />
       <FilterAndSearchBar project={project} />
-      <Box h="410px" w="calc(100vw - 334px)">
+      <Box h="410px" w="calc(100vw - 334px)" overflowX={{base:"auto", "4xl":"hidden"}}>
         <Flex justifyContent="space-between" w="980px">
           <Box
             w="320px"
