@@ -90,7 +90,7 @@ function IssueModal({
           />
         </ModalHeader>
         <ModalCloseButton m="17px 10px 0 0" onClick={handleClose}/>
-        <ModalBody>
+        <ModalBody overflowY="auto" maxH="400px">
         <IssueContent project={project} issue={issue}/>
         </ModalBody>
       </ModalContent>

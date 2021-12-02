@@ -6,7 +6,6 @@ import {
   VStack,
   Avatar,
   Heading,
-  IconButton,
   Menu,
   MenuButton,
   MenuList,

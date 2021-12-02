@@ -205,7 +205,7 @@ function IssueContent({ project, issue }: IssueContentProps) {
       maxW="1152px"
       flexDir="column"
     >
-      <Flex as="main" w="100%" h="100%" flexDir="row">
+      <Flex as="main" w="100%" h="100%" flexDir="column" border="1px solid #eee">
         <Flex
           w="60%"
           p="15px 15px 20px 20px"

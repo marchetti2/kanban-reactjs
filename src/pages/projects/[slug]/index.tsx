@@ -62,7 +62,7 @@ function Project(/* { project }: ProjectProps */): JSX.Element {
   return (
     <IssuesProvider>
       <Flex 
-      display={{base:'none', sm:"flex"}} 
+      display={{base:'none', md:"flex"}} 
       h="100vh" 
       flexDirection="row"
       >
@@ -115,7 +115,7 @@ function Project(/* { project }: ProjectProps */): JSX.Element {
       <Box 
       h="100vh" 
       w="100vw" 
-      display={{base:"inline", sm:'none'}} 
+      display={{base:"inline", md:'none'}} 
       >
         <ProjectResponsive project={project}/>
       </Box>

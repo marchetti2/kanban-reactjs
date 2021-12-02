@@ -1,17 +1,22 @@
-import { Flex, HStack, Icon, Text, IconButton, useDisclosure, Box,
+import { 
+  Flex, 
+  HStack, 
+  Icon, 
+  Text, 
+  IconButton, 
+  useDisclosure, 
+  Box,
   Menu,
   MenuButton,
   MenuList,
   MenuItem,
-  Badge, Button
+  useColorMode,
 } from "@chakra-ui/react";
-
-import { ChevronDownIcon } from "@chakra-ui/icons";
+import { useCallback, useState } from "react";
 import { IoCheckbox, IoPaperPlaneOutline, IoCopy, IoAlertCircleSharp } from "react-icons/io5";
 import { FiTrash2, FiLink } from "react-icons/fi";
 
 import { ConfirmDeleteModal } from '../../IssuesWrapper/ConfirmDeleteModal'
-import { Dispatch, SetStateAction, useState } from "react";
 import { useIssues } from "../../../../../../contexts/IssuesContext";
 
 interface UserData {
@@ -54,9 +59,9 @@ interface IssueHeaderProps {
 }
 
 function IssueHeader({id, project, onCloseModal, issue }: IssueHeaderProps) {
-
+  const { colorMode } = useColorMode();
   const { isOpen, onClose, onOpen } = useDisclosure()
-  const { deleteIssue,updateIssue, updatedIssueListener, issues} = useIssues();
+  const { deleteIssue,updateIssue, updatedIssueListener } = useIssues();
   
   const [loading, setLoading] = useState(false)
   const [type, setType] = useState(issue.type)
@@ -73,7 +78,7 @@ function IssueHeader({id, project, onCloseModal, issue }: IssueHeaderProps) {
     }
   }
   
-  function GetIssueType() {
+  const GetIssueType = useCallback(() => {
     switch (type) {
       case "tarefa":
         return <Icon as={IoCheckbox} w={5} h={5} color="#4bade8" />
@@ -87,7 +92,7 @@ function IssueHeader({id, project, onCloseModal, issue }: IssueHeaderProps) {
       default:
         return <Box/>
     }
-  }
+  },[type])
 
   async function handleChangeIssueType(type:string){
     setType(type)
@@ -119,7 +124,7 @@ function IssueHeader({id, project, onCloseModal, issue }: IssueHeaderProps) {
         <MenuButton >
           <GetIssueType />
         </MenuButton>
-        <MenuList w="180px">
+        <MenuList w="180px" bg={colorMode === "dark" ? "dark.200" : "white"}>
           <MenuItem
             minH="40px"
             onClick={() => handleChangeIssueType("tarefa")}
@@ -158,18 +163,18 @@ function IssueHeader({id, project, onCloseModal, issue }: IssueHeaderProps) {
           h="32px"
           transition=" .3s"
           _hover={{
-            bgColor: "light.200",
+            bgColor: colorMode === "dark" ? "rgba(153, 153, 153,0.175)" : "gray.50",
           }}
           _active={{
-            bgColor: "light.300",
+            bgColor: colorMode === "dark" ? "rgba(153, 153, 153,0.3)" : "gray.100",
           }}
           borderRadius="6px"
           my="4px"
         >
-          <Icon as={IoPaperPlaneOutline} w={5} h={5} color="light.600" />
-          <Text>Feedback</Text>
+          <Icon as={IoPaperPlaneOutline} w={5} h={5} color={colorMode === "dark" ? "dark.800" : "gray.600"}  />
+          <Text color={colorMode === "dark" ? "dark.800" : "gray.600"}>Feedback</Text>
         </HStack>
-        <HStack
+        {/* <HStack
           as="button"
           p="12px"
           h="32px"
@@ -184,7 +189,7 @@ function IssueHeader({id, project, onCloseModal, issue }: IssueHeaderProps) {
         >
           <Icon as={FiLink} w={5} h={5} color="light.600" />
           <Text>Copiar o link</Text>
-        </HStack>
+        </HStack> */}
 
         <IconButton
           variant="unstyled"
@@ -194,15 +199,15 @@ function IssueHeader({id, project, onCloseModal, issue }: IssueHeaderProps) {
           h="32px"
           transition=" .3s"
           _hover={{
-            bgColor: "light.200",
+            bgColor: colorMode === "dark" ? "rgba(153, 153, 153,0.175)" : "gray.50",
           }}
           _active={{
-            bgColor: "light.300",
+            bgColor: colorMode === "dark" ? "rgba(153, 153, 153,0.3)" : "gray.100",
           }}
           borderRadius="6px"
           onClick={onOpen}
         >
-          <Icon as={FiTrash2} w={5} h={5} color="light.600" />
+          <Icon as={FiTrash2} w={5} h={5} color={colorMode === "dark" ? "dark.800" : "gray.600"} />
         </IconButton>
       </HStack>
     </Flex>
