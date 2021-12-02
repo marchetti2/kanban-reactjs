@@ -244,7 +244,7 @@ function ProjectDashboardResponsive({ project }: ProjectResponsiveProps): JSX.El
 
         {
           isProjectSetings ? (
-          <ProjectSettingsResponsive project={project}/>
+          <ProjectSettingsResponsive project={project} setIsProjectSetings={setIsProjectSetings}/>
           ) : (
 
             <Flex
