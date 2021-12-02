@@ -37,10 +37,9 @@ import { useIssues } from "../../../../contexts/IssuesContext";
 import { CreateIssueModal } from "../../../../components/Projects/slug/Sidebar/CreateIssueModal";
 import { NotificationsResponsive } from "../../../../components/Projects/Header/NotificationsResponsive";
 import { IssuesWrapper } from "../../../../components/Projects/slug/Dashboard/IssuesWrapper";
-import {ConfirmLogoutModal} from "../../../../components/Projects/Header/ConfirmLogoutModal"
-import {ProfileModal} from "../../../../components/Projects/Header/ProfileModal"
-import ProjectSettingsResponsive from "../_projectSettingsResponsive/ProjectSettingsResponsive"
- 
+import { ConfirmLogoutModal } from "../../../../components/Projects/Header/ConfirmLogoutModal";
+import { ProfileModal } from "../../../../components/Projects/Header/ProfileModal";
+import ProjectSettingsResponsive from "../_projectSettingsResponsive/ProjectSettingsResponsive";
 
 interface UserData {
   id: string;
@@ -64,7 +63,9 @@ interface ProjectResponsiveProps {
   project: Project;
 }
 
-function ProjectDashboardResponsive({ project }: ProjectResponsiveProps): JSX.Element {
+function ProjectDashboardResponsive({
+  project,
+}: ProjectResponsiveProps): JSX.Element {
   const { colorMode, toggleColorMode } = useColorMode();
   const id = useId();
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -116,7 +117,10 @@ function ProjectDashboardResponsive({ project }: ProjectResponsiveProps): JSX.El
     <>
       <Box h="100vh" w="100vw">
         <ProfileModal isOpen={isOpenProfile} onClose={onCloseModal} />
-        <ConfirmLogoutModal isOpen={isOpenConfirmLogout} onClose={onCloseModal} />
+        <ConfirmLogoutModal
+          isOpen={isOpenConfirmLogout}
+          onClose={onCloseModal}
+        />
         <CreateIssueModal project={project} isOpen={isOpen} onClose={onClose} />
         <Flex
           as="header"
@@ -197,15 +201,13 @@ function ProjectDashboardResponsive({ project }: ProjectResponsiveProps): JSX.El
                 >
                   {project?.title}
                 </Heading>
-                <Box
-                onClick={()=>setIsProjectSetings(true)}
-                >
-                <Icon
-                  as={MdSettings}
-                  width="20px"
-                  height="20px"
-                  color={colorMode === "dark" ? "dark.800" : "gray.400"} 
-                />
+                <Box onClick={() => setIsProjectSetings(true)}>
+                  <Icon
+                    as={MdSettings}
+                    width="20px"
+                    height="20px"
+                    color={colorMode === "dark" ? "dark.800" : "gray.400"}
+                  />
                 </Box>
               </HStack>
 
@@ -213,10 +215,10 @@ function ProjectDashboardResponsive({ project }: ProjectResponsiveProps): JSX.El
                 maxW="190px"
                 fontFamily="Inter"
                 fontSize="13px"
-                fontColor={colorMode === "dark" ? "dark.600" : "gray.500"} 
+                fontColor={colorMode === "dark" ? "dark.600" : "gray.500"}
                 isTruncated
               >
-               {project?.type}
+                {project?.type}
               </Text>
             </VStack>
           </HStack>
@@ -226,28 +228,31 @@ function ProjectDashboardResponsive({ project }: ProjectResponsiveProps): JSX.El
             borderRadius="20px"
             width="40px"
             height="40px"
-            bgColor={colorMode === "dark" ? "rgba(153, 153, 153,0.175)" : "gray.200"}
+            bgColor={
+              colorMode === "dark" ? "rgba(153, 153, 153,0.175)" : "gray.200"
+            }
             onClick={() => router.push("/projects")}
             _hover={{
-              bg: colorMode === "dark" ? "rgba(153, 153, 153,0.25)" : "gray.300"
+              bg:
+                colorMode === "dark" ? "rgba(153, 153, 153,0.25)" : "gray.300",
             }}
           >
             <Icon
               as={IoMdArrowRoundBack}
               width="20px"
               height="20px"
-              color={colorMode === "dark" ? "dark.600" :"gray.400"}
+              color={colorMode === "dark" ? "dark.600" : "gray.400"}
             />
           </Flex>
         </Flex>
 
-
-        {
-          isProjectSetings ? (
-          <ProjectSettingsResponsive project={project} setIsProjectSetings={setIsProjectSetings}/>
-          ) : (
-
-            <Flex
+        {isProjectSetings ? (
+          <ProjectSettingsResponsive
+            project={project}
+            setIsProjectSetings={setIsProjectSetings}
+          />
+        ) : (
+          <Flex
             h="calc(100vh - 140px)"
             p="14px 24px 30px 24px"
             flexDirection="column"
@@ -263,16 +268,13 @@ function ProjectDashboardResponsive({ project }: ProjectResponsiveProps): JSX.El
                       cursor="pointer"
                       textDecoration="underline"
                       _hover={{
-                        color: colorMode === "dark" ? "white" :"gray.700",
+                        color: colorMode === "dark" ? "white" : "gray.700",
                       }}
                     >
                       Projetos
                     </Text>
                   </Link>
-                  <Text 
-                  variant="breadcrumb"
-                  fontSize="12px"
-                  >
+                  <Text variant="breadcrumb" fontSize="12px">
                     {" "}
                     /{" "}
                   </Text>
@@ -286,15 +288,12 @@ function ProjectDashboardResponsive({ project }: ProjectResponsiveProps): JSX.El
                     {project?.title}
                   </Text>
                 </HStack>
-  
-                <Heading
-                  variant="project-responsive-title"
-                  mb="20px"
-                >
+
+                <Heading variant="project-responsive-title" mb="20px">
                   Quadro de problemas
                 </Heading>
               </Box>
-  
+
               <Flex
                 flexDirection="column"
                 h="350px"
@@ -339,13 +338,13 @@ function ProjectDashboardResponsive({ project }: ProjectResponsiveProps): JSX.El
                     </Heading>
                   </Box>
                 </Flex>
-  
+
                 <Flex justifyContent="space-between" w="980px">
                   <IssuesWrapper project={project} />
                 </Flex>
               </Flex>
             </Box>
-  
+
             <InputGroup h="40px" w="250px">
               <Input
                 h="100%"
@@ -353,7 +352,9 @@ function ProjectDashboardResponsive({ project }: ProjectResponsiveProps): JSX.El
                 borderColor={colorMode === "dark" ? "dark.300" : "gray.200"}
                 color={colorMode === "dark" ? "white" : "gray.700"}
                 bgColor={colorMode === "dark" ? "dark.300" : "gray.50"}
-                focusBorderColor={colorMode === "dark" ? "main.300" : "main.500"}
+                focusBorderColor={
+                  colorMode === "dark" ? "main.300" : "main.500"
+                }
                 placeholder="Buscar problema"
                 _placeholder={{
                   fontSize: "13px",
@@ -365,16 +366,13 @@ function ProjectDashboardResponsive({ project }: ProjectResponsiveProps): JSX.El
               </InputRightElement>
             </InputGroup>
           </Flex>
-  
-          )
-        }
-
+        )}
 
         <Flex
           w="50px"
           h="50px"
           borderRadius="25px"
-          display={{ base: "flex", lg: "none" }}
+          display={{ base: isProjectSetings ? "none" : "flex", lg: "none" }}
           onClick={onOpen}
           bgColor="main.300"
           boxShadow="lg" //"xl"
