@@ -357,7 +357,7 @@ function ProjectResponsive({ project }: ProjectResponsiveProps): JSX.Element {
           w="50px"
           h="50px"
           borderRadius="25px"
-          display={{ base: "flex", md: "none" }}
+          display={{ base: "flex", lg: "none" }}
           onClick={onOpen}
           bgColor="main.300"
           boxShadow="lg" //"xl"
