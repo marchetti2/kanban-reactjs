@@ -76,10 +76,11 @@ function IssueModal({
     >
       <ModalOverlay />
       <ModalContent 
-      p="20px"
+      p={{base:"20px 10px", md:"20px"}}
       bg={colorMode === "dark" ? "dark.200" : "white"}
       borderColor={colorMode === "dark" ? "rgba(255, 255, 255, 0.24)" : "none"}
       borderWidth={colorMode === "dark" ? "1px" : "0"}
+      overflow="hidden"
       >
         <ModalHeader p="0">
           <IssueHeader
@@ -90,7 +91,7 @@ function IssueModal({
           />
         </ModalHeader>
         <ModalCloseButton m="17px 10px 0 0" onClick={handleClose}/>
-        <ModalBody overflowY="auto" maxH="550px">
+        <ModalBody overflowY="auto" maxH="450px">
         <IssueContent project={project} issue={issue}/>
         </ModalBody>
       </ModalContent>

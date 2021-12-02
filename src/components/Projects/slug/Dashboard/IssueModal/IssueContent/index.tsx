@@ -208,7 +208,7 @@ function IssueContent({ project, issue }: IssueContentProps) {
       <Flex as="main" w="100%" h="100%" flexDir={{base:"column", md:"row"}} m="auto">
         <Flex
           w={{base:"100%", md:"60%"}}
-          p="15px 15px 20px 20px"
+          p={{base:"12px 8px 12px 8px", md:"15px 15px 20px 20px"}}
           flexDir="column"
         >
           <Box>
@@ -405,7 +405,7 @@ function IssueContent({ project, issue }: IssueContentProps) {
           </Box>
         </Flex>
 
-        <Flex w={{base:"100%", md:"40%"}} h="100%" p="10px 20px 20px 15px">
+        <Flex w={{base:"100%", md:"40%"}} h="100%" p={{base:"12px 8px 12px 8px", md:"10px 20px 20px 15px" }}>
           <Flex flexDir="column" w="100%" pt="10px">
             <Box mb="20px">
               <Text fontWeight="500" mb="5px">
