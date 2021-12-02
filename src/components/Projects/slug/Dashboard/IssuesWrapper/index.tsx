@@ -1,23 +1,10 @@
 import {
   Flex,
-  VStack,
-  Heading,
   Box,
-  useDisclosure,
-  Button,
-  Menu,
-  MenuButton,
-  MenuItem,
-  Icon,
-  MenuList,
-  Text,
-  IconButton,
   useColorMode,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import { useRouter } from "next/router";
 import { DragDropContext, Droppable, DropResult } from "react-beautiful-dnd";
-import { HiOutlineDotsHorizontal } from "react-icons/hi";
 
 import { useIssues } from "../../../../../contexts/IssuesContext";
 
@@ -87,11 +74,10 @@ interface IssuesWrapperProps {
 import { IssueCard } from "./IssueCard";
 
 function IssuesWrapper({ project }: IssuesWrapperProps) {
-  const router = useRouter();
+
   const { colorMode } = useColorMode();
-  const { onClose } = useDisclosure();
+
   const {
-    issues,
     updateIssue,
     getIssues,
     deleteIssue,
@@ -102,7 +88,6 @@ function IssuesWrapper({ project }: IssuesWrapperProps) {
   const [id, setId] = useState("");
   const [issue, setIssue] = useState({} as Issue);
   const [isLoading, setLoading] = useState(false);
-  const [loadingCloseModal, setLoadingCloseModal] = useState(false);
   const [columns, setColumns] = useState<IssueWrapper>({} as IssueWrapper);
   const [isOpenConfirmDelete, setIsOpenConfirmDelete] = useState(false);
   const [isOpenIssue, setIsOpenIssue] = useState(false);
@@ -175,8 +160,7 @@ function IssuesWrapper({ project }: IssuesWrapperProps) {
     }
 
     if (modalName === "issue") {
-      setIsOpenIssue(true);
-      return router.push(`/projects/${project?.id}?issue=${issueId}`);
+      return setIsOpenIssue(true);
     }
   }
 
@@ -186,7 +170,6 @@ function IssuesWrapper({ project }: IssuesWrapperProps) {
 
     if (isOpenIssue) {
       setIsOpenIssue(false);
-      router.push(`/projects/${project?.id}`);
     }
     setLoading(false);
     return;
@@ -247,10 +230,6 @@ function IssuesWrapper({ project }: IssuesWrapperProps) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchListIssueData]);
 
-  useEffect(() => {
-    setLoadingCloseModal(false);
-  }, [router.query.issue]);
-  console.log(issue);
   return (
     <>
       <ConfirmDeleteModal
@@ -260,19 +239,15 @@ function IssuesWrapper({ project }: IssuesWrapperProps) {
         id={id}
         isLoading={isLoading}
       />
-      {console.log(issue)}
       <IssueModal
         project={project}
         issue={issue}
         isOpen={isOpenIssue}
         onCloseModal={onCloseModal}
-        setLoadingCloseModal={setLoadingCloseModal}
-        loadingCloseModal={loadingCloseModal}
         id={id}
       />
       <DragDropContext onDragEnd={onDragEnd}>
         <Flex
-          //maxH="360px"
           justifyContent="space-between"
           w="980px"
         >

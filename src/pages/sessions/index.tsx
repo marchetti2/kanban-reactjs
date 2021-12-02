@@ -19,7 +19,6 @@ import { ForgotPassword } from "../../components/Sessions/ForgotPassword";
 import { Footer } from "../../components/Sessions/Footer";
 
 function Sessions(): JSX.Element {
-  console.log("oi");w                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     dsz
   const id = useId();
   const { currentPage, setCurrentPage, isLogged, user, logout } = useAuth();
   const router = useRouter();
@@ -61,7 +60,6 @@ function Sessions(): JSX.Element {
         minH="430px"
         h="430px"
       >
-        {console.log("oi")}
         <Heading
           fontSize={["18px", "22px", "24px", "18px", "20px", "22px", "24px"]}
           textAlign="center"
@@ -144,7 +142,6 @@ function Sessions(): JSX.Element {
         "4xl": username || currentPage === "forgotPassword" ? "430px" : "540px",
       }}
     >
-      {console.log("oi")}
       <Box as="header">
         <Heading variant="sessions-title">
           {currentPage === "forgotPassword"

@@ -1,22 +1,16 @@
 import {
   Box,
-  Flex,
-  HStack,
+  Flex, 
   Icon,
   Text,
-  IconButton,
-  Textarea,
-  VStack,
-  Editable,
-  EditableInput,
-  EditablePreview,
+  IconButton, 
+  VStack, 
   Avatar,
   Button,
   Spinner,
   Tag,
   TagLabel,
-  Divider,
-  useEditableControls,
+  Divider, 
   Menu,
   MenuButton,
   MenuList,
@@ -25,7 +19,7 @@ import {
   Input,
   ButtonGroup,
 } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import {
   BiChevronUp,
   BiChevronDown,
@@ -36,11 +30,11 @@ import { HiMenuAlt4 } from "react-icons/hi";
 import { CheckIcon, CloseIcon, ChevronDownIcon } from "@chakra-ui/icons";
 
 import { useAuth } from "../../../../../../contexts/AuthContext";
-import { TextEditor } from "../../../../../../components/TextEditor";
-import { AssigneesSelect } from "../../../../../../components/Projects/slug/Sidebar/CreateIssueModal/AssigneesSelect";
-
 import { useIssues } from "../../../../../../contexts/IssuesContext";
 import { useComments } from "../../../../../../contexts/CommentsContext";
+
+import { TextEditor } from "../../../../../../components/TextEditor";
+import { AssigneesSelect } from "../../../../../../components/Projects/slug/Sidebar/CreateIssueModal/AssigneesSelect";
 import { CommentsWrapper } from "./CommentsWrapper";
 import { CreateComment } from "./CreateComment";
 
@@ -114,9 +108,11 @@ function IssueContent({ project, issue }: IssueContentProps) {
   }
 
   async function handleSaveDescriptionChanges() {
+    setLoading(true)
     setDescription(tempDescription);
     setIsEditingDescription(false);
     await updateIssue({ id: issue.id, description: tempDescription });
+    setLoading(false)
   }
 
   async function handleChangeIssuePriority(priority: string) {
@@ -129,7 +125,7 @@ function IssueContent({ project, issue }: IssueContentProps) {
     await updateIssue({ id: issue.id, status });
   }
 
-  function getIssueStatus() {
+  const getIssueStatus = useCallback(()=>{
     switch (status) {
       case "nao iniciado":
         return <Badge>Não iniciado</Badge>;
@@ -139,12 +135,11 @@ function IssueContent({ project, issue }: IssueContentProps) {
         return <Badge colorScheme="green">Concluído</Badge>;
       default:
         return {
-          /* <Badge>Não iniciado</Badge>; */
         };
     }
-  }
+  },[status])
 
-  function getIssuePriority() {
+  const getIssuePriority = useCallback(() => {
     switch (priority) {
       case "muito alta":
         return (
@@ -182,22 +177,15 @@ function IssueContent({ project, issue }: IssueContentProps) {
           </Flex>
         );
       default:
-        return; /* (
-          <Flex alignItems="center">
-            <Text ml="8px" fontSize="16px">
-              Selecione
-            </Text>
-          </Flex>
-        ); */
+        return;
     }
-  }
+  },[priority])
 
   useEffect(() => {
     updatedIssueListener(project?.id);
     if (assignees.length > 0) {
       updateIssue({ id: issue.id, assignees });
     }
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [assignees]);
 

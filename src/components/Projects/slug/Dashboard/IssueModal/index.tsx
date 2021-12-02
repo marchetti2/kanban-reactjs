@@ -4,14 +4,11 @@ import {
   ModalContent,
   ModalHeader,
   ModalBody,
-  ModalCloseButton,
-  Spinner,
+  ModalCloseButton
 } from "@chakra-ui/react";
 import { Dispatch, SetStateAction } from "react";
-import { useRouter } from "next/router";
 
 import { IssueContent } from "./IssueContent";
-import { IssueContentSkeleton } from "./IssueContent/IssueContentSkeleton";
 import { IssueHeader } from "./IssueHeader";
 
 interface UserData {
@@ -49,8 +46,6 @@ interface Issue {
 interface IssueModalProps {
   project: Project;
   issue: Issue;
-  setLoadingCloseModal: Dispatch<SetStateAction<boolean>>;
-  loadingCloseModal: boolean;
   onCloseModal: () => void;
   isOpen: boolean;
   id: string | undefined;
@@ -61,14 +56,10 @@ function IssueModal({
   onCloseModal,
   project,
   issue,
-  setLoadingCloseModal,
-  loadingCloseModal,
   id,
 }: IssueModalProps) {
-  const router = useRouter();
 
   function handleClose() {
-    setLoadingCloseModal(true);
     onCloseModal();
   }
 
@@ -77,7 +68,7 @@ function IssueModal({
       isCentered
       trapFocus={true}
       size="6xl"
-      isOpen={!!router.query.issue ? !!router.query.issue : isOpen}
+      isOpen={isOpen}
       onClose={handleClose}
     >
       <ModalOverlay />
@@ -90,23 +81,12 @@ function IssueModal({
             issue={issue}
           />
         </ModalHeader>
-        <ModalCloseButton m="17px 10px 0 0" onClick={handleClose}>
-          {loadingCloseModal && <Spinner size="sm" color="gray.400" />}
-        </ModalCloseButton>
+        <ModalCloseButton m="17px 10px 0 0" onClick={handleClose}/>
         <ModalBody>
-          {
-            //console.log(issue, project)
-          }
-          {!!router.query.issue ? (
-            <div />
-          ) : (
-            //<IssueContent project={project} issue={issue} />
-            <IssueContentSkeleton />
-          )}
+        <IssueContent project={project} issue={issue}/>
         </ModalBody>
       </ModalContent>
     </Modal>
   );
 }
-
-export { IssueModal };
+export  {IssueModal} 

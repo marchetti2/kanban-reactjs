@@ -80,7 +80,6 @@ function Dashboard({ project }: DashboardProps): JSX.Element {
           overflowX="hidden"
           w="1000px"
         >
-          {console.log(project)}
           <IssuesWrapper project={project} />
         </Box>
       </Box>
