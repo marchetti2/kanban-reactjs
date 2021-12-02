@@ -46,7 +46,7 @@ function NotificationsResponsive() {
     <Popover id={id} arrowShadowColor={colorMode === "dark" ? "rgba(255, 255, 255, 0.24)" : "#A38FD6"}>
       <PopoverTrigger>
         <Box position="relative" alignItems="center" justifyContent="center">
-          <Box display={{ base: "flex", sm: "none" }}>
+          <Box display={{ base: "flex", md: "none" }}>
             <Icon as={BellIcon} w={6} h={6} color="white" />
           </Box>
 

@@ -205,9 +205,9 @@ function IssueContent({ project, issue }: IssueContentProps) {
       maxW="1152px"
       flexDir="column"
     >
-      <Flex as="main" w="100%" h="100%" flexDir="column" border="1px solid #eee">
+      <Flex as="main" w="100%" h="100%" flexDir={{base:"column", md:"row"}} m="auto">
         <Flex
-          w="60%"
+          w={{base:"100%", md:"60%"}}
           p="15px 15px 20px 20px"
           flexDir="column"
         >
@@ -405,7 +405,7 @@ function IssueContent({ project, issue }: IssueContentProps) {
           </Box>
         </Flex>
 
-        <Flex w="40%" h="100%" p="10px 20px 20px 15px">
+        <Flex w={{base:"100%", md:"40%"}} h="100%" p="10px 20px 20px 15px">
           <Flex flexDir="column" w="100%" pt="10px">
             <Box mb="20px">
               <Text fontWeight="500" mb="5px">
