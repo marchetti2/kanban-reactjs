@@ -3,20 +3,17 @@ import Head from "next/head";
 import { Flex } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { collection, query, getDocs, doc, getDoc, onSnapshot, DocumentData } from "firebase/firestore";
-import { database } from "../../../services/firebase";
 
 import { IssuesProvider } from "../../../contexts/IssuesContext";
+import { CommentsProvider } from "../../../contexts/CommentsContext";
+import { useProjects } from "../../../contexts/ProjectsContext";
 
 import Dashboard from "./dashboard";
 import ProjectSettings from "./projectSettings";
+import ProjectResponsive from "./_projectResponsive/ProjectResponsive";
 
 import { Sidebar } from "../../../components/Projects/slug/Sidebar";
 import { Aside } from "../../../components/Projects/slug/Aside";
-
-import { useProjects } from "../../../contexts/ProjectsContext";
-import ProjectResponsive from "./_projectResponsive/ProjectResponsive";
-
 
 interface UserData {
   id: string;
@@ -35,11 +32,7 @@ interface Project {
   assignees: UserData[];
 }
 
-interface ProjectProps {
-  project: Project;
-}
-
-function Project(/* { project }: ProjectProps */): JSX.Element {
+function Project(): JSX.Element {
   const { colorMode } = useColorMode();
   const [tabIndex, setTabIndex] = useState(0)
 
@@ -117,7 +110,9 @@ function Project(/* { project }: ProjectProps */): JSX.Element {
       w="100vw" 
       display={{base:"inline", md:'none'}} 
       >
-        <ProjectResponsive project={project}/>
+        <CommentsProvider>
+          <ProjectResponsive project={project}/>
+        </CommentsProvider>
       </Box>
     </IssuesProvider>
   );
