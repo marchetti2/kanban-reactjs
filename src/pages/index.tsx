@@ -7,7 +7,7 @@ import {
   useColorMode,
   useColorModeValue,
 } from "@chakra-ui/react";
-import Link from "next/link";
+//import Link from "next/link";
 
 import Sessions from "./sessions";
 
@@ -98,7 +98,7 @@ function App(): JSX.Element {
                   Tenha controle total sobre projetos, finanças, produtividade,
                   arquivos, mídias e clientes. Tudo isso em tempo real!
                 </Text>
-                <Link href="#sessions" passHref>
+                <a href="#sessions">
                   <Flex
                     height={{
                       base: "40px",
@@ -126,7 +126,7 @@ function App(): JSX.Element {
                       Crie sua conta gratis
                     </Text>
                   </Flex>
-                </Link>
+                </a>
               </Flex>
               <Image
                 height={{

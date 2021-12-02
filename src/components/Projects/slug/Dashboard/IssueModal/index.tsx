@@ -94,9 +94,13 @@ function IssueModal({
           {loadingCloseModal && <Spinner size="sm" color="gray.400" />}
         </ModalCloseButton>
         <ModalBody>
+          {
+            //console.log(issue, project)
+          }
           {!!router.query.issue ? (
-            <IssueContent project={project} issue={issue} />
+            <div />
           ) : (
+            //<IssueContent project={project} issue={issue} />
             <IssueContentSkeleton />
           )}
         </ModalBody>

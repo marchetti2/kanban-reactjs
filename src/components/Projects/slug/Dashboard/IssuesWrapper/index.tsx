@@ -250,7 +250,7 @@ function IssuesWrapper({ project }: IssuesWrapperProps) {
   useEffect(() => {
     setLoadingCloseModal(false);
   }, [router.query.issue]);
-
+  console.log(issue);
   return (
     <>
       <ConfirmDeleteModal
@@ -260,6 +260,7 @@ function IssuesWrapper({ project }: IssuesWrapperProps) {
         id={id}
         isLoading={isLoading}
       />
+      {console.log(issue)}
       <IssueModal
         project={project}
         issue={issue}
