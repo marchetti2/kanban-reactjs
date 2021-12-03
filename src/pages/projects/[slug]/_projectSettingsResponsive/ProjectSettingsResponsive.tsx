@@ -52,16 +52,24 @@ function ProjectSettingsResponsive({
 }: ProjectResponsiveProps): JSX.Element {
   const { colorMode } = useColorMode();
   const [isLoading, setLoading] = useState(false);
+
   const [title, setTitle] = useState("");
   const [initialTitle, setInitialTitle] = useState("");
   const [tempTitle, setTempTitle] = useState("");
+
   const [type, setType] = useState("");
+  const [initialType, setInitialType] = useState("");
+  const [tempType, setTempType] = useState("");
+
   const [description, setDescription] = useState("");
   const [tempDescription, setTempDescription] = useState("");
   const [initialDescription, setInitialDescription] = useState("");
 
-  const [isEditingDescription, setIsEditingDescription] = useState(true);
+  const [isEditingDescription, setIsEditingDescription] = useState(
+    !!!description
+  );
   const [isEditingTitle, setIsEditingTitle] = useState(false);
+  const [isEditingType, setIsEditingType] = useState(false);
 
   const { updateProject, projects } = useProjects();
 
@@ -72,7 +80,7 @@ function ProjectSettingsResponsive({
       onChange: (e: any) => setTempTitle(e.target.value),
     },
     type: {
-      onChange: (e: any) => setType(e.target.value),
+      onChange: (e: any) => setTempType(e.target.value),
     },
   };
 
@@ -91,6 +99,11 @@ function ProjectSettingsResponsive({
     setIsEditingDescription(false);
   }
 
+  function handleSaveTypeChanges() {
+    setType(tempType);
+    setIsEditingType(false);
+  }
+
   function handleSaveTitleChanges() {
     setTitle(tempTitle);
     setIsEditingTitle(false);
@@ -101,7 +114,11 @@ function ProjectSettingsResponsive({
       setTitle(project.title);
       setInitialTitle(project.title);
       setTempTitle(project.title);
+
       setType(project.type);
+      setInitialType(project.type);
+      setTempType(project.type);
+
       setDescription(project.description!);
       setInitialDescription(project.description!);
       setTempDescription(project.description!);
@@ -116,7 +133,11 @@ function ProjectSettingsResponsive({
     setTitle(project.title);
     setInitialTitle(project.title);
     setTempTitle(project.title);
+
     setType(project.type);
+    setInitialType(project.type);
+    setTempType(project.type);
+
     setDescription(project.description!);
     setInitialDescription(project.description!);
     setTempDescription(project.description!);
@@ -290,31 +311,127 @@ function ProjectSettingsResponsive({
           <Text mt="20px" mb="5px">
             Categoria do projeto
           </Text>
-          <Select
+
+          <FormControl
+            cursor="text"
+            display="flex"
             h="40px"
             mb="20px"
-            variant="filled"
-            borderWidth="1px"
             bgColor={
               colorMode === "dark" ? "rgba(153, 153, 153,0.175)" : "gray.50"
             }
             borderColor={colorMode === "dark" ? "dark.300" : "gray.200"}
             color={colorMode === "dark" ? "white" : "gray.700"}
-            transition=" .3s"
-            _hover={{
-              bgColor:
-                colorMode === "dark" ? "rgba(153, 153, 153,0.175)" : "gray.50",
-              borderColor: colorMode === "dark" ? "dark.300" : "gray.200",
-            }}
-            {...register("type", formValidations.type)}
-            focusBorderColor="main.500"
-            value={project?.type}
+            borderWidth="1px"
+            borderRadius="6px"
           >
-            <option value="Santa ceia">Santa ceia</option>
-            <option value="Slipknots">Slipknots</option>
-            <option value="Deboras">Deboras</option>
-            <option value="Premisas">Premisas</option>
-          </Select>
+            <Input
+              readOnly
+              id="preview-type-input"
+              cursor="text"
+              display={isEditingType ? "none" : "flex"}
+              type="text"
+              border="none"
+              w="100%"
+              h="40px"
+              bg="none"
+              alignItems="center"
+              justifyContent="left"
+              pl="20px"
+              _focus={{
+                outline: "none",
+                boxShadow: "none",
+              }}
+              placeholder={type}
+              value={type}
+            />
+            <Input
+              display={isEditingType ? "flex" : "none"}
+              type="text"
+              border="none"
+              w="100%"
+              h="40px"
+              bg="none"
+              alignItems="center"
+              justifyContent="left"
+              pl="20px"
+              value={tempType}
+              _focus={{
+                outline: "none",
+                boxShadow: "none",
+              }}
+              focusBorderColor="main.500"
+              {...register("type", formValidations.type)}
+            />
+            {isEditingType ? (
+              <ButtonGroup
+                justifyContent="center"
+                alignItems="center"
+                size="xs"
+                pr="5px"
+              >
+                <IconButton
+                  aria-label="Check Icon"
+                  bg="none"
+                  color={colorMode === "dark" ? "dark.800" : "gray.500"}
+                  _hover={{
+                    bg: "none",
+                  }}
+                  _active={{
+                    bg: "none",
+                  }}
+                  _focus={{
+                    outline: "none",
+                    boxShadow: "none",
+                  }}
+                  icon={<CheckIcon />}
+                  onClick={handleSaveTypeChanges}
+                />
+                <IconButton
+                  aria-label="Close Icon"
+                  bg="none"
+                  color={colorMode === "dark" ? "dark.800" : "gray.500"}
+                  _hover={{
+                    bg: "none",
+                  }}
+                  _active={{
+                    bg: "none",
+                  }}
+                  _focus={{
+                    outline: "none",
+                    boxShadow: "none",
+                  }}
+                  icon={<CloseIcon />}
+                  onClick={() => {
+                    setTempType(initialType);
+                    return setIsEditingType(false);
+                  }}
+                />
+              </ButtonGroup>
+            ) : (
+              <Flex justifyContent="center" alignItems="center">
+                <IconButton
+                  pr="10px"
+                  aria-label="edit Icon"
+                  bg="none"
+                  color={colorMode === "dark" ? "dark.800" : "gray.500"}
+                  _hover={{
+                    bg: "none",
+                  }}
+                  _active={{
+                    bg: "none",
+                  }}
+                  _focus={{
+                    outline: "none",
+                    boxShadow: "none",
+                  }}
+                  size="sm"
+                  icon={<EditIcon />}
+                  onClick={() => setIsEditingType(true)}
+                />
+              </Flex>
+            )}
+          </FormControl>
 
           <Text mb="5px">Descrição do projeto</Text>
 
@@ -402,7 +519,9 @@ function ProjectSettingsResponsive({
               variant="modal-submit"
               disabled={
                 isEditingTitle ||
-                (initialTitle === title && initialDescription === description)
+                (initialTitle === title &&
+                  initialDescription === description &&
+                  initialType === type)
               }
               w="120px"
               onClick={handleSubmit(onSubmit)}
