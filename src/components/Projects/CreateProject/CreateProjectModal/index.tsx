@@ -81,11 +81,13 @@ function CreateProjectModal({ isOpen, onClose }: UseModalProps) {
       onClose={onModalClose}
     >
       <ModalOverlay />
-      <ModalContent 
-      p="10px"
-      bg={colorMode === "dark" ? "dark.200" : "white"}
-      borderColor={colorMode === "dark" ? "rgba(255, 255, 255, 0.24)" : "none"}
-      borderWidth={colorMode === "dark" ? "1px" : "0"}
+      <ModalContent
+        p="10px"
+        bg={colorMode === "dark" ? "dark.200" : "white"}
+        borderColor={
+          colorMode === "dark" ? "rgba(255, 255, 255, 0.24)" : "none"
+        }
+        borderWidth={colorMode === "dark" ? "1px" : "0"}
       >
         <ModalHeader pl="36px">
           <Heading variant="modal-title">Criar projeto</Heading>
@@ -108,7 +110,11 @@ function CreateProjectModal({ isOpen, onClose }: UseModalProps) {
                 <Input
                   pl="20px"
                   type="text"
-                  bgColor={colorMode === "dark" ? "rgba(153, 153, 153,0.175)" : "gray.50"}
+                  bgColor={
+                    colorMode === "dark"
+                      ? "rgba(153, 153, 153,0.175)"
+                      : "gray.50"
+                  }
                   borderColor={colorMode === "dark" ? "dark.300" : "gray.200"}
                   color={colorMode === "dark" ? "white" : "gray.700"}
                   {...register("title", formValidations.title)}
@@ -148,27 +154,19 @@ function CreateProjectModal({ isOpen, onClose }: UseModalProps) {
                 alignItems="center"
                 isInvalid={!!errors.type}
               >
-                <Select
-                  mb="5px"
-                  variant="filled"
-                  borderWidth="1px"
-                  bgColor={colorMode === "dark" ? "rgba(153, 153, 153,0.175)" : "gray.50"}
+                <Input
+                  pl="20px"
+                  type="text"
+                  bgColor={
+                    colorMode === "dark"
+                      ? "rgba(153, 153, 153,0.175)"
+                      : "gray.50"
+                  }
                   borderColor={colorMode === "dark" ? "dark.300" : "gray.200"}
                   color={colorMode === "dark" ? "white" : "gray.700"}
-                  placeholder="Selecione"
-                  transition=" .3s"
-                  _hover={{
-                    bgColor: colorMode === "dark" ? "rgba(153, 153, 153,0.175)" : "gray.50",
-                    borderColor: colorMode === "dark" ? "dark.300" : "gray.200",
-                  }}
                   {...register("type", formValidations.type)}
                   focusBorderColor={!!errors.type ? "red.500" : "main.500"}
-                >
-                  <option value="Santa ceia">Santa ceia</option>
-                  <option value="Slipknots">Slipknots</option>
-                  <option value="Deboras">Deboras</option>
-                  <option value="Premisas">Premisas</option>
-                </Select>
+                />
                 {!!errors.type && (
                   <Tooltip
                     label={errors.type?.message}
@@ -206,12 +204,7 @@ function CreateProjectModal({ isOpen, onClose }: UseModalProps) {
               >
                 Cancelar
               </Button>
-              <Button
-                variant="modal-submit"
-                type="submit"
-                mr={3}
-                w="120px"
-              >
+              <Button variant="modal-submit" type="submit" mr={3} w="120px">
                 {isLoading ? <Spinner color="white" /> : "Criar"}
               </Button>
             </Flex>

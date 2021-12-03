@@ -40,10 +40,15 @@ function ProjectSettingsModal({
 }: ConfirmDeleteModalProps) {
   const { colorMode } = useColorMode();
   const [isLoading, setLoading] = useState(false);
+
   const [title, setTitle] = useState("");
   const [initialTitle, setInitialTitle] = useState("");
   const [tempTitle, setTempTitle] = useState("");
+
   const [type, setType] = useState("");
+  const [initialType, setInitialType] = useState("");
+  const [tempType, setTempType] = useState("");
+
   const [description, setDescription] = useState("");
   const [tempDescription, setTempDescription] = useState("");
   const [initialDescription, setInitialDescription] = useState("");
@@ -52,6 +57,7 @@ function ProjectSettingsModal({
     !!!description
   );
   const [isEditingTitle, setIsEditingTitle] = useState(false);
+  const [isEditingType, setIsEditingType] = useState(false);
 
   const { updateProject, projects } = useProjects();
 
@@ -62,7 +68,11 @@ function ProjectSettingsModal({
       setTitle(project.title);
       setInitialTitle(project.title);
       setTempTitle(project.title);
+
       setType(project.type);
+      setInitialType(project.type);
+      setTempType(project.type);
+
       setDescription(project.description!);
       setInitialDescription(project.description!);
       setTempDescription(project.description!);
@@ -77,7 +87,7 @@ function ProjectSettingsModal({
       value: title,
     },
     type: {
-      onChange: (e: any) => setType(e.target.value),
+      onChange: (e: any) => setTempType(e.target.value),
       value: type,
     },
   };
@@ -97,6 +107,11 @@ function ProjectSettingsModal({
     setIsEditingDescription(false);
   }
 
+  function handleSaveTypeChanges() {
+    setType(tempType);
+    setIsEditingType(false);
+  }
+
   function handleSaveTitleChanges() {
     setTitle(tempTitle);
     setIsEditingTitle(false);
@@ -108,6 +123,8 @@ function ProjectSettingsModal({
     setLoading(false);
     setTitle(initialTitle);
     setTempTitle(initialTitle);
+    setType(initialType);
+    setTempType(initialType);
     setDescription(initialDescription);
     setTempDescription(initialDescription);
   }
@@ -116,9 +133,11 @@ function ProjectSettingsModal({
     <Modal size="2xl" isOpen={isOpen} onClose={onCloseModal} isCentered>
       <ModalOverlay />
       <ModalContent
-      bg={colorMode === "dark" ? "dark.200" : "white"}
-      borderColor={colorMode === "dark" ? "rgba(255, 255, 255, 0.24)" : "none"}
-      borderWidth={colorMode === "dark" ? "1px" : "0"}
+        bg={colorMode === "dark" ? "dark.200" : "white"}
+        borderColor={
+          colorMode === "dark" ? "rgba(255, 255, 255, 0.24)" : "none"
+        }
+        borderWidth={colorMode === "dark" ? "1px" : "0"}
       >
         <ModalHeader px="36px" pt="20px">
           <Heading variant="modal-title">Definições do projeto</Heading>
@@ -139,7 +158,9 @@ function ProjectSettingsModal({
               display="flex"
               h="40px"
               mb="20px"
-              bgColor={colorMode === "dark" ? "rgba(153, 153, 153,0.175)" : "gray.50"}
+              bgColor={
+                colorMode === "dark" ? "rgba(153, 153, 153,0.175)" : "gray.50"
+              }
               borderColor={colorMode === "dark" ? "dark.300" : "gray.200"}
               color={colorMode === "dark" ? "white" : "gray.700"}
               borderWidth="1px"
@@ -182,6 +203,7 @@ function ProjectSettingsModal({
                 }}
                 focusBorderColor="main.500"
                 {...register("title", formValidations.title)}
+                value={tempTitle}
               />
               {isEditingTitle ? (
                 <ButtonGroup
@@ -193,7 +215,7 @@ function ProjectSettingsModal({
                   <IconButton
                     aria-label="Check Icon"
                     bg="none"
-                    color={colorMode === "dark" ? "dark.800" : "gray.500"} 
+                    color={colorMode === "dark" ? "dark.800" : "gray.500"}
                     _hover={{
                       bg: "none",
                     }}
@@ -207,7 +229,7 @@ function ProjectSettingsModal({
                   <IconButton
                     aria-label="Close Icon"
                     bg="none"
-                    color={colorMode === "dark" ? "dark.800" : "gray.500"} 
+                    color={colorMode === "dark" ? "dark.800" : "gray.500"}
                     _hover={{
                       bg: "none",
                     }}
@@ -216,7 +238,10 @@ function ProjectSettingsModal({
                       boxShadow: "none",
                     }}
                     icon={<CloseIcon />}
-                    onClick={() => setIsEditingTitle(false)}
+                    onClick={() => {
+                      setTempTitle(initialTitle);
+                      return setIsEditingTitle(false);
+                    }}
                   />
                 </ButtonGroup>
               ) : (
@@ -225,7 +250,7 @@ function ProjectSettingsModal({
                     pr="10px"
                     aria-label="edit Icon"
                     bg="none"
-                    color={colorMode === "dark" ? "dark.800" : "gray.500"} 
+                    color={colorMode === "dark" ? "dark.800" : "gray.500"}
                     _hover={{
                       bg: "none",
                     }}
@@ -244,27 +269,119 @@ function ProjectSettingsModal({
             <Text mt="20px" mb="5px">
               Categoria do projeto
             </Text>
-            <Select
+
+            <FormControl
+              cursor="text"
+              display="flex"
               h="40px"
               mb="20px"
-              variant="filled"
-              bgColor={colorMode === "dark" ? "rgba(153, 153, 153,0.175)" : "gray.50"}
+              bgColor={
+                colorMode === "dark" ? "rgba(153, 153, 153,0.175)" : "gray.50"
+              }
               borderColor={colorMode === "dark" ? "dark.300" : "gray.200"}
               color={colorMode === "dark" ? "white" : "gray.700"}
-              transition=" .3s"
-              _hover={{
-                bgColor: colorMode === "dark" ? "rgba(153, 153, 153,0.175)" : "gray.50",
-                borderColor: colorMode === "dark" ? "dark.300" : "gray.200",
-              }}
-              {...register("type", formValidations.type)}
-              focusBorderColor="main.500"
-              value={type}
+              borderWidth="1px"
+              borderRadius="6px"
+              alignItems="center"
             >
-              <option value="Santa ceia">Santa ceia</option>
-              <option value="Slipknots">Slipknots</option>
-              <option value="Deboras">Deboras</option>
-              <option value="Premisas">Premisas</option>
-            </Select>
+              <Input
+                readOnly
+                id="preview-type-input"
+                cursor="text"
+                display={isEditingType ? "none" : "flex"}
+                type="text"
+                border="none"
+                w="100%"
+                h="40px"
+                bg="none"
+                alignItems="center"
+                justifyContent="left"
+                pl="20px"
+                _focus={{
+                  outline: "none",
+                  boxShadow: "none",
+                }}
+                placeholder={type}
+                value={type}
+              />
+              <Input
+                display={isEditingType ? "flex" : "none"}
+                type="text"
+                border="none"
+                w="100%"
+                h="40px"
+                bg="none"
+                alignItems="center"
+                justifyContent="left"
+                pl="20px"
+                _focus={{
+                  outline: "none",
+                  boxShadow: "none",
+                }}
+                focusBorderColor="main.500"
+                {...register("type", formValidations.type)}
+                value={tempType}
+              />
+              {isEditingType ? (
+                <ButtonGroup
+                  justifyContent="center"
+                  alignItems="center"
+                  size="sm"
+                  pr="5px"
+                >
+                  <IconButton
+                    aria-label="Check Icon"
+                    bg="none"
+                    color={colorMode === "dark" ? "dark.800" : "gray.500"}
+                    _hover={{
+                      bg: "none",
+                    }}
+                    _focus={{
+                      outline: "none",
+                      boxShadow: "none",
+                    }}
+                    icon={<CheckIcon />}
+                    onClick={handleSaveTypeChanges}
+                  />
+                  <IconButton
+                    aria-label="Close Icon"
+                    bg="none"
+                    color={colorMode === "dark" ? "dark.800" : "gray.500"}
+                    _hover={{
+                      bg: "none",
+                    }}
+                    _focus={{
+                      outline: "none",
+                      boxShadow: "none",
+                    }}
+                    icon={<CloseIcon />}
+                    onClick={() => {
+                      setTempType(initialType);
+                      return setIsEditingType(false);
+                    }}
+                  />
+                </ButtonGroup>
+              ) : (
+                <Flex justifyContent="center" alignItems="center">
+                  <IconButton
+                    pr="10px"
+                    aria-label="edit Icon"
+                    bg="none"
+                    color={colorMode === "dark" ? "dark.800" : "gray.500"}
+                    _hover={{
+                      bg: "none",
+                    }}
+                    _focus={{
+                      outline: "none",
+                      boxShadow: "none",
+                    }}
+                    size="sm"
+                    icon={<EditIcon />}
+                    onClick={() => setIsEditingType(true)}
+                  />
+                </Flex>
+              )}
+            </FormControl>
 
             <Text mb="5px">Descrição do projeto</Text>
 
@@ -324,7 +441,7 @@ function ProjectSettingsModal({
                 />
                 <Flex mt="8px" h="32px">
                   <Button
-                  variant="modal-cancel"
+                    variant="modal-cancel"
                     w="70px"
                     h="32px"
                     mr={2}
@@ -360,16 +477,18 @@ function ProjectSettingsModal({
               Cancelar
             </Button>
             <Button
-            disabled={
-              isEditingTitle ||
-              isEditingDescription ||
-              (initialTitle === title && initialDescription === description)
-            }
-            type="submit"
-            mr={3}
-            w="120px"
-            variant="modal-submit"
-            onClick={handleSubmit(onSubmit)}
+              disabled={
+                isEditingTitle ||
+                isEditingType ||
+                (initialTitle === title &&
+                  initialDescription === description &&
+                  initialType === type)
+              }
+              type="submit"
+              mr={3}
+              w="120px"
+              variant="modal-submit"
+              onClick={handleSubmit(onSubmit)}
             >
               {isLoading ? <Spinner color="white" /> : "Salvar"}
             </Button>
