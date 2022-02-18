@@ -21,8 +21,6 @@ Aplicação web de gerenciamento de tarefas utilizando o método organizacional 
 - Editor de Rich Text: Quill.
 - Design: Chakra-ui
 
-Projeto em desenvolvimento, faltando implementar resposividade, darktheme e melhorias de performace.
-
  <h2 id="technologies">Tecnologias</h2>
 
 - [next](https://nextjs.org)
